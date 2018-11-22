@@ -16,7 +16,4 @@ after_success:
   - git config --global user.name "Travis CI"
   - git add .
   - git commit -m 'Add files via upload'
-  - git remote add origin https://${DEPLOY_TOKEN}@github.com/lib-pku/lib-pku.github.io.git
-  - git push origin master -f
-
-  
+  - git push https://${DEPLOY_TOKEN}@github.com/lib-pku/lib-pku.github.io.git master -f
