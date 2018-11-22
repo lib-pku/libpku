@@ -28,8 +28,18 @@ function solve(e, depth) {
 // console.log(solve(tree, 1));
 
 let begin = `<html>
+<head>
+<meta charset='utf-8'>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>lib-pku.github.io</title>
+<meta property="og:url" content="https://lib-pku.github.io/" />
+<meta property="og:site_name" content="lib-pku.github.io" />
+<link rel="canonical" href="https://lib-pku.github.io/" />
+<link rel="stylesheet" href="assets/css/index.css">
+</head>
 <body>
-  <link rel="stylesheet" href="assets/css/index.css">
+  <header>
   <div class="inner">
     <a href="https://lib-pku.github.io/">
       <h1>lib-pku.github.io</h1>
@@ -37,6 +47,7 @@ let begin = `<html>
     <h2></h2>
     <a href="https://github.com/lib-pku" class="button"><small>Follow me on</small> GitHub</a>
   </div>
+  </header>
   <div id="content-wrapper">
     <div class="inner clearfix">
       <section id="main-content"><aside id="sidebar">`;
