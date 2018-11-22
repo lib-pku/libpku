@@ -10,7 +10,7 @@ script:
   - echo 'XD'
 after_success:
   - git clone https://github.com/lib-pku/lib-pku.github.io.git
-  - node index.js > lib-pku.github.io/index.md
+  - node index.js > lib-pku.github.io/index.html
   - cd lib-pku.github.io
   - git config --global user.email "travis@travis-ci.org"
   - git config --global user.name "Travis CI"
