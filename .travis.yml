@@ -5,7 +5,7 @@ branches:
   only:
   - master
 before_script:
-  - npm install directory-tree
+  - npm install directory-tree remark remark-toc remark-html
 script:
   - echo 'XD'
 after_success:
