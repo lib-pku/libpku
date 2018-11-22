@@ -1,0 +1,76 @@
+#include <iostream>
+#include <string>
+#include <sstream>
+#include <algorithm>
+#include <iomanip>
+#include <stdlib.h>
+
+using namespace std;
+
+inline float my_stof(const string& str)
+{   // convert string to float
+    return atof(str.c_str());
+}
+
+int main()
+{
+    int n;
+    cin >> n;
+    for (int kase = 1; kase <= n; kase++) {
+        // ignore all the spaces
+        while (cin.peek() == ' ' || cin.peek() == '\n')
+            cin.get();
+        float current = -1, voltage = -1, power = -1;
+        string line;
+        getline(cin, line);
+        stringstream ss(line);
+        string word;
+        while (ss >> word) {
+            // comma!!! period!!!
+            if (word[word.size() - 1] == ',' || word[word.size() - 1] == '.') {
+                word = word.substr(0, word.size() - 1);
+            }
+            // detect
+            if (word.length() > 3 && word[0] == 'U' && word[1] == '=' && word[word.length() - 1] == 'V') {
+                voltage = my_stof(word.substr(2, word.length() - 3));
+                if (word[word.length() - 2] == 'm')
+                    voltage /= 1000;
+                if (word[word.length() - 2] == 'k')
+                    voltage *= 1000;
+                if (word[word.length() - 2] == 'M')
+                    voltage *= 1000000;
+            }
+            if (word.length() > 3 && word[0] == 'I' && word[1] == '=' && word[word.length() - 1] == 'A') {
+                current = my_stof(word.substr(2, word.length() - 3));
+                if (word[word.length() - 2] == 'm')
+                    current /= 1000;
+                if (word[word.length() - 2] == 'k')
+                    current *= 1000;
+                if (word[word.length() - 2] == 'M')
+                    current *= 1000000;
+            }
+            if (word.length() > 3 && word[0] == 'P' && word[1] == '=' && word[word.length() - 1] == 'W') {
+                power = my_stof(word.substr(2, word.length() - 3));
+                if (word[word.length() - 2] == 'm')
+                    power /= 1000;
+                if (word[word.length() - 2] == 'k')
+                    power *= 1000;
+                if (word[word.length() - 2] == 'M')
+                    power *= 1000000;
+            }
+        }
+        cout << "Problem #" << kase << endl;
+        if (voltage < 0) {
+            cout << "U=" << fixed << setprecision(2) << power / current << "V" << endl;
+        }
+        if (current < 0) {
+            cout << "I=" << fixed << setprecision(2) << power / voltage << "A" << endl;
+        }
+        if (power < 0) {
+            cout << "P=" << fixed << setprecision(2) << voltage * current << "W" << endl;
+        }
+        cout << endl;
+    }
+
+    return 0;
+}

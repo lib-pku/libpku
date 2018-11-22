@@ -1,0 +1,69 @@
+#include <iostream>
+#include <string>
+#include <algorithm>
+
+using namespace std;
+
+int is_leap_year(int year) {
+    return year % 4 == 0 && (year % 100 != 0 || year % 400 == 0);
+}
+const int day_of_month[] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+int what_day_is_it_in_a_year(int year, int month, int day) {
+    int total = 0;
+    for (int m = 1; m < month; m++) {
+        total += day_of_month[m - 1];
+        if (m == 2 && is_leap_year(year)) {
+            total++;
+        }
+    }
+    total += day;
+    return total;
+}
+int main()
+{
+    int n;
+    cin >> n;
+    for (int kase = 0; kase < n; kase++) {
+        char tmp;
+        int year, month, day;
+        string car;
+        cin >> year >> tmp >> month >> tmp >> day >> car;
+        // see on which day the car is banned
+        char last_char = car[car.length() - 1];
+        int banned_day;
+        if (last_char >= 'A' && last_char <= 'Z') {
+            banned_day = 5;
+        }
+        else {
+            banned_day = (last_char - '0') % 5;
+            if (banned_day == 0)
+                banned_day = 5;
+        }
+        // see what day is it
+        // 2000.1.1 -> total_day = 1
+        int total_day = 0;
+        for (int y = 2000; y < year; y++) {
+            if (is_leap_year(y)) {
+                total_day += 366;
+            }
+            else {
+                total_day += 365;
+            }
+        }
+        total_day += what_day_is_it_in_a_year(year, month, day);
+        // this is the day in a week
+        // 2000.1.1 -> this_day == 6
+        int this_day = (total_day + 5) % 7;
+        if (this_day == 0)
+            this_day = 7;
+        // test
+        if (this_day == banned_day) {
+            cout << "yes" << endl;
+        }
+        else {
+            cout << "no" << endl;
+        }
+    }
+
+    return 0;
+}

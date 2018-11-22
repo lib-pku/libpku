@@ -1,0 +1,41 @@
+#include <iostream>
+#include <string>
+#include <algorithm>
+
+using namespace std;
+
+int main()
+{
+    int max_row, max_col;
+    cin >> max_row >> max_col;
+    int land[20][20];
+    for (int i = 0; i < max_row; i++) {
+        for (int j = 0; j < max_col; j++) {
+            cin >> land[i][j];
+        }
+    }
+
+    int max_area = 0;
+    for (int col1 = 0; col1 < max_col; col1++) {
+        for (int col2 = col1; col2 < max_col; col2++) {
+            for (int row1 = 0; row1 < max_row; row1++) {
+                for (int row2 = 0; row2 < max_row; row2++) {
+                    // test if empty
+                    bool empty = true;
+                    for (int col = col1; col <= col2; col++) {
+                        for (int row = row1; row <= row2; row++) {
+                            if (land[row][col] == 1) {
+                                empty = false;
+                            }
+                        }
+                    }
+                    if (empty) {
+                        max_area = max(max_area, (col2 - col1 + 1) * (row2 - row1 + 1));
+                    }
+                }
+            }
+        }
+    }
+    cout << max_area << endl;
+    return 0;
+}

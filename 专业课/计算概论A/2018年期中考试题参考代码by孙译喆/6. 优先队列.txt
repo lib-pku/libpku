@@ -1,0 +1,95 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+
+const int maxn = 200005;
+// BST
+// left_node[i] == 0 && right_node[i] == 0 means leaf
+// val[left_node[i]] < val[i] <= val[right_node[i]]
+int root;
+int left_node[maxn], right_node[maxn];
+int val_top = 0;
+int val[maxn]; // val[0] not used
+int tree_size = 0;
+
+void add(int value) {
+    val[++val_top] = value;
+    if (root == 0) {
+        root = val_top;
+        return;
+    }
+    int current = root;
+    while (true) {
+        if (value < val[current]) {
+            if (left_node[current] == 0) {
+                left_node[current] = val_top;
+                break;
+            }
+            else {
+                current = left_node[current];
+            }
+        }
+        else {
+            if (right_node[current] == 0) {
+                right_node[current] = val_top;
+                break;
+            }
+            else {
+                current = right_node[current];
+            }
+        }
+    }
+
+}
+int extract() {
+    // set null node to 0!
+    // assume tree non-empty
+    if (left_node[root] == 0) {
+        int min_val = val[root];
+        root = right_node[root];
+        return min_val;
+    }
+    // go all the way left
+    int current = root;
+    int parent = -1;
+    while (left_node[current] != 0) {
+        parent = current;
+        current = left_node[current];
+    }
+    int min_val = val[current];
+    // delete the node
+    left_node[parent] = right_node[current];
+    return min_val;
+}
+int main()
+{
+    int n;
+    cin >> n;
+    for (int i = 0; i < n; i++) {
+        int tmp;
+        cin >> tmp;
+        add(tmp);
+    }
+    int m;
+    cin >> m;
+    for (int i = 0; i < m; i++) {
+        string op;
+        cin >> op;
+        if (op == "ADD") {
+            int tmp;
+            cin >> tmp;
+            add(tmp);
+        }
+        else {
+            if (root == 0) {
+                cout << "NULL" << endl;
+            }
+            else {
+                cout << extract() << endl;
+            }
+        }
+    }
+    return 0;
+}

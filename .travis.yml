@@ -1,0 +1,17 @@
+language: node_js
+node_js:
+  - "10"
+before_script:
+  - npm install directory-tree
+script:
+  - echo 'XD'
+after_deploy:
+  - git clone https://github.com/lib-pku/lib-pku.github.io.git
+  - node index.js > lib-pku.github.io/index.md
+  - cd lib-pku.github.io
+  - git config --global user.email "travis@travis-ci.org"
+  - git config --global user.name "Travis CI"
+  - git add .
+  - git commit -m 'Add files via upload'
+  - git remote add origin https://${DEPLOY_TOKEN}@github.com/lib-pku/lib-pku.github.io.git
+  - git push origin master -f
