@@ -1,13 +1,14 @@
 language: node_js
 node_js:
   - "10"
+branches:
+  only:
+  - master
 before_script:
   - npm install directory-tree
 script:
   - echo 'XD'
-deploy:
-  - echo 'XD'
-after_deploy:
+after_success:
   - git clone https://github.com/lib-pku/lib-pku.github.io.git
   - node index.js > lib-pku.github.io/index.md
   - cd lib-pku.github.io
@@ -17,6 +18,5 @@ after_deploy:
   - git commit -m 'Add files via upload'
   - git remote add origin https://${DEPLOY_TOKEN}@github.com/lib-pku/lib-pku.github.io.git
   - git push origin master -f
-
 
   
