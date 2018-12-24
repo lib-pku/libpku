@@ -46,7 +46,7 @@ let begin = `<html>
       <h2>libpku - 北京大学课程资料整理</h2>
     </a>
     <h2></h2>
-    <a href="https://github.com/lib-pku/libpku" class="button"><small>Follow this on</small> GitHub</a>
+    <a href="https://github.com/lib-pku/libpku" class="button"><small>Fork this on</small> GitHub</a>
   </div>
   </header>
   <div id="content-wrapper">
