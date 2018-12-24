@@ -1,4 +1,4 @@
-# libpku
+# libpku - 北京大学课程资料整理
 
 ## Disclaimer
 
