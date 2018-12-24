@@ -41,8 +41,9 @@ let begin = `<html>
 <body>
   <header>
   <div class="inner">
+    <br>
     <a href="https://lib-pku.github.io/">
-      <h1>libpku - 北京大学课程资料整理</h1>
+      <h2>libpku - 北京大学课程资料整理</h2>
     </a>
     <h2></h2>
     <a href="https://github.com/lib-pku/libpku" class="button"><small>Follow this on</small> GitHub</a>
