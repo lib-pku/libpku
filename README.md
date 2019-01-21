@@ -2,7 +2,7 @@
 
 ## Preface
 
-（引用自 https://github.com/QSCTech/zju-icicles）
+（引用自 [QSCTech/zju-icicles](https://github.com/QSCTech/zju-icicles) ）
 
 来到一所大学，从第一次接触许多课，直到一门一门完成，这个过程中我们时常收集起许多资料和情报。
 
