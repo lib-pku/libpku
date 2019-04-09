@@ -69,7 +69,7 @@ Issue、PR、纠错、资料、选课/考试攻略，完全欢迎！
 - [北大计算机课程大作业](https://github.com/tongtzeho/PKUCourse)
 - [清华大学计算机系课程攻略](https://github.com/Trinkle23897/thu-cst-cracker)
 - [东南大学课程共享计划](https://github.com/zjdx1998/seucourseshare)
-- [中国科学技术大学计算机学院课程资源](https://github.com/mbinary/USTC-CS-Courses-Resource)
+- [中国科学技术大学计算机学院课程资源](https://github.com/USTC-Resource/USTC-Course)
 - [上海交通大学课程资料分享](https://github.com/CoolPhilChen/SJTU-Courses/)
 
 (more to be added....)
