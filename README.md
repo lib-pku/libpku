@@ -1,4 +1,4 @@
-# libpku - 北京大学课程资料整理
+# libpku - 贵校课程资料民间整理
 
 ## Preface
 
