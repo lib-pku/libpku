@@ -32,7 +32,7 @@ let begin = `<html>
 <meta charset='utf-8'>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<title>libpku - 北京大学课程资料整理</title>
+<title>libpku - 贵校课程资料民间整理</title>
 <meta property="og:url" content="https://lib-pku.github.io/" />
 <meta property="og:site_name" content="lib-pku.github.io" />
 <link rel="canonical" href="https://lib-pku.github.io/" />
@@ -43,7 +43,7 @@ let begin = `<html>
   <div class="inner">
     <br>
     <a href="https://lib-pku.github.io/">
-      <h2>libpku - 北京大学课程资料整理</h2>
+      <h2>libpku - 贵校课程资料民间整理</h2>
     </a>
     <h2></h2>
     <a href="https://github.com/lib-pku/libpku" class="button"><small>Fork this on</small> GitHub</a>
