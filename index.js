@@ -13,7 +13,7 @@ function solve(e, depth) {
   }
   if (e.type == "directory") {
     for (let i = 0; i < depth; ++i) s += "#";
-    res.push(`${s} ${e.name}`);
+    res.push(`${s} [${e.name}](${prefix + encodeURIComponent(e.path)})`);
   } else if (e.type == "file") {
     res.push(`[${e.name}](${prefix + encodeURIComponent(e.path)})`);
   }
