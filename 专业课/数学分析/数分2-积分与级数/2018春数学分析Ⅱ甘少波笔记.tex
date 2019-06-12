@@ -1,0 +1,3429 @@
+\documentclass[UTF8]{article}
+\usepackage{ctex}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{geometry}
+\usepackage{amssymb}
+\usepackage{mathrsfs}
+\usepackage{color}
+\usepackage{hyperref}
+\usepackage{titlesec}
+\title{\heiti 数学分析(二)笔记}
+\date{}
+\geometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm}
+\titleformat{\section}[block]{\centering\Large\bfseries}{\thesection}{1em}{}
+\DeclareMathOperator{\li}{li}
+\DeclareMathOperator{\sgn}{sgn}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\dx}{\mathrm{d}x}
+\newcommand{\zm}{\textbf{证明}$\quad$}
+\newcommand{\jz}{\textbf{简证}$\quad$}
+\newcommand{\jie}{\textbf{解}$\quad$}
+\newcommand{\fz}{\textbf{附注}$\quad$}
+\newtheorem{thm}{\hspace{2em}定理}[section]
+\newtheorem{lem}{\hspace{2em}引理}[section]
+\newtheorem{dfn}{\hspace{2em}定义}[section]
+\newtheorem{add}{\hspace{2em}补充}[section]
+\newtheorem{exa}{\hspace{2em}例题}[section]
+
+\begin{document}
+\maketitle
+\tableofcontents
+\clearpage
+\section{课堂笔记(1)：课程介绍、定积分的定义}
+  \begin{center}
+    {\kaishu 2018年2月26日}
+  \end{center}
+  \subsection{课程介绍}
+    \begin{enumerate}
+      \item \emph{教材}：《数学分析(第二册)》(伍胜健).\\\emph{习题}：谢惠民.
+      \item \emph{答疑时间}：每周五下午3:00--5:00，理一14106.
+      \item \emph{成绩}：平时10-20，期中30-40，期末40-60.
+      \item \emph{考试}：期中:二教107
+    \end{enumerate}
+  \subsection{定积分的定义}
+    \begin{lem}
+      设$f(x)$在区间$[a,b]$上连续，$m,M$分别为其最小、最大值.在区间内任意插入有限个点，形成一个分割
+      $$\Delta:a=x_0<x_1<\cdots<x_n=b$$
+      且设$m_i,M_i$分别为$f(x)$在第$i$个区间的最小、最大值.则有：
+      $$\sum_{i=1}^n(M_i-m_i)\Delta x_i\le(M-m)(b-a).$$
+    \end{lem}
+    在假定$f$在闭区间连续的情况下，可以由\emph{一致连续}得到
+    $$\lim_{n\to\infty}\sum_{i=1}^nf(\xi_i)\Delta x_i=S.$$
+    \begin{dfn}[定积分的定义]
+      设$f(x)$在$[a,b]$上有定义.在$[a,b]$中插入$n-1$个点构成一个分割
+      $$\Delta:a=x_0<x_1<\cdots<x_n=b$$
+      记$\Delta x_i=x_i-x_{i-1},\lambda(\Delta)=\max\limits_{1\le i\le n}\{\Delta x_i\}$为分割的直径.在每个小区间$[x_{i-1},x_i]$中任取
+      $\xi_i$,如果和式
+      $$\sum_{i=1}^nf(\xi_i)\Delta x_i$$在$\lambda(\Delta)\to0$的时候存在极限$I,$且不依赖于分割$\Delta$的选取及$\xi_i$的选取.
+      则称$f(x)$在区间$[a,b]$上\textbf{黎曼可积},$I$为$f(x)$在区间$[a,b]$上的定积分.
+    \end{dfn}
+    \begin{dfn}[定积分的定义']
+      设函数$f(x)$在区间$[a,b]$上有定义.若存在常数$I,$使得对于$\forall\varepsilon>0,\exists\delta>0,$对区间$[a,b]$的任何一个
+      分割$\Delta$，当$\lambda(\Delta)<\delta$时，在每个$[x_{i-1},x_i]$任取$\xi_i$都有
+      $$\left|\sum_{i=1}^nf(\xi_i)\Delta x_i-I\right|<\varepsilon,$$则称$I$为函数$f(x)$在$[a,b]$上的定积分.用记号$f(x)\in R[a,b]$
+      表示函数在$[a,b]$可积.
+    \end{dfn}
+    \begin{thm}[连续函数的可积性]
+      设函数$f(x)\in C[a,b]$,则$f(x)\in R[a,b]$.
+    \end{thm}
+    \textbf{简证}$\quad$首先得到估计式$m(b-a)\le\sum_{i=1}^nf(\xi_i)\Delta x_i\le M(b-a).$然后将区间$[a,b]\;n$等分得到一个特殊的黎曼和
+    $$S_n=\sum_{j=1}^nf(x_j)\frac{b-a}{n}.$$
+    显然$\{S_n\}$是一个有界序列,从而有收敛子列$\{S_{n_k}\}$.设$\lim\limits_{k\to\infty}S_{n_k}=I,$即证$I$为定积分.\\
+    对于$\forall\varepsilon>0,$由函数的一致连续，$\exists\delta>0,$当$x',x''\in[a,b],|x'-x''|<\delta$有
+    $$|f(x')-f(x'')|<\frac{\varepsilon}{4(b-a)}.$$
+    从而对任意的分割$\Delta$,当$\lambda(\Delta)<\delta$时，有
+    $$\sum_{i=1}^n(M_i-m_i)\Delta x_i<\frac{\varepsilon}{4}.$$
+    由于$\lim\limits_{k\to\infty}S_{n_k}=I,$因此存在$K$,当$n_k>K$时有$\lambda(\Delta_{n_k})<\delta$与
+    $|S_{n_k}-I|<\dfrac{\varepsilon}{2}$同时成立.现在取定一个$n_{k_0}$满足这两个条件.\\
+    对于任意的分割$\Delta,$当$\lambda(\Delta)<\delta$时，我们有下面的估计：
+    \begin{align*}
+      \left|\sum_{i=1}^nf(\xi_i)\Delta x_i-I\right|&\le\left|\sum_{i=1}^nf(\xi_i)\Delta x_i-S_{n_{k_0}}\right|+|S_{n_{k_0}}-I|\\
+      &<\left|\sum_{i=1}^nf(\xi_i)\Delta x_i-\sum_{j=1}^{n_{k_0}}f(x_j)\frac{b-a}{n_{k_0}}\right|+\frac{\varepsilon}{2}.
+    \end{align*}
+    记$\Delta'$为$\Delta$与$\Delta_{n_{k_0}}$的分点集的\textbf{并}所构成的分割.显然有$\lambda(\Delta')<\delta$.容易看出有下面的估计：
+    $$\left|\sum_{i=1}^nf(\xi_i)\Delta x_i-\sum_{k=1}^{n'}f(\xi_k')\Delta x_k'\right|\le\sum_{i=1}^n(M_i-m_i)\Delta x_i<
+    \frac{\varepsilon}{4}$$与
+    $$\left|\sum_{j=1}^{n_{k_0}}f(x_j)\frac{b-a}{n_{k_0}}-\sum_{k=1}^{n'}f(\xi_k')\Delta x_k'\right|\le
+    \sum_{j=1}^{n_{k_0}}(M_j'-m_j')\frac{b-a}{n_{k_0}}<\frac{\varepsilon}{4}.$$
+    其中$\sum\limits_{k=1}^{n'}f(\xi_k')\Delta x_k'$是关于$\Delta'$的任意一个黎曼和.因此
+    $$\left|\sum_{i=1}^nf(\xi_i)\Delta x_i-I\right|<\varepsilon.$$证毕.
+\clearpage
+
+\section{课堂笔记(2)：微积分基本定理、达布理论}
+\begin{center}
+  2018年2月28日
+\end{center}
+  \subsection{微积分基本定理}
+    \begin{thm}[微积分基本定理]
+      设函数$f(x)$在区间$[a,b]$上有定积分，并且满足：
+      \begin{enumerate}
+        \item 在$[a,b]$上可积；
+        \item 在$[a,b]$上存在原函数$F(x)$,
+      \end{enumerate}
+      则有$$\int_a^bf(x)\dx=F(b)-F(a).$$
+      \end{thm}
+      \zm 首先，由于$f(x)$在$[a,b]$可积，任取区间的分割$\Delta:a=x_0<x_1<\cdots<x_n=b,$在$[x_{i-1},x_i]$任取$\xi_i,$则有
+      $$\lim_{\lambda(\Delta)\to0}\sum_{i=1}^nf(\xi_i)\Delta x_i=\int_a^bf(x)\dx.$$
+      其次，关于分割$\Delta,$我们有
+      $$F(b)-F(a)=\sum_{i=1}^n[F(x_i)-F(x_{i-1})].$$
+      在每个小区间上对$F(x)$应用Lagrange中值定理得
+      $$F(x_i)-F(x_{i-1})=f(\xi_i')\Delta x_i,$$
+      因此我们有
+      \begin{align*}
+        F(b)-F(a)&=\lim_{\lambda(\Delta)\to0}\sum_{i=1}^n[F(x_i)-F(x_{i-1})]\\
+        &=\lim_{\lambda(\Delta)\to0}\sum_{i=1}^nf(\xi_i')\Delta x_i\\
+        &=\int_a^bf(x)\dx.
+      \end{align*}
+      证毕.
+    \begin{exa}
+      设$I_n=\dfrac{1}{n^{\alpha+1}}(1+2^\alpha+\cdots+n^\alpha)(\alpha>0),$求$\lim\limits_{n\to\infty}I_n.$\\
+      由于
+      $$I_n=\frac{1}{n}\left(\frac{1}{n^\alpha}+\frac{2^\alpha}{n^\alpha}+\cdots+\frac{n^\alpha}{n^\alpha}\right)
+      =\frac{1}{n}\sum_{i=1}^n\frac{i^\alpha}{n^\alpha},$$
+      因此$I_n$可以看成函数$x^\alpha$在区间$[0,1]$上关于分割
+      $$0<\frac{1}{n}<\frac{2}{n}<\cdots<\frac{n}{n}=1$$的一个黎曼和.
+      由$x^\alpha$在区间$[0,1]$上连续，从而可积.我们知道$\dfrac{1}{\alpha+1}x^{\alpha+1}$是它的一个原函数，从而
+      $$\lim_{n\to\infty}I_n=\int_0^1x^\alpha\dx=\frac{1}{\alpha+1}.$$
+    \end{exa}
+  \subsection{达布理论}
+    \begin{thm}[可积的一个必要条件]
+      设$f\in R[a,b]$,则$f$在$[a,b]$上有界.
+    \end{thm}
+    \zm 若记$\int_a^bf(x)\dx=I,$则从可积的定义知道，对于$\varepsilon=1$,存在一个分划$P,$使得对于从属于这个$P$的
+    任何介点集$\xi,$均成立不等式
+    $$\left|\sum_{i=1}^nf(\xi_i)\Delta x_i\right|<1.$$
+    下面只要证明$f$在每个$I_i=[x_{i-1},x_i]$上有界即可.对于确定的子区间$I_i,$固定所有$\xi_k(k\ne i),$就可以对$f(\xi_i)$作出估计如下：
+    $$\frac{1}{\Delta x_i}(I-1-\sum_{k\ne i}f(\xi_k)\Delta x_k)<f(\xi_i)<\frac{1}{\Delta x_i}(I+1-\sum_{k\ne i}f(\xi_k)\Delta x_k).$$
+    由于$\xi_i\in I_i=[x_{i-1},x_i]$的任意性，可见$f$在$I_i$上有界.
+    \begin{exa}
+      证明狄利克雷函数
+      $$y=D(x)=\begin{cases}1,&x\in\mathbb{Q}\\ 0,&x\in\mathbb{R}/\mathbb{Q}\end{cases}$$在任何区间都不可积.
+    \end{exa}
+    \begin{dfn}[达布和]
+      对于分割$\Delta$,令
+      $$M_i=\sup_{x\in[x_{i-1},x_i]}\{f(x)\},\qquad m_i=\inf_{x\in[x_{i-1},x_i]}\{f(x)\}.$$
+      我们作如下和式：
+      $$\overline{S}(\Delta)=\sum_{i=1}^nM_i\Delta x_i,\qquad \underline{S}(\Delta)=\sum_{i=1}^nm_i\Delta x_i.$$
+      称$\overline{S}(\Delta),\underline{S}(\Delta)$分别为$f(x)$关于分割$\Delta$的达布上和与达布下和.
+    \end{dfn}
+    我们显然有：
+    $$\underline{S}(\Delta)\le S(\Delta)\le \overline{S}(\Delta).$$
+    若$\Delta'$中的分点均是$\Delta''$中的分点，则称$\Delta''$是$\Delta'$的\textbf{细分}，记为$\Delta'\subset\Delta''$.\\
+    \begin{lem}\label{lem1}
+      设$\Delta',\Delta''$为区间$[a,b]$的两个分割，若$\Delta'\subset\Delta''$,则对于分割的细分，达布上和不增，达布下和不减.
+    \end{lem}
+    \zm 设
+    $$\Delta':a=x_0<x_1<\cdots<x_n=b.$$我们先假定
+    $$\Delta'':a=x_0<x_1<\cdots<x_{i-1}<x'<x_i<\cdots<x_n=b,$$
+    即$\Delta''$只是在$\Delta'$中加入一个分点$x'$.记
+    $$M_i=\sup_{x\in[x_{i-1},x_i]}\{f(x)\},M_i'=\sup_{x\in[x_{i-1},x']}\{f(x)\},M_i''=\sup_{x\in[x',x_i]}\{f(x)\},$$
+    则有$$M_i'\le M_i,M_i''\le M_i,$$因此有
+    $$\overline{S}(\Delta')-\overline{S}(\Delta'')=M_i(x_i-x_{i-1})-[M_i'(x'-x_{i-1})+M_i''(x_i-x')]\ge0.$$
+    同理对于达布下和.对于$\Delta'$中加入多个分点的情形可以比较逐个每次加入一个分点的分割.
+    \begin{lem}
+      设$\Delta',\Delta''$是区间$[a,b]$上任意两个分割，则有$\underline{S}(\Delta')\le\overline{S}(\Delta''),$即任意分割的
+      达布下和不大于任意分割的达布上和.
+    \end{lem}
+    \zm 将$\Delta',\Delta''$中分分点合并在一起构成区间$[a,b]$的一个新的分割.记其为$\Delta=\Delta'\cup\Delta''$.由引理\ref{lem1}得
+    $$\underline{S}(\Delta')\le\underline{S}(\Delta)\le\overline{S}(\Delta)\le\overline{S}(\Delta'').$$证毕.\\
+    我们再定义
+    $$\underline{\int_a^b}f(x)\dx=\sup_\Delta\{\underline{S}(\Delta)\},\overline{\int_a^b}f(x)\dx=\inf_\Delta\{\overline{S}(\Delta)\}$$
+    分别为函数$f(x)$在区间$[a,b]$的\textbf{下积分}和\textbf{上积分}.显然我们有
+    $$\underline{\int_a^b}f(x)\dx\le\overline{\int_a^b}f(x)\dx.$$
+    \begin{thm}[\color{red}达布定理]
+      设函数$f(x)$在区间$[a,b]$上有界，则
+      $$\lim_{\lambda(\Delta)\to0}\overline{S}(\Delta)=\overline{\int_a^b}f(x)\dx,
+      \lim_{\lambda(\Delta)\to0}\underline{S}(\Delta)=\underline{\int_a^b}f(x)\dx.$$
+    \end{thm}
+    \zm 只证上积分的情形.对于$\forall\varepsilon>0$，由上积分的定义，存在一个分割$\Delta_1:a=x_0'<x_1'<\cdots<x_N'=b$使得下式成立
+    $$0\le\overline{S}(\Delta_1)-\overline{\int_a^b}f(x)\dx<\frac{\varepsilon}{2}.$$
+    对任意分割$\Delta:a=x_0<x_1<\cdots<x_n=b,$由上积分的定义有
+    $$0\le\overline{S}(\Delta)-\overline{\int_a^b}f(x)\dx.$$
+    我们记$\Delta^*=\Delta\cup\Delta_1,$并考查分割$\Delta$中的每一个小区间$[x_{i-1},x_i].$如果$(x_{i-1},x_i)$中无$\Delta_1$
+    的分点，则在$\overline{S}(\Delta)$与$\overline{S}(\Delta^*)$中的对应项同为$M_i\Delta x_i.$现在设$(x_{i-1},x_i)$中含有
+    $\Delta_1$的分点.记$\delta_1$为$\Delta_1$中$N$个小区间长度的最小者，若预先取$\lambda(\Delta)<\delta_1,$则在$(x_{i-1},x_i)$
+    中只有$\Delta_1$中的一个分点$x'.$因此$\overline{S}(\Delta)$与$\overline{S}(\Delta^*)$中相应项之差为
+    \begin{align*}
+      &M_i(x_i-x_{i-1})-[M_i'(x'-x_{i-1})+M_i''(x_i-x')]\\
+      &\le(M-m)(x_i-x_{i-1})\\
+      &\le(M-m)\lambda(\Delta).(m=\inf_{x\in[a,b]}\{f(x)\})
+    \end{align*}
+    因此我们得到下面的估计式：
+    $$0\le\overline{S}(\Delta)-\overline{S}(\Delta^*)\le(N-1)(M-m)\lambda(\Delta).$$
+    我们不妨设$m<M,$否则$f$为常值函数.取$\delta=\min\left\{\delta_1,\dfrac{\varepsilon}{2(N-1)(M-m)}\right\},$当$\lambda(\Delta)<\delta$
+    时，有
+    \begin{align*}
+      0&\le\overline{S}(\Delta)-\overline{\int_a^b}f(x)\dx\\
+      &=[\overline{S}(\Delta)-\overline{S}(\Delta^*)]+[\overline{S}(\Delta^*)-\overline{S}(\Delta_1)]+
+      [\overline{S}(\Delta_1)-\overline{\int_a^b}f(x)\dx]\\
+      &<\frac{\varepsilon}{2}+0+\frac{\varepsilon}{2}=\varepsilon.
+    \end{align*}
+    证毕.
+\clearpage
+
+\section{习题课笔记(1)}
+\begin{center}
+  2018年2月28日
+\end{center}
+\begin{exa}
+  设$f(x)$在$[a,b]$上有界，$\alpha>0.$对任意一个分割$\Delta,$以及任意选取的$\xi_i,$计算
+  $$\lim_{\lambda(\Delta)\to0}\sum_{i=1}^nf(\xi_i)(\Delta x_i)^{1+\alpha}.$$
+\end{exa}
+我们有下面的估计：
+\begin{align*}
+  \left|\sum_{i=1}^nf(\xi_i)(\Delta x_i)\cdot(\Delta x_i)^\alpha\right|
+  &\le\sum_{i=1}^n|f(\xi_i)|\Delta x_i\cdot(\Delta x_i)^\alpha\\
+  &\le M\sum_{i=1}^n\Delta x_i\cdot(\lambda(\Delta))^\alpha\\
+  &\le M(b-a)\cdot(\lambda(\Delta))^\alpha\to0.
+\end{align*}
+从而所求极限为零.
+\begin{exa}
+  设
+  \[
+    f(x)=
+    \begin{cases}
+      x,&x\in\mathbb{Q}\\
+      0,&\text{其他}
+    \end{cases}
+  \]
+  求$f(x)$在$[0,1]$上的上、下积分.
+\end{exa}
+我们取任一分割$\Delta,$显然有$m_i=0$为区间$[x_{i-1},x_i]$上$f$的下确界.从而
+$$\underline{S}(\Delta)\equiv0=I_*.$$
+另一方面，
+$$\overline{S}(\Delta)=\sum_{i=1}^nM_i\Delta x_i=\sum_{i=1}^nx_i(x_i-x_{i-1})=\sum_{i=1}^nx_i^2-x_ix_{i-1}\ge
+\sum_{i=1}^n\left(x_i^2-\frac{x_i^2+x_{i-1}^2}{2}\right)=\frac{1}{2}.$$
+现在我们证明$\dfrac{1}{2}$确实是它的下确界，从而就是$I^*.$将$[0,1]$等分，得到分割$\Delta_n:0<\dfrac{1}{n}<\cdots<\dfrac{n}{n}=1.$
+$$\overline{S}(\Delta)=\sum_{i=1}^nx_i(x_i-x_{i-1})=\sum_{i=1}^n\frac{i}{n^2}=\frac{1}{2}.$$
+我们就证明了$I^*=\dfrac{1}{2}.$
+\begin{exa}
+  $f(x)\in R[a,b],$$I_n=\dfrac{1}{n}\left[f\left(\dfrac{1}{n}\right)-f\left(\dfrac{2}{n}\right)+\cdots+
+  (-1)^nf\left(\dfrac{n-1}{n}\right)\right].$证明$\lim\limits_{n\to\infty}I_n=0.$
+\end{exa}
+\jz 分别讨论$n=2k,2k-1$的时候，凑出黎曼和.\\或者：$|I_n|\le\dfrac{1}{n}\left[\left|f\left(\dfrac{1}{n}\right)-
+f\left(\dfrac{2}{n}\right)\right|+
+\left|f\left(\dfrac{3}{n}\right)-f\left(\dfrac{4}{n}\right)\right|+\cdots+
+\left|f\left(\dfrac{n-1}{n}\right)-f\left(\dfrac{n}{n}\right)\right|\right]+
+f\left(1\right)\le\dfrac{1}{2}\dfrac{2}{n}\sum\omega_i.$
+\clearpage
+
+\section{课堂笔记(3):可积的充要条件、可积函数类}
+\begin{center}
+  2018年3月5日
+\end{center}
+\subsection{可积的充要条件}
+\begin{thm}
+  设函数$f(x)$在$[a,b]$上有界，则$f(x)\in R[a,b]$的充要条件是
+  $$\overline{\int_a^b}f(x)\dx=\underline{\int_a^b}f(x)\dx.$$
+\end{thm}
+\zm 充分性是显然的，下证必要性.\\
+我们观察到，通过在每个小区间上的特殊取值，可以使黎曼和任意接近达布上下和.设$f(x)\in R[a,b]$,则对于任意的
+$\varepsilon>0,\exists\delta>0,$对$[a,b]$的任意分割$\Delta$,只要$\lambda(\Delta)<\delta$，就有
+$$\left|\sum_{i=1}^nf(\xi_i)\Delta x_i-\int_a^bf(x)\dx\right|<\varepsilon.$$
+由上下确界的定义，存在$\xi_i',\xi_i''\in[x_{i-1},x_i],$使得
+$$f(\xi_i')\ge M_i-\frac{\varepsilon}{b-a},f(\xi_i'')\le m_i+\frac{\varepsilon}{b-a}.$$
+因此有
+\begin{align*}
+  &\overline{\int_a^b}f(x)\dx-\varepsilon\le\sum_{i=1}^nM_i\Delta x_i-\varepsilon\le\sum_{i=1}^nf(\xi_i')\Delta x_i<
+    \int_a^bf(x)\dx+\varepsilon_i\\
+  &\underline{\int_a^b}f(x)\dx+\varepsilon\ge\sum_{i=1}^nm_i\Delta x_i+\varepsilon\ge\sum_{i=1}^nf(\xi_i'')\Delta x_i>
+    \int_a^bf(x)\dx-\varepsilon_i
+\end{align*}
+由此
+$$\int_a^bf(x)\dx-\varepsilon<\underline{\int_a^b}f(x)\dx+\varepsilon\le\overline{\int_a^b}f(x)\dx+\varepsilon<
+\int_a^bf(x)\dx+3\varepsilon.$$
+也就是
+$$0<\overline{\int_a^b}f(x)\dx-\underline{\int_a^b}f(x)\dx<4\varepsilon.$$
+证毕.\\
+\fz 本节内容参考《微积分学教程》更为清晰.
+\begin{thm}
+  若$f(x)$在$[a,b]$有界，则下面三个结论等价：
+  \begin{enumerate}
+    \item $f(x)\in R[a,b]$;
+    \item $\forall\varepsilon>0,\exists\Delta,$使得
+    $$\sum_{i=1}^n\omega_i\Delta x_i<\varepsilon;$$
+    \item $\forall\varepsilon>0,\forall\sigma>0,\exists\Delta,$使得$\omega_i\ge\varepsilon$的区间长度总和小于$\sigma.$
+  \end{enumerate}
+\end{thm}
+证明可参考《微积分学教程》.\\
+\subsection{可积函数类}
+\begin{thm}
+  若$f(x)$在$[a,b]$上有界，若$f$连续或者只有有限个间断点，则$f(x)\in R[a,b].$
+\end{thm}
+\jz 连续函数的情况用Cantor定理易证.
+若$f$只有有限个间断点,可以将所有小区间分为两类，即包含或不包含间断点.对于不包含间断点的闭区间，可以应用Cantor定理到每一个小区间.
+对于包含间断点的闭区间，可以用整个区间的振幅来放缩.\\
+\fz 还可以证明如下结论：设函数$f(x)$在区间$[a,b]$上有界，且有无穷多个不连续点，若这些间断点构成的集合只有有限多个聚点，则$f(x)\in R[a,b].$
+\begin{exa}
+  函数$f(x)=\begin{cases}\sin\dfrac{1}{x},&x\ne0\\0,&x=0\end{cases}$在任何区间$[a,b]$上可积.
+\end{exa}
+\begin{exa}
+  函数$f(x)=\begin{cases}\left\{\dfrac{1}{x}\right\},&x\ne0,\\0,&x=0\end{cases}$在$[0,1]$上可积.
+\end{exa}
+\begin{thm}
+  $f(x)$在$[a,b]$上单调，则$f(x)\in R[a,b]$.
+\end{thm}
+\begin{exa}
+  黎曼函数
+  \[
+    f(x)=
+    \begin{cases}
+      \dfrac{1}{p},&x\in[0,1],x=\dfrac{q}{p}(p,q>0,(p,q)\equiv1),\\
+      0,&x\in(0,1)\backslash\mathbb{Q},\\
+      1,&x=0
+    \end{cases}
+  \]在区间$[0,1]$可积且值为$0$.
+\end{exa}
+\begin{thm}[Lebesgue定理]
+  设函数$f(x)$在$[a,b]$有界，记$E$为$f(x)$的间断点集，则$f(x)\in R[a,b]$的充要条件是：对于$\forall\varepsilon>0$,存在一列
+  开区间$(x_i',x_i'')$使得$E\subset\cup_{i=1}^\infty(x_i',x_i'')$并且对于$\forall n\in\mathbb{N},
+  $有$\sum\limits_{i=1}^n(x_i''-x_i')<\varepsilon.$
+\end{thm}
+\clearpage
+
+\section{课堂笔记(4):定积分的性质}
+\begin{center}
+  2018年3月7日
+\end{center}
+\begin{thm}[线性性质]
+  设函数$f,g\in R[a,b],\alpha,\beta\in\R,$则$\alpha f(x)+\beta g(x)\in R[a,b],$且
+  $$\int_a^b[\alpha f(x)+\beta g(x)]\dx=\alpha\int_a^bf(x)\dx+\beta\int_a^bg(x)\dx.$$
+\end{thm}
+\jz 注意振幅$\omega_i(\alpha f(x)+\beta g(x))=\sup\limits_{x',x''\in[x_{i-1},x_i]}|\alpha f(x')+\beta g(x')-\alpha f(x'')-\beta g(x'')|.$
+然后对绝对值放缩即可.
+\begin{thm}
+  设函数$f(x)\in R[a,b]$,则$|f(x)|\in R[a,b]$,且有
+  $$\left|\int_a^bf(x)\dx\right|\le\int_a^b|f(x)|\dx.$$
+\end{thm}
+\zm 对于$\forall\varepsilon>0,\exists\Delta:a=x_0<x_1<\cdots<x_n=b,$记$\omega_i(f)$为第$i$个小区间的振幅，则有
+$$\sum_{i=1}^n\omega_i(f)\Delta x_i<\varepsilon.$$
+当$x',x''\in[x_{i-1},x_i]$时我们有
+$$||f(x')|-|f(x'')||\le|f(x')-f(x'')|,$$因此有
+$$\omega_i(|f|)\le\omega_i(f),$$
+从而有
+$$\sum_{i=1}^n\omega_i(|f|)\Delta x_i<\varepsilon.$$所以$|f(x)|\in R[a,b].$\\
+对$[a,b]$的任意分割$\Delta$及任意选取的$\xi_i,$我们有
+$$\left|\sum_{i=1}^nf(\xi_i)\Delta x_i\right|\le\sum_{i=1}^n|f(\xi_i)|\Delta x_i.$$
+因此，当$\lambda(\Delta)\to 0$时就得到证明.
+\begin{thm}
+  设$a<c<b,$则函数$f(x)\in R[a,b]$的充要条件是：$f(x)\in R[a,c],f(x)\in R[c,b].$当$f(x)\in R[a,b]$时，有：
+  $$\int_a^bf(x)\dx=\int_a^cf(x)\dx+\int_c^bf(x)\dx.$$
+\end{thm}
+\jz 必要性是显然的(利用分割的一部分).对于充分性，只要将两个小区间对应的分割部分加起来即可.
+\begin{thm}
+  设函数$f,g\in R[a,b]$,并且对于$\forall x\in[a,b]$,有$f(x)\ge g(x)$,则有
+  $$\int_a^bf(x)\dx\ge\int_a^bg(x)\dx.$$
+\end{thm}
+\begin{exa}
+  设函数$f\in R[a,b],$证明，对$\forall\varepsilon>0,$\\
+    $(1)$.存在$[a,b]$上的阶梯函数$h(x),$使得$\displaystyle\int_a^b|f(x)-h(x)|\dx<\varepsilon;$\\
+    $(2)$.存在$[a,b]$上的连续函数$g(x)$,使得$\displaystyle\int_a^b|f(x)-g(x)|\dx<\varepsilon.$
+\end{exa}
+\zm 由于$f(x)\in R[a,b],$对于$\forall\varepsilon>0$,存在$[a,b]$的分割
+$$\Delta:a=x_0<x_1<\cdots<x_n=b,$$记$M_i,m_i,\omega_i$为第$i$个小区间的上、下确界和振幅，则有
+$$\sum_{i=1}^n\omega_i\Delta x_i<\varepsilon.$$
+(1).定义阶梯函数
+\[
+\overline{f}(x)=
+\begin{cases}
+  M_i,&x\in[x_{i-1},x_i),i=1,2,\cdots,n-1,\\
+  M_n,&x\in[x_{n-1},b]
+\end{cases}
+\]
+和
+\[
+\underline{f}(x)=
+\begin{cases}
+  m_i,&x\in[x_{i-1},x_i),i=1,2,\cdots,n-1,\\
+  m_n,&x\in[x_{n-1},b]
+\end{cases}
+\]
+则$\overline{f}(x),\underline{f}(x)$均为区间$[a,b]$上的阶梯函数.为了证明它们满足(1)的结论，我们令\footnote{如果不这么做，就可能在端点处出现
+该闭区间振幅大于$\omega_i$的情况.因此我们需要排除端点处的例外.}
+\[
+\overline{f}_1(x)=
+\begin{cases}
+  \overline{f}(x),&x\in[a,b],x\ne x_i,\\
+  f(x_i),&x=x_i
+\end{cases}
+\]
+\[
+\underline{f}_1(x)=
+\begin{cases}
+  \underline{f}(x),&x\in[a,b],x\ne x_i,\\
+  f(x_i),&x=x_i
+\end{cases}
+\]
+容易看出$\overline{f}(x),\overline{f}_1(x),\underline{f}(x),\underline{f}_1(x)$均为$[a,b]$上的可积函数，且有
+$$\int_a^b|f(x)-\overline{f}(x)|\dx=\int_a^b|f(x)-\overline{f}_1(x)|\dx$$
+与$$\int_a^b|f(x)-\underline{f}(x)|\dx=\int_a^b|f(x)-\underline{f}_1(x)|\dx.$$
+由振幅的定义，对于$\forall x\in[x_{i-1},x_i]$,有
+$$|f(x)-\overline{f}_1(x)|\le \omega_i,|f(x)-\underline{f}_1(x)|\le \omega_i,$$从而有
+\begin{align*}
+  \int_a^b|f(x)-\underline{f}(x)|\dx&=\int_a^b|f(x)-\underline{f}_1(x)|\dx\\
+  &=\sum_{i=1}^n\int_{x_{i-1}}^{x_i}|f(x)-\underline{f}_1(x)|\dx\le\sum_{i=1}^n\omega_i\Delta x_i<\varepsilon
+\end{align*}和
+$$\int_a^b|f(x)-\overline{f}(x)|<\varepsilon.$$
+(2).作折线依次连接$(x_{i-1},f(x_{i-1}))$和$(x_i,f(x_i))$.则$g(x)$为该折线函数(分段线性函数)，显然是满足条件的.\\
+\fz 我们还可以证明下面的结论：设函数$f(x)\in R[a,b],$则对于$\forall\varepsilon>0$,存在区间$[a,b]$上的连续函数$g(x)$,使得
+$$\int_a^b[f(x)-g(x)]^2\dx<\varepsilon.$$
+利用上面的例子可以容易地证之.只需注意到用上面的构造有$|f(x)|\le M,|g(x)|\le M,[f(x)-g(x)]^2\le[|f(x)|+|g(x)|]|f(x)-g(x)|.$
+\begin{thm}
+  设函数$f,g\in R[a,b]$,则$fg\in R[a,b].$
+\end{thm}
+\jz 只需注意到$|f(x'')g(x'')-f(x')g(x')|\le|f(x'')g(x'')-f(x'')g(x')|+|f(x'')g(x')-f(x')g(x')|\le|f(x'')||g(x'')-g(x')|+
+|g(x')||f(x'')-f(x')|,$从而$\omega_i(fg)\le M(\omega_i(f)+\omega_i(g)).$\\
+容易看出，此时$\dfrac{f(x)}{g(x)},f(g(x))$都不一定可积.
+\begin{exa}
+  设函数$f(x)$在区间$[a,b]$上连续，证明：\\
+  $(1).$如果对$[a,b]$的任何子区间$[a_1,b_1]$有$\displaystyle\int_{a_1}^{b_1}f(x)\dx=0$,则$f(x)\equiv0.$\\
+  $(2).$若$f(x)\ge0,$且$\displaystyle\int_a^bf(x)\dx=0$,则$f(x)\equiv0.$
+\end{exa}
+\begin{exa}
+  设$0<q\le p,$证明$\ln\dfrac{p}{q}\le\dfrac{p-q}{q}.$
+\end{exa}
+\clearpage
+
+\section{习题课笔记(2)}
+\begin{exa}
+  设$f$定义在$[a,b]$，且$f(x)>0,x\in[a,b].$证明，$\overline{\displaystyle\int_a^b}f(x)\dx>0.$
+\end{exa}
+\zm 我们用反证法.假设$\overline{\displaystyle\int_a^b}f(x)\dx=0.$于是对于$\forall\varepsilon>0,\exists\delta>0$，当我们选取的
+分割$\Delta:a=x_0<x_1<\cdots<x_n=b$的$\lambda(\Delta)<\delta$时，就有
+$$\sum_{i=1}^nM_i\Delta x_i<\varepsilon,\; M_i=\sup_{x\in[x_{i-1},x_i]}\{f(x)\}.$$
+故存在$M_{i_1}$使得$M_{i_1}<\varepsilon.$
+这时候我们记$[a_1,b_1]=[x_{i_1-1},x_{i_1}]$.我们在后面将证明$\overline{\displaystyle\int_{a_1}^{b_1}}f(x)\dx=0$,现在不妨先使用它.
+则同理我们取$\dfrac{\varepsilon}{2}$对$[a_1,b_1]$采取同样的操作，存在$[a_2,b_1]\subset[a_1,b_1]$使得
+$f(x)\le\dfrac{\varepsilon}{2},x\in[a_2,b_2],$且$\overline{\displaystyle\int_{a_2}^{b_2}}f(x)\dx=0.$这样下去，则找到闭区间套
+$\{[a_n,b_n]\}_{n=1}^\infty,$当$x\in[a_n,b_n]$时，$f(x)<\dfrac{\varepsilon}{n}.$从而存在唯一$\xi\in\bigcap_{n=1}^\infty[a_n,b_n]$.
+故$f(\xi)=0.$矛盾.\\
+现在我们简单说明上面用到的结论，只需要将$[a_1,b_1]$内的黎曼和放大到整个区间即可.\\
+现在我们有个\textbf{结论}：若$f>0,x\in[a,b],\overline{\displaystyle\int_a^b}f(x)\dx=0,$则$f(x)$的零点集在$[a,b]$稠密.
+\begin{exa}
+  设$f(x)\in C^1[a,b]$，作$[a,b]$的$n$等分，记$I=\displaystyle\int_a^bf(x)\dx,S_n=\sum\limits_{i=1}^nf(x_i)\dfrac{b-a}{n}.$
+  证明：$\lim\limits_{n\to\infty}n(S_n-I)=\dfrac{b-a}{2}\left(f(b)-f(a)\right)$.
+\end{exa}
+\zm 注意到$$|S_n-I|=\sum_{i=1}^n\int_{x_{i-1}}^{x_i}f'(\xi_i)(x_i-x)\dx$$和
+$$\frac{b-a}{2}(f(b)-f(a))=\frac{b-a}{2}\sum_{i=1}^n\int_{x_{i-1}}^{x_i}f'(\eta_i)\dx.$$
+于是我们有
+\begin{align*}
+  &\left|n(S_n-I)-\frac{b-a}{2}(f(b)-f(a))\right|\\
+  &\le\sum_{i=1}^n\left|\int_{x_{i-1}}^{x_i}\left(f'(\xi_i)n(x_i-x)-f'(\eta_i)\frac{b-a}{2}\right)\dx\right|\\
+  &\le\sum_{i=1}^n\left|\int_{x_{i-1}}^{x_i}\left( f'(\xi_i)n(x_i-x)-f'(\eta_i)n(x_i-x) \right)\dx\right|\cdots\cdots I_1\\
+  &+\sum_{i=1}^n\left|\int_{x_{i-1}}^{x_i}\left(f'(\eta_i)n(x_i-x)-f'(\eta_i)\frac{b-a}{2}\right)\dx\right|\cdots\cdots I_2.
+\end{align*}
+对于$I_1$我们有
+$$I_1\le\sum_{i=1}^n\int_{x_{i-1}}^{x_i}\left|f'(\xi_i)-f'(\eta_i)\right|n(x_i-x)\dx.$$
+当$|x_i-x_{i-1}|=\dfrac{b-a}{n}<\delta$时，$|f'(\xi_i)-f'(\eta_i)|<\varepsilon.$这时有
+$$I_1\le\varepsilon\sum_{i=1}^n\int_{x_{i-1}}^{x_i}n(x_i-x)\dx=\frac{\varepsilon(b-a)^2}{2}.$$
+对于$I_2$，我们有
+$$I_2=\sum_{i=1}^n\left|f'(\eta_i)\int_{x_{i-1}}^{x_i}\left(n(x_i-x)-\frac{b-a}{2}\right)\dx\right|=0.$$
+这样就完成了证明.
+\begin{exa}
+  设$f\in C^1[a,b],f(a)=f(b)=0,$则$\left|\displaystyle\int_a^bf(x)\dx\right|\le\dfrac{(b-a)^2}{4}\sup|f'(x)|.$
+\end{exa}
+\zm 我们有
+\begin{align*}
+  \left|\int_a^bf(x)\dx\right|&=\left|\int_a^\frac{a+b}{2}f(x)\dx+\int_\frac{a+b}{2}^bf(x)\dx\right|\\
+  &=\left|\int_a^\frac{a+b}{2}\left(\int_a^xf'(t)\mathrm{d}t\right)\dx+
+  \int_\frac{a+b}{2}^b\left(\int_b^xf'(t)\mathrm{d}t\right)\dx\right|\\
+  &\le\int_a^\frac{a+b}{2}\left(\int_a^x|f'(t)|\mathrm{d}t\right)\dx\\
+  &+\int_\frac{a+b}{2}^b\left(\int_b^x|f'(t)|\mathrm{d}t\right)\dx
+\end{align*}
+此时显然有
+$$\int_a^\frac{a+b}{2}\left(\int_a^x|f'(t)|\mathrm{d}t\right)\dx\le\int_a^\frac{a+b}{2}
+\left(\int_a^xM\mathrm{d}t\right)\dx=\frac{M}{8}(b-a)^2.$$
+得证.\\
+\fz 这种\emph{将大区间分成若干小区间}的方法十分常用.
+\begin{exa}
+  设$f(x)\in C[-1,1],$则$$\lim_{n\to\infty}\frac{\int_{-1}^1f(x)(1-x^2)^n\dx}{\int_{-1}^1(1-x^2)^n\dx}=f(0).$$
+\end{exa}
+\zm 令$g_n(x)=\dfrac{(1-x^2)^n}{\int_{-1}^1(1-x^2)^n\dx},$则$g_n(x)\ge0$且$\int_{-1}^1g(x)\dx=1$.从而
+\begin{align*}
+  \left|\int_{-1}^1f(x)g_n(x)\dx-f(0)\right|&=\left|\int_{-1}^1f(x)g_n(x)\dx-\int_{-1}^1f(0)g_n(x)\dx\right|\\
+  &=\left|\int_{-1}^1\left(f(x)-f(0)\right)g_n(x)\dx\right|\\
+  &\le\int_{-1}^1\left|f(x)-f(0)\right|g_n(x)\dx\\
+  &=\int_{-\delta}^\delta\left|f(x)-f(0)\right|g_n(x)\dx+\int_{-1}^{-\delta}\left|f(x)-f(0)\right|g_n(x)\dx
+  +\int_{\delta}^1\left|f(x)-f(0)\right|g_n(x)\dx.
+\end{align*}
+首先，我们有(由闭区间上的一致连续性)：
+$$\int_{-\delta}^\delta\left|f(x)-f(0)\right|g_n(x)\dx\le\frac{\varepsilon}{2}\int_{-\delta}^\delta g_n(x)\dx
+\le\int_{-1}^1g_n(x)\dx=\frac{\varepsilon}{2}.$$
+下面再说明$\int_{-1}^{-\delta}(1-x^2)^n\dx$与$\int_{\delta}^{1}(1-x^2)^n\dx$是$\int_{-\delta}^{\delta}(1-x^2)^n\dx$
+的高阶无穷小即可.
+\begin{exa}
+  设$f$可微，且$f'\in R[a,b]$，则$|f(y)-f(x)|\le M|y-x|^\frac{1}{2},$M是常数.
+\end{exa}
+\zm 我们利用Cauchy-Schwarz不等式：\\
+$|f(y)-f(x)|=|\int_x^yf'(t)\mathrm{d}t|\le\sqrt{\int_x^y1^2\mathrm{d}t}\cdot\sqrt{\int_x^y(f'(t))^2\mathrm{d}t}
+\le\sqrt{|y-x|}\sqrt{\int_a^b|f'(t)|^2\mathrm{d}t}.$
+\clearpage
+
+\section{课堂笔记(5):变限定积分与定积分的计算(1)}
+\begin{center}
+  2018年3月12日
+\end{center}
+\subsection{原函数的存在性}
+\begin{dfn}
+  设函数$f(x)\in R[a,b]$，则对于$\forall x\in[a,b],f(t)\in R[a,x]$，则
+  $$\varPhi(x)=\int_a^xf(t)\mathrm{d}t$$是定义在区间$[a,b]$上的一个函数，称为$f(t)$的变上限定积分.
+\end{dfn}
+\begin{thm}
+  设$\varPhi(x)$是函数$f(t)\in R[a,b]$的\textbf{变上限积分}.
+  \begin{enumerate}
+    \item $\varPhi(x)\in C[a,b]$;
+    \item 若$f(t)\in C[a,b]$，则$\varPhi(x)$在$[a,b]$上可导，并且$\varPhi'(x)=f(x)$.
+  \end{enumerate}
+\end{thm}
+\zm $\varPhi(x)$的连续性用定义即可.下面设$f(t)\in C[a,b]$,来证明$\varPhi(x)$在$x_0\in(a,b)$处满足$\varPhi'(x_0)=f(x_0).$
+由$f(t)$的连续性,对于$\forall\varepsilon>0,\exists\delta>0,$当$|t-x_0|<\delta$时，有$|f(t)-f(x_0)|<\varepsilon.$
+因此，当$0<|x-x_0|<\delta$时，有
+\begin{align*}
+  \left|\frac{\varPhi(x)-\varPhi(x_0)}{x-x_0}-f(x_0)\right|&=\left|
+  \frac{\int_a^xf(t)\mathrm{d}t-\int_a^{x_0}f(t)\mathrm{d}t}{x-x_0}-\frac{\int_{x_0}^xf(x_0)\mathrm{d}t}{x-x_0}\right|\\
+  &=\left|\frac{\int_{x_0}^x[f(t)-f(x_0)]\mathrm{d}t}{x-x_0}\right|\\
+  &\le\frac{\int_{x_0}^x|f(t)-f(x_0)|\mathrm{d}t}{|x-x_0|}<\varepsilon.
+\end{align*}
+于是我们知道，区间$[a,b]$上的连续函数$f$总存在原函数，且其变上限积分就是它的一个原函数.\\
+\fz 值得注意的是，即使一个函数$f(x)$存在原函数$F(x)$，有时候$f(x)$也不可积.例如
+\[
+F(x)=
+\begin{cases}
+  x^2\sin\dfrac{1}{x^2},&x\ne0,\\
+  0,&x=0.
+\end{cases}
+\]
+则它的导数在$x=0$的邻域内无界，从而在包含$x=0$的任何闭区间都不可积.
+
+下面来考虑积分上下限是函数时变限定积分的求导问题.若函数$f(t)\in C[a,b],u=\phi(x)$在区间$[\alpha,\beta]$上可导，且对于
+$\forall x\in[\alpha,\beta],\phi(x)\in[a,b]$，则对于$\forall x\in[\alpha,\beta],\displaystyle\int_a^\phi(x)f(t)
+\mathrm{d}t$在$[\alpha,\beta]$上有定义，因此是$[\alpha,\beta]$的一个函数.若令
+$$G(x)=\int_a^\phi(x)f(t)\mathrm{d}t,$$则$G(x)$可以看成$\varPhi(u)=\int_a^uf(t)\mathrm{d}t$与$u=\phi(x)$的复合函数.因此
+$$G'(x)=\varPhi(\phi(x))\phi'(x)=f(\phi(x))\phi'(x).$$
+\subsection{定积分的计算(1)}
+\begin{thm}[换元法]
+  设函数$f(x)\in C[a,b]$，$\varphi(t)$在区间$[\alpha,\beta]$上\textbf{具有连续导数},且$\varphi(\alpha)=a,\varphi(\beta)=b,
+  a\le\varphi(t)\le b,$则有
+  $$\int_a^bf(x)\dx=\int_\alpha^\beta f(\varphi(t))\varphi'(t)\mathrm{d}t.$$
+\end{thm}
+\zm 一方面，由于$f(x)\in C[a,b],$因此具有原函数$F(x),$且$\int_a^bf(x)\dx=F(b)-F(a).$另一方面，$F(\varphi(t))$是连续函数
+$f(\varphi(t))\varphi'(t)$在$[\alpha,\beta]$上的一个原函数，因此也有$\int_\alpha^\beta f(\varphi(t))\varphi'(t)\mathrm{d}t
+=F(b)-F(a).$
+\begin{exa}
+  求定积分$I=\displaystyle\int_0^\pi\dfrac{x\sin x}{1+\cos^2x}\dx$.
+\end{exa}
+\jie 只需要将区间从$\dfrac{\pi}{2}$分成两部分即可.
+\begin{exa}
+  设$x_1,x_2\in(-1,1)$,定义$d(x_1,x_2)=|\int_{x_1}^{x_2}\frac{\dx}{1-x^2}|.$则：
+  \begin{enumerate}
+    \item 对任何的$x_1,x_2\in(-1,1)$,有$d(x_1,x_2)\ge0,$且$d(x_1,x_2)=0\iff x_1=x_2;$
+    \item $d(x_1,x_2)=d(x_2,x_1);$
+    \item 对任何的$x_1,x_2,x_3\in(-1,1),$成立$d(x_1,x_3)\le d(x_1,x_2)+d(x_2,x_3);$
+    \item 设$x_0,x_1,x_2\in(-1,1),w_j=\dfrac{x_j-x_0}{1-x_0x_j}(j=1,2)$,则$w_1,w_2\in(-1,1)$且$d(w_1,w_2)=d(x_1,x_2);$
+    \item 设$x_0\in(-1,1),$则$\lim\limits_{x\to\pm1}d(x_0,x)=+\infty.$
+  \end{enumerate}
+  这个距离$d$称为\textbf{庞加莱(Poincare)距离}或\textbf{双曲距离}.
+\end{exa}
+\clearpage
+
+\section{课堂笔记(6):定积分的计算(2)、积分中值定理(1)}
+\begin{center}
+  2018年3月14日
+\end{center}
+\subsection{定积分的计算(2)}
+\begin{thm}[分部积分法]
+  设函数$u(x),v(x)$在区间$[a,b]$上可导，并且$u'(x),v'(x)\in R[a,b]$,则
+  $$\int_a^bu(x)v'(x)\dx=u(x)v(x)\Big|_a^b-\int_a^bu'(x)v(x)\dx.$$
+\end{thm}
+\begin{exa}
+  对任意的$m\in\mathbb{N},$有$$\int_0^\frac{\pi}{2}\sin^mx\dx=\int_0^\frac{\pi}{2}\cos^mx\dx=I_m=
+  \begin{cases}
+    \dfrac{(m-1)!!}{m!!}\cdot\dfrac{\pi}{2}&,m\text{是偶数}\\
+    \dfrac{(m-1)!!}{m!!}&,m\text{是奇数}
+  \end{cases}$$
+\end{exa}
+\begin{exa}[Wallis公式]
+  当$x\in\left(0,\dfrac{\pi}{2}\right),\forall n\in\mathbb{N},$有
+  $$\sin^{2n+1}x<\sin^{2n}x<\sin^{2n-1}x,$$积分之，有
+  $$\frac{(2n)!!}{(2n+1)!!}<\frac{(2n-1)!!}{(2n)!!}\frac{\pi}{2}<\frac{(2n-2)!!}{(2n-1)!!}.$$
+  从而容易得到
+  $$\lim_{n\to\infty}\left[\frac{(2n)!!}{(2n-1)!!}\right]^2\frac{1}{2n+1}=\frac{\pi}{2}.$$
+\end{exa}
+\subsection{定积分中值定理(1)}
+\begin{lem}
+  设函数$f(x)$在区间$[a,b]$上连续，必存在一点$\xi\in[a,b]$，使得
+  $$\int_a^bf(x)\dx=f(\xi)(b-a).$$
+\end{lem}
+\begin{thm}[定积分第一中值定理]
+  设函数$f(x)\in C[a,b],g(x)\in R[a,b],$且在$[a,b]$上不变号，则存在$\xi\in[a,b]$使得
+  $$\int_a^bf(x)g(x)\dx=f(\xi)\int_a^bg(x)\dx.$$
+\end{thm}
+\jz 由介值定理易知.
+
+\fz 在定积分第一中值定理中，若只假定$f(x)\in R[a,b]$,令
+$$m=\inf\{f(x)\},\quad M=\sup\{f(x)\},$$
+则同样可以证明存在$\mu\in[m,M]$使得
+$$\int_a^bf(x)g(x)\dx=\mu\int_a^bg(x)\dx.$$
+而若$f(x)$是连续的，则可以证明存在$\xi\in(a,b)$使得上式成立.
+\begin{exa}
+  设函数$f(x)\in C[0,1],$证明$$\lim_{n\to\infty}\int_0^1\frac{nf(x)}{1+n^2x^2}\dx=\frac{\pi}{2}f(0).$$
+\end{exa}
+\zm 由于$f(x)\in C[0,1]$，从而存在$M>0$使得$|f(x)|\le M.$由定积分的性质，我们有
+$$\int_0^1\frac{nf(x)}{1+n^2x^2}\dx=\int_0^{n^{-\frac{1}{3}}}\frac{nf(x)}{1+n^2x^2}\dx+
+\int_{n^{-\frac{1}{3}}}^1\frac{nf(x)}{1+n^2x^2}\dx.$$
+对于第二个积分有：
+$$\left|\int_{n^{-\frac{1}{3}}}^1\frac{nf(x)}{1+n^2x^2}\dx\right|\le
+\int_{n^{-\frac{1}{3}}}^1\left|\frac{nf(x)}{1+n^2x^2}\right|\dx\le\frac{nM}{1+n^{1+\frac{1}{3}}}\to0.$$
+而在第一个积分中，$\dfrac{n}{1+n^2x^2}$不变号，因此存在$\xi\in[0,n^{-\frac{1}{3}}]$使得
+$$\int_0^{n^{-\frac{1}{3}}}\frac{nf(x)}{1+n^2x^2}\dx=f(\xi)\int_0^{-\frac{1}{3}}\frac{n}{1+n^2x^2}\dx=
+f(\xi)\arctan n^\frac{2}{3}.$$
+显然当$n\to\infty$时，$\xi\to0$，$\arctan n^\frac{2}{3}\to\dfrac{\pi}{2},$因此得证.
+\begin{thm}[带积分余项的泰勒公式]
+  设$f(x)$在$x_0$的邻域$U(x_0,h)$内具有$n+1$阶连续导数，则对$\forall x\in U(x_0,h)$，有
+  $$f(x)=f(x_0)+f'(x_0)(x-x_0)+\frac{f''(x_0)}{2!}(x-x_0)^2+\ldots+\frac{f^{(n)}(x_0)}{n!}(x-x_0)^n+\frac{1}{n!}
+  \int_{x_0}^xf^{(n+1)}(t)(x-t)^n\mathrm{d}t.$$
+\end{thm}
+\zm 由NL公式：
+$$f(x)=f(x_0)+\int_{x_0}^xf'(t)\mathrm{d}t=f(x_0)+\int_{x_0}^x(x-t)^0f'(t)\mathrm{d}t.$$
+利用分部积分有：
+\begin{align*}
+  \int_{x_0}^x(x-t)^0f'(t)\mathrm{d}t&=-\int_{x_0}^xf'(t)\mathrm{d}(x-t)\\
+  &=f'(x_0)(x-x_0)+\int_{x_0}^x(x-t)f''(t)\mathrm{d}t\\
+  &=f'(x_0)(x-x_0)-\frac{1}{2}\int_{x_0}^xf''(t)\mathrm{d}(x-t)^2\\
+  &=f'(x_0)(x-x_0)+\frac{f''(x_0)}{2}(x-x_0)^2+\frac{1}{2}\int_{x_0}^x(x-t)^2f'''(t)\mathrm{d}t.
+\end{align*}
+然后再用归纳法可以得证.\\
+\fz 现在用它来推出Lagrange余项.事实上，在$x_0$与$x$之间，$g(t)=(x-t)^n$是关于$t$的连续函数并且是不变号的，而$f^{(n-1)}(t)$是
+连续的，因此，由第一中值定理在$x_0$与$x$之间存在$\xi$使得
+$$R_n(x)=\frac{f^{(n+1)}(\xi)}{n!}\int_{x_0}^x(x-t)^n\mathrm{d}t=\frac{f^{(n+1)}(\xi)}{(n+1)!}(x-x_0)^{n+1}.$$
+而如果如下应用积分第一中值定理，则可以得到柯西余项：
+$$R_n(x)=\frac{f^{(n+1)}(\xi)}{n!}(x-\xi)^n(x-x_0),$$
+在注意到$x-\xi=(x-x_0)-\theta(x-x_0)=(1-\theta)(x-x_0),0<\theta<1$，代入就得到了柯西余项.
+\clearpage
+
+\section{习题课笔记(3)}
+\begin{exa}
+  设$f,g$是$[a,b]$上的连续递增函数，则有
+  $$\frac{1}{b-a}\int_a^bf(x)\dx\cdot\frac{1}{b-a}\int_a^bg(x)\dx\le\frac{1}{b-a}\int_a^bf(x)g(x)\dx.$$
+\end{exa}
+\zm 我们可以证明一个更一般的结论：
+$$\int_a^xf(t)\mathrm{d}t\int_a^xg(t)\mathrm{d}t\le(x-a)\int_a^xf(t)g(t)\mathrm{d}t,x\ge a.$$
+于是令$$F(x)=\int_a^xf(t)\mathrm{d}t\int_a^xg(t)\mathrm{d}t-(x-a)\int_a^xf(t)g(t)\mathrm{d}t.$$
+\begin{align*}
+  F'(x)&=f(x)\int_a^xg(t)\mathrm{d}t+g(x)\int_a^xf(t)\mathrm{d}t-\int_a^xf(t)g(t)\mathrm{d}t-(x-a)f(x)g(x)\\
+  &=\int_a^xf(x)g(t)\mathrm{d}t+\int_a^xg(x)f(t)\mathrm{d}t-\int_a^xf(t)g(t)\mathrm{d}t-\int_a^xf(x)g(x)\mathrm{d}t\\
+  &=\int_a^x[f(x)-f(t)]g(t)\mathrm{d}t-\int_a^x[f(x)-f(t)]g(x)\mathrm{d}t\\
+  &=\int_a^x[f(x)-f(t)][g(t)-g(x)]\mathrm{d}t<0.
+\end{align*}
+故$F(x)$单调减，又$F(a)=0$,从而得证.
+\begin{exa}
+  设$f(x)\in C[0,1]$,且$f(x)\ge0.$若$f^2(x)\le1+2\displaystyle\int_0^xf(t)\mathrm{d}t,$则$f(x)\le1+x,x\in[0,1].$
+\end{exa}
+\zm 令$F(x)=\int_0^xf(t)\mathrm{d}t,F(0)=0,F'(x)=f(x),$于是条件变成
+$$F'(x)\le\sqrt{1+2F(x)}\;\text{或}\;\frac{F'(x)}{\sqrt{1+2F(x)}}\le 1.$$
+两边从$0$到$x$积分有：
+$$\int_0^x\frac{\mathrm{d}F(t)}{\sqrt{1+2F(t)}}\le x,$$
+结果是
+$$f(x)=F'(x)=\sqrt{1+2F(x)}-1\le x,$$
+从而得证.
+
+\fz 通常涉及变上限积分，将之化为微分方程处理.
+\begin{exa}
+  证明下列结论：
+  \begin{enumerate}
+    \item 设$f(x)\in C[0,1]$,则存在$\xi\in(0,1)$,使得$\xi f(\xi)=\displaystyle\int_\xi^1f(x)\dx.$
+    \item 设$f(x)\in C[a,b],$且$a>0$，若$\displaystyle\int_a^bf(x)\dx=0$,则存在$\xi\in(a,b)$使
+    $\displaystyle\int_a^\xi f(x)\dx=\xi f(\xi).$
+  \end{enumerate}
+\end{exa}
+\zm \begin{enumerate}
+  \item 设$F(x)=\displaystyle\int_x^1f(t)\mathrm{d}t,F(1)=0,F'(x)=-f(x).$再令$G(x)=xF(x),G'(x)=xF'(x)+F(x),$
+  且有$G(0)=G(1)=0$，则存在$\xi\in(0,1)$使得$G'(\xi)=0$，原式成立.
+  \item 设$F(x)=\displaystyle\int_a^xf(t)\mathrm{d}t,F(a)=F(b)=0,F'(x)=f(x).$然后同上即可.
+\end{enumerate}
+\begin{exa}
+  设$f(x)\in C[0,1]$，且在$(0,1)$上可导，并且满足$f(1)=2\displaystyle\int_0^\frac{1}{2}e^{1-x}f(x)\dx.$则
+  存在$\xi\in(0,1)$满足$f(\xi)=f'(\xi)$.
+\end{exa}
+
+\zm 令$F(x)=\dfrac{f(x)}{e^x},F'(x)=\dfrac{f'(x)-f(x)}{e^x}.$且$f(1)=2\displaystyle\int_0^\frac{1}{2}
+e^{1-x}f(x)\dx=2f(\eta)e^{1-\eta}\cdot\dfrac{1}{2}=f(\eta)e^{1-\eta},$也即
+$G(1)=G(\eta)$,再由Rolle定理得证.
+\begin{exa}
+  设$f(x)\in C(-\infty,\infty),$且$f'(0)$存在，对于$\forall x\in(-\infty,\infty),$有
+  $\displaystyle\int_0^xf(t)\mathrm{d}t=\dfrac{1}{2}xf(x)$.则$f(x)\equiv cx.$
+\end{exa}
+\zm 令$F(x)=\int_0^xf(t)\mathrm{d}t,$条件变为$F(x)=\dfrac{1}{2}xF'(x)$或$xF'(x)-2F(x)=0$.也即当$x>0$
+时$F'(x)-\dfrac{2}{x}F(x)=\left(\dfrac{F(x)}{x^2}\right)'=0.$于是$F(x)=c_1x^2,f(x)=c'x.$当$x<0$时同理有
+$f(x)=c''x.$由于$f'(0)$存在，从而$c'=c''$,得证.
+
+\begin{exa}
+  计算定积分$\displaystyle\int_0^\frac{\pi}{2}\dfrac{\sin(2m-1)x}{\sin x}\dx.$
+\end{exa}
+\jz 只需要利用$\sin(2m-1)x=\sin x+\sum\limits_{k=1}^{m-1}(\sin(2k+1)x-\sin(2k-1)x)=\sin x+
+\sum\limits_{k=1}^{m-1}2\cos2kx\sin x.$结果为$\dfrac{\pi}{2}$.
+\begin{exa}
+  若$f\in C[0,1]$，求$\lim\limits_{n\to\infty}\displaystyle\int_0^1nx^nf(x)\dx.$
+\end{exa}
+\jz 我们有如下的估计：
+\begin{align*}
+  \left|\int_0^1nx^nf(x)-f(1)\dx\right|\le&\left|\int_0^1nx^nf(x)-nx^nf(1)\dx\right|+
+  \left|\int_0^1nx^nf(1)-f(1)\dx\right|\\
+  &=\left|\int_0^1nx^n(f(x)-f(1))\dx\right|+f(1)\int_0^1(nx^n-1)\dx\\
+\end{align*}
+第二项在$n\to\infty$的时候趋于零.现在来估计第一项.\\
+\begin{align*}
+  I_1&=\left|\int_0^1nx^n(f(x)-f(1))\dx\right|\\
+  &=\left|\int_0^{1-\delta}nx^n(f(x)-f(1))\dx\right|+\left|\int_{1-\delta}^1nx^n(f(x)-f(1))\dx\right|\\
+  &\le2M\int_0^{1-\delta}nx^n\dx+\varepsilon\int_{1-\delta}^1nx^n\dx\\
+  &\le 2M(1-\delta)^n+\varepsilon.
+\end{align*}
+\clearpage
+
+\section{课堂笔记(7):定积分中值定理(2)、定积分的应用(1)}
+\begin{center}
+  2018年3月18日
+\end{center}
+\subsection{定积分第二中值定理}
+\begin{thm}[定积分第二中值定理]
+  设$g(x)\in R[a,b]$,则
+  \begin{enumerate}
+    \item 若$f(x)$在$[a,b]$上单调上升且$f(x)\ge0$,则存在$\xi_1\in[a,b]$使得
+    $$\int_a^bf(x)g(x)\dx=f(b)\int_{\xi_1}^bg(x)\dx;$$
+    \item 若$f(x)$在$[a,b]$上单调下降且$f(x)\ge0$,则存在$\xi_2\in[a,b]$使得
+    $$\int_a^bf(x)g(x)\dx=f(a)\int_a^{\xi_2}g(x)\dx;$$
+    \item 若$f(x)$在$[a,b]$上单调,则存在$\xi\in[a,b]$使得
+    $$\int_a^bf(x)g(x)\dx=f(a)\int_a^\xi g(x)\dx+f(b)\int_\xi^bg(x)\dx.$$
+  \end{enumerate}
+\end{thm}
+我们可以先在条件较弱的情况下证明：设$g(x)\in C[a,b],f(x)\in C^1[a,b].$此时令$G(x)=\displaystyle\int_x^bg(t)\mathrm{d}t,
+m,M$为其最小最大值，则有
+\begin{align*}
+  \int_a^bf(x)g(x)\dx&=-\int_a^bf(x)\mathrm{d}G(x)\\
+  &=f(a)G(a)+\int_a^bG(x)f'(x)\dx.
+\end{align*}
+再由
+$$m[f(b)-f(a)]\le\displaystyle\int_a^bG(x)f'(x)\dx\le M[f(b)-f(a)]$$
+得到
+$$mf(b)\le\displaystyle\int_a^bf(x)g(x)\dx\le Mf(b).$$再由介值定理得证.
+\begin{lem}[阿贝尔变换]
+  设$a_1,a_2,\cdots,a_n;b_1,b_2,\cdots,b_n$是两组数，若记$B_k=\sum\limits_{i=1}^kb_i,$则有
+  $$\sum_{i=1}^na_ib_i=\sum_{i=1}^{n-1}(a_i-a_{i+1})B_i+a_nB_n=a_nB_n-\sum_{i=1}^{n-1}(a_{i+1}-a_i)B_i.$$
+\end{lem}
+证明从略.现在我们可以证明原定理了.
+
+\zm 令$h(x)=\displaystyle\int_a^xg(t)\mathrm{d}t.$知$h(x)\in C[a,b].$设$m=\min\{h(x)\},M=\max\{h(x)\},|g(x)|\le M_1$.\\
+$\Delta:a=x_0<x_1<\cdots<x_n=b$为任一分割，则有
+$$\int_a^bf(x)g(x)\dx=\lim_{\lambda(\Delta)\to0}\sum_{i=1}^n\int_{x_{i-1}}^{x_i}f(x)g(x)\dx.$$由于
+$$\left|\sum_{i=1}^n\int_{x_{i-1}}^{x_i}[f(x)-f(x_{i-1})]g(x)\dx\right|\le M_1\sum_{i=1}^n\omega_i\Delta x_i\to0.$$
+从而
+$$\int_a^bf(x)g(x)\dx=\lim_{\lambda(\Delta)\to0}\sum_{i=1}^nf(x_{i-1})\int_{x_{i-1}}^{x_i}g(x)\dx.$$
+因此只需要对
+$$\sum_{i=1}^nf(x_{i-1})\int_{x_{i-1}}^{x_i}g(x)\dx=\sum_{i=1}^nf(x_{i-1})[h(x_i)-h(x_{i-1})]$$进行估计即可.
+运用Abel引理我们有
+$$\sum_{i=1}^nf(x_{i-1})[h(x_i)-h(x_{i-1})]=\sum_{i=1}^{n-1}[f(x_{i-1})-f(x_i)]h(x_i)+f(x_{n-1})h(b).$$
+由于$f$是单调减的，故$f(x_{i-1})-f(x_i)\ge 0.$再注意到$f(b)\ge0,m\le h(x)\le M,$可以推出
+\begin{align*}
+  mf(a)&=\sum_{i=1}^{n-1}[f(x_{i-1})-f(x_i)]m+f(x_{n-1})m\\
+  &\le\sum_{i=1}^{n-1}[f(x_{i-1})-f(x_i)]h(x_i)+f(x_{n-1})h(b)\\
+  &\le\sum_{i=1}^{n-1}[f(x_{i-1})-f(x_i)]M+f(x_{n-1})M\\
+  &=Mf(a).
+\end{align*}
+从而$$mf(a)\le \int_a^bf(x)g(x)\dx\le Mf(a).$$再由介值定理得证.
+\begin{exa}
+  设函数$f(x)$在区间$[a,b]$单调增，证明：
+  $$\int_a^bxf(x)\dx\ge\frac{a+b}{2}\int_a^bf(x)\dx.$$
+\end{exa}
+\zm 移项后有
+\begin{align*}
+  \int_a^bf(x)\left(x-\frac{a+b}{2}\right)\dx&=f(a)\int_a^\xi\left(x-\frac{a+b}{2}\right)\dx+
+  f(b)\int_\xi^b\left(x-\frac{a+b}{2}\right)\dx\\
+  &=[f(b)-f(a)]\frac{b-\xi}{2}(\xi-a)\ge 0.
+\end{align*}
+
+\fz 此题可以不用中值定理，变量替换后合并显然.
+\begin{exa}
+  设函数$f(x)=\begin{cases}\displaystyle\int_0^x\sin\dfrac{1}{t}\mathrm{d}t,&x\ne0\\0,&x=0\end{cases}$，证明$f'(0)=0.$
+\end{exa}
+\zm 对任给的$x>0$,由于$\sin\dfrac{1}{t}$在区间$[0,x]$上可积，从而有
+$$\int_0^x\sin\dfrac{1}{t}\mathrm{d}t=\lim_{\delta\to0+}\int_\delta^x\sin\frac{1}{t}\mathrm{d}t.$$
+作变换$t=\dfrac{1}{u},$有
+$$\int_\delta^x\sin\frac{1}{t}\mathrm{d}t=\int_\frac{1}{x}^\frac{1}{\delta}\frac{\sin u}{u^2}\mathrm{d}u.$$
+应用积分第二中值定理，存在$\xi_\delta\in\left[\dfrac{1}{x},\dfrac{1}{\delta}\right],$使得
+$$\int_\frac{1}{x}^\frac{1}{\delta}\frac{\sin u}{u^2}\mathrm{d}u=x^2\int_\frac{1}{x}^{\xi_\delta}\sin u\mathrm{d}u.$$
+由于$\left|\int_\frac{1}{x}^{\xi_\delta}\sin u\mathrm{d}u\right|\le 2,$因此，对$\forall \delta>0$有
+$$\left|\int_\delta^x\sin\frac{1}{t}\mathrm{d}t\right|\le 2x^2.$$
+令$\delta\to0+,$得
+$$\left|\int_0^x\sin\frac{1}{t}\mathrm{d}t\right|\le 2x^2.$$
+注意到$\displaystyle\int_0^x\sin\dfrac{1}{t}\mathrm{d}t$是偶函数，从而对$x<0$也成立，因此有
+$$0\le\lim_{x\to0}\left|\frac{\int_0^x\sin\frac{1}{t}\mathrm{d}t}{x}\right|\le\lim_{x\to0}\frac{2x^2}{|x|}=0.$$
+得证.
+\subsection{定积分的应用(1)}
+\begin{thm}[Young不等式]
+  设$f(x)$是区间$[0,+\infty)$上严格单增连续函数，且$f(0)=0$，则对任何的$a>0,b>0$有
+  $$ab\le\int_0^af(x)\dx+\int_0^bf^{-1}(y)\mathrm{d}y.$$
+\end{thm}
+\jz 先设$0<b\le f(a),$由$f$的严格增，有
+$$[a-f^{-1}(b)]b\le\int_{f^{-1}(b)}^af(x)\dx.$$整理得
+$$ab-\int_0^af(x)\dx\le bf^{-1}(b)-\int_0^{f^{-1}(b)}f(x)\dx.$$然后考虑定积分的几何意义即可.
+\clearpage
+
+\section{课堂笔记(8):定积分的应用(2)}
+\begin{center}
+  2018年3月21日
+\end{center}
+\subsection{参数方程表示}
+有结论：
+$$A=\int_\alpha^\beta x(t)y'(t)\mathrm{d}t=-\int_\alpha^\beta y(t)x'(t)\mathrm{d}t.$$或者记为
+$$A=\int_\gamma x\mathrm{d}y=-\int_\gamma y\mathrm{d}x=\frac{1}{2}\int_\gamma x\mathrm{d}y-y\mathrm{d}x.$$
+\begin{exa}
+  计算椭圆$\dfrac{x^2}{a^2}+\dfrac{y^2}{b^2}=1$所围图形$S$的面积$A$.
+\end{exa}
+\jie 将椭圆方程写成参数方程
+\[
+\gamma:\begin{cases}
+x=a\cos t,\\
+y=b\sin t,
+\end{cases}t\in[0,2\pi],
+\]
+当$t$连续变化时，该曲线为正定向.因此
+$$A=\int_\gamma x\mathrm{d}y=\int_0^{2\pi}a\cos t\cdot b\cos t\mathrm{d}t=\pi ab.$$
+\subsection{微元法}
+设所求定积分的量是$S$，它与区间$[a,b]$有关，当区间给定后，$S$就是一个确定的量，而且该量具有可加性，即对于$[a,b]$的任意分割
+$\Delta:a=x_0<x_1<\cdots<x_n=b$，若记$[x_{i-1},x_i]$的部分量为$\Delta s_i,$则$S=\sum\Delta s_i$.为求$S$，我们可以任取
+小区间$[x,x+\dx]\subset[a,b]$，若$[x,x+\dx]$所对应的那部分量$\Delta s=f(\xi)\dx,$则有$\mathrm{d}s=f(x)\dx,$并且
+$S=\int_a^bf(x)\dx$.这个求$S$的过程也称微元法.
+\subsection{极坐标表示}
+我们可以用微元法推导出极坐标下的面积公式：
+$$A=\int_\alpha^\beta\frac{1}{2}r^2(\theta)\mathrm{d}\theta.$$
+\begin{exa}
+  求心脏线$r=a(1+\cos\theta)$所围成的平面图形的面积.
+\end{exa}
+\jie $A=\dfrac{1}{2}\int_0^{2\pi}a^2(1+\cos\theta)^2\mathrm{d}\theta=\dfrac{3}{2}\pi a^2.$
+\subsection{截面面积已知的立体的体积}
+\begin{exa}
+  求椭球体$\dfrac{x^2}{a^2}+\dfrac{y^2}{b^2}+\dfrac{z^2}{c^2}\le 1$的体积.
+\end{exa}
+\jie 对于每个$x\in[-a,a]$,过点$x$且与$x$垂直的平面截面的面积为椭圆$\dfrac{y^2}{b^2(1-\frac{x^2}{a^2})}+
+\dfrac{z^2}{c^2(1-\frac{x^2}{a^2})}=1$所围成的面积.该图形的面积为$\pi ab(1-\frac{x^2}{a^2})$,因此
+$$V=\int_{-a}^a\pi ab(1-\frac{x^2}{a^2})\dx=\frac{4}{3}\pi ab.$$
+\begin{exa}
+  求星形线$x^\frac{2}{3}+y^\frac{2}{3}=a^\frac{2}{3}$绕$x$轴一周形成的立体的体积.
+\end{exa}
+\jie 由旋转体的体积公式，有
+$$V=\pi\int_{-a}^ay^2\dx=\pi\int_{-a}^a(x^\frac{2}{3}-a^\frac{2}{3})^3\dx=\frac{32}{105}\pi a^3.$$
+\subsection{曲线的弧长}
+  设平面曲线$\Gamma$由参数方程给出，且$x'(t),y'(t)$是区间$[\alpha,\beta]$上的连续函数,且$x'(t)^2+y'(t)^2\ne0,$这时$\Gamma$
+  是光滑曲线.可以推导出：
+  $$\Delta L\approx\sqrt{x'(t)^2+y'(t)^2}\mathrm{d}t.$$从而$\Gamma$的弧长是
+  $$L=\int_\alpha^\beta\sqrt{x'(t)^2+y'(t)^2}\mathrm{d}t.$$
+  或者
+  \begin{align*}
+    L&=\int_a^b\sqrt{1+[f'(x)]^2}\dx.\\
+    L&=\int_\alpha^\beta\sqrt{[r(\theta)]^2+[r'(\theta)]^2}\mathrm{d}\theta.
+  \end{align*}
+\begin{exa}
+  求双纽线$r^2=2a^2\cos2\theta$从$\theta=0$到$\theta=\dfrac{\pi}{6}$之间的弧长$L.$
+\end{exa}
+\jie 对$r^2=2a^2\cos2\theta$两边关于$\theta$求导得$2rr'=-4a^2\sin2\theta,$因此
+$$r'(\theta)=\frac{-2a^2\sin2\theta}{r},$$从而
+$$\sqrt{r^2(\theta)+r'(\theta)^2}=\frac{\sqrt{2}a}{\sqrt{1-2\sin^2\theta}}.$$得到
+$$L=\int_0^\frac{\pi}{6}\frac{\sqrt{2}a}{\sqrt{1-2\sin^2\theta}}\mathrm{d}\theta.$$
+\clearpage
+
+\section{习题课笔记(4)}
+\begin{exa}
+  设$f\in R[a,b],$且$g$为周期函数，周期为$T$，$g\in R[0,T]$.证明：
+  $$\lim_{\lambda\to+\infty}\int_a^bf(x)g(\lambda x)\dx=\frac{1}{T}\int_0^Tg(x)\dx\int_a^bf(x)\dx.$$
+\end{exa}
+\zm 我们取$m\in\mathbb{N}$使得$[a,b]\subset(-mT,mT)$.再令$F(x)=\begin{cases}f(x),&x\in[a,b]\\0,&
+x\in[-mT,mT]\backslash[a,b]\end{cases}$,故$\int_{-mT}^{mT}F(x)g(\lambda x)\dx=\int_a^bf(x)g(\lambda x)\dx.$
+首先，假定$g(x)\ge 0,$对$[-mT,mT]$作分割$\Delta_\lambda:-mT\le-\dfrac{[\lambda m]}{\lambda}T
+\le-\dfrac{[\lambda m]-1}{\lambda}T\le\cdots\le\dfrac{[\lambda m]-1}{\lambda}T\le\dfrac{[\lambda m]}{\lambda}T
+\le mT.$两端小区间的长度是
+$$mT-\dfrac{[\lambda m]}{\lambda}T=\frac{\lambda m-[\lambda m]}{\lambda}T\le\frac{T}{\lambda}.$$
+中间的小区间长度是$\dfrac{T}{\lambda}.$当$\lambda\to\infty,$区间长度趋于零，从而对该分割：
+\begin{align*}
+\int_{-mT}^{mT}F(x)g(\lambda x)\dx&=\int_{-mT}^{-\frac{[\lambda m]}{\lambda}T}F(x)g(\lambda x)\dx+
+\int_{\frac{[\lambda m]}{\lambda}T}^{mT}F(x)g(\lambda x)\dx+\sum_{k=-[\lambda m]}^{[\lambda m]-1}
+\int_{\frac{k}{\lambda}T}^{\frac{k+1}{\lambda}T}F(x)g(\lambda x)\dx.
+\end{align*}
+首先考虑(设界为$M$)$\left|\int_{\frac{[\lambda m]}{\lambda}T}^{mT}F(x)g(\lambda x)\dx\right|\le M
+\int_{\frac{[\lambda m]}{\lambda}T}^{mT}\dx\le M\frac{T}{\lambda}\to0.$同理对于负的那部分.\\
+再考虑
+$$\int_{\frac{k}{\lambda}T}^{\frac{k+1}{\lambda}T}F(x)g(\lambda x)\dx=
+u_k\int_{\frac{k}{\lambda}T}^{\frac{k+1}{\lambda}T}g(\lambda x)\dx.$$
+其中$\inf\{F(x)\}=m_k\le u_k\le M_k=\sup\{F(x)\}$.从而
+$$u_k\int_{\frac{k}{\lambda}T}^{\frac{k+1}{\lambda}T}g(\lambda x)\dx=u_k\int_0^T\frac{g(kT+t)}{\lambda}\mathrm{d}t
+=\frac{u_k}{\lambda}\int_0^Tg(t)\mathrm{d}t.$$
+所以
+\begin{align*}
+  \sum_{k=-[\lambda m]}^{[\lambda m]-1}\int_{\frac{k}{\lambda}T}^{\frac{k+1}{\lambda}T}F(x)g(\lambda x)\dx&=
+\sum_{k=-[\lambda m]}^{[\lambda m]-1}\frac{Tu_k}{\lambda}\frac{1}{T}\int_0^Tg(t)\mathrm{d}t\\&=
+\frac{1}{T}\int_0^Tg(t)\mathrm{d}t\sum_k\frac{T}{\lambda}u_k\\
+&=\frac{1}{T}\int_0^Tg(t)\mathrm{d}t\int_{-mT}^{mT}F(x)\dx.
+\end{align*}
+对于一般的$g(x)$，令$g_1(x)=\dfrac{|g(x)|+g(x)}{2},g_2(x)=\dfrac{|g(x)|-g(x)}{2},$从而有
+$g(x)=g_1(x)-g_2(x).$利用定积分的线性性质得证.
+\clearpage
+
+\section{课堂笔记(9):定积分的应用(3)}
+\begin{center}
+  2018年3月26日
+\end{center}
+\subsection{旋转体的侧面积}
+通过面积微元
+$$\mathrm{d}S=2\pi y(t)\sqrt{[x'(t)]^2+[y'(t)]^2}\mathrm{d}t$$得到侧面积公式：
+$$S=2\pi\int_\alpha^\beta y(t)\sqrt{[x'(t)]^2+[y'(t)]^2}\mathrm{d}t.$$
+\begin{exa}
+  求圆周$x^2+y^2=R^2$上$x$介于$[a,a+h]$的部分绕$x$轴旋转一周所形成的球台的体积及侧面积.
+\end{exa}
+\jie 设该球台可由曲线$y=f(x)=\sqrt{R^2-x^2}$绕$x$轴旋转一周而成，其体积
+$$V=\pi\int_a^{a+h}(R^2-x^2)\dx=\pi\left[R^2h-\left(a^2h+ah^2+\frac{h^3}{3}\right)\right].$$
+其侧面积为
+$$S=2\pi\int_a^{a+h}\sqrt{R^2-x^2}\sqrt{1+[f'(x)]^2}\dx=2\pi hR.$$
+\subsection{在物理学上的应用}
+$n$个质点关于$x,y$轴的静力矩分别为
+$$M_x=\sum_{i=1}^nm_iy_i,\quad M_y=\sum_{i=1}^nm_ix_i.$$
+这$n$个质点的质心为
+$$\bar{x}=\frac{M_y}{M}=\frac{\sum_{i=1}^nm_ix_i}{\sum_{i=1}^nm_i},
+\bar{y}=\frac{M_x}{M}=\frac{\sum_{i=1}^nm_iy_i}{\sum_{i=1}^nm_i}$$
+曲线$\Gamma$的静力矩是
+\begin{align*}
+  M_x&=\int_\alpha^\beta\rho(t)y(t)\sqrt{[x'(t)]^2+[y'(t)]^2}\mathrm{d}t,\\
+  M_y&=\int_\alpha^\beta\rho(t)x(t)\sqrt{[x'(t)]^2+[y'(t)]^2}\mathrm{d}t.
+\end{align*}
+从而可以求出质心坐标
+$$\bar{x}=\frac{M_y}{M},\quad \bar{y}=\frac{M_x}{M}.$$
+特别地，我们有
+$$2\pi\bar{y}L=S.$$也就是，一条曲线绕$x$轴旋转一周所成旋转体的侧面积等于该曲线长度与质心
+绕$x$轴旋转一周的周长的乘积.\\
+物质曲线$\Gamma$关于$x,y$轴的转动惯量为
+\begin{align*}
+  I_x&=\int_\alpha^\beta\rho(t)y^2(t)\sqrt{[x'(t)]^2+[y'(t)]^2}\mathrm{d}t,\\
+  I_y&=\int_\alpha^\beta\rho(t)x^2(t)\sqrt{[x'(t)]^2+[y'(t)]^2}\mathrm{d}t.
+\end{align*}
+现在来考虑平面图形的质心问题.注意到图形$S$关于$x,y$轴的静力矩的微元分别为
+\begin{align*}
+  \mathrm{d}M_x&=\frac{1}{2}[y2(x)+y1(x)][y2(x)-y1(x)]\dx=\frac{1}{2}[y2^2(x)-y1^2(x)]\dx,\\
+  \mathrm{d}M_y&=x[y2(x)-y1(x)]\dx.
+\end{align*}
+从而整个图形$S$关于$x,y$的静力矩是
+\begin{align*}
+  M_x&=\frac{1}{2}\int_a^b[y2^2(x)-y1^2(x)]\dx,\\
+  M_y&=\int_a^bx[y2(x)-y1(x)]\dx.
+\end{align*}
+特别地有
+$$2\pi\bar{y}S=V.$$
+这表明一个平面图形绕$x$轴旋转一周得到的旋转体体积等于该平面图形的面积与以质心到$x$轴的距离为半径的
+圆周长的乘积.
+\begin{exa}
+  求半径为$R>0$的半圆盘的质心.
+\end{exa}
+\jie 设质心为$(\bar{x},\bar{y}),$由对称性$\bar{x}=0.$该图形绕$x$轴旋转一周得到球体，故
+$$2\pi\bar{y}\frac{\pi}{2}R^2=\frac{4}{3}\pi R^3.$$
+解得$\bar{y}=\dfrac{4}{3\pi}R.$
+
+\clearpage
+\section{定积分补充:不等式}
+\begin{add}[Hadamard不等式]
+  设$f$是$(a,b)$上的下凸函数，则对任意$x_1,x_2\in(a,b),x_1<x_2$，有
+  $$f\left(\frac{x_1+x_2}{2}\right)\le\frac{1}{x_2-x_1}\int_{x_1}^{x_2}f(t)\mathrm{d}t
+  \le\frac{f(x_1)+f(x_2)}{2}.$$
+\end{add}
+可以证明，其中每一个不等式都是函数下凸的充要条件.
+\begin{add}[Jensen不等式]
+  设$f,p\in R[a,b],m\le f(x)\le M,p(x)\ge0,\int_a^bp(x)>0,$则当$\phi$是$[m,M]$上的下凸函数时，成立不等式：
+  $$\phi\left(\frac{\int_a^bp(x)f(x)\dx}{\int_a^bp(x)\dx}\right)\le \frac{\int_a^bp(x)\phi(f(x))\dx}
+  {\int_a^bp(x)\dx}.$$
+  若$\phi$为上凸则不等式反向.
+\end{add}
+\begin{add}[Schwarz不等式]
+  设$f,g\in R[a,b]$，则
+  $$\left(\int_a^bf(x)g(x)\dx\right)^2\le\int_a^bf^2(x)\dx\int_a^bg^2(x)\dx.$$
+\end{add}
+\begin{exa}
+  设$f\in C^1[a,b],f(a)=0,$证明：
+  $$\int_a^bf^2(x)\dx\le\frac{(b-a)^2}{2}\int_a^b(f'(x))^2\dx.$$
+\end{exa}
+\zm 利用条件$f(a)=0$知
+$$f(x)=\int_a^xf'(t)\mathrm{d}t,$$
+然后用Schwarz不等式作如下估计：
+$$f^2(x)=\left(\int_a^xf'(t)\mathrm{d}t\right)^2\le\left(\int_a^x(f'(x))^2\dx\right)(x-a)
+\le(x-a)\int_a^b(f'(x))^2\dx.$$然后取积分即可.
+\begin{add}[Young不等式]
+  设$f$在$[0,+\infty)$上连续可导且严格单增，$f(0)=0,a,b>0$，则有
+  $$ab\le\int_0^af(x)\dx+\int_0^bg(y)\mathrm{d}y.$$其中$g(y)$是$f(x)$的反函数，等号成立当且仅当$b=f(a).$
+\end{add}
+\begin{add}[Holder不等式]
+  设$f,g\in R[a,b],\dfrac{1}{p}+\dfrac{1}{q}=1,$则成立
+  $$\left(\int_a^b|f(x)g(x)|\dx\right)\le\left(\int_a^b|f(x)|^p\dx\right)^\frac{1}{p}
+  \left(\int_a^b|g(x)|^q\dx\right)^\frac{1}{q}.$$
+\end{add}
+\begin{add}[Minkowski不等式]
+  设$f,g\in R[a,b],1\le p<+\infty,$则成立
+  $$\left(\int_a^b(|f(x)|+|g(x)|)^p\dx\right)^\frac{1}{p}\le\left(\int_a^b|f(x)|^p\dx\right)^\frac{1}{p}+
+  \left(\int_a^b|g(x)|^p\dx\right)^\frac{1}{p}.$$
+\end{add}
+
+\clearpage
+\section{课堂笔记(10):无穷积分}
+\begin{center}
+  2018年3月28日
+\end{center}
+\subsection{无穷积分的概念}
+\begin{dfn}
+  设函数$f(x)$在$[a,+\infty)$上\textbf{有定义}，并且对于$\forall X\in(a,+\infty)$,在$[a,X]$上可积，如果极限
+  $$\lim_{X\to+\infty}\int_a^Xf(x)\dx$$存在，则称无穷积分$\displaystyle\int_a^{+\infty}f(x)\dx$
+  收敛，或者可积.记$\displaystyle\int_a^{+\infty}f(x)\dx=\lim_{X\to+\infty}\displaystyle\int_a^Xf(x)\dx.$
+\end{dfn}
+类似地，我们可以定义在区间$(-\infty,b],(-\infty,+\infty)$上的无穷积分.
+\begin{exa}
+  讨论无穷积分$\displaystyle\int_1^\infty\dfrac{\dx}{x^p}$的敛散性，其中$p\in\mathbb{R}$.
+\end{exa}
+\jie 易得在$p>1$时收敛，在$p\le1$时发散.
+\begin{exa}
+  讨论无穷积分$\displaystyle\int_2^\infty\dfrac{\dx}{x\ln^px}$的收敛性.
+\end{exa}
+\jie 易得在$p>1$时收敛，在$p\le1$时发散.\\
+同样地，我们可以证明无穷积分
+$$\int_{e^2}^\infty\frac{\dx}{x\ln x(\ln\ln x)^p}$$在$p>1$时收敛，在$p\le1$时发散.
+
+我们可以证明下面的关于无穷积分的换元法和分部积分公式：\\
+设函数$f(x)$在$[a,+\infty)$上定义且可积，函数$\varphi(x)$在区间$[\alpha,\beta)$上连续可微，严格单调上升，
+并且满足$$a=\varphi(\alpha)\le\varphi(t)\le\lim_{t\to\beta-}\varphi(t)=+\infty,$$则换元公式成立：
+$$\int_a^{+\infty}f(x)\dx=\int_\alpha^\beta f(\varphi(t))\varphi'(t)\mathrm{d}t.$$
+\fz 当等式两端的积分有一个收敛时，另一个也收敛，否则发散.
+\begin{exa}
+  计算无穷积分$\displaystyle\int_1^{+\infty}\dfrac{\dx}{x\sqrt{1+x^2}}.$
+\end{exa}
+\jie 令$x=\dfrac{1}{t},$积分化为
+$$\int_0^1\frac{\mathrm{d}t}{\sqrt{1+t^2}}=\ln(1+\sqrt{2}).$$
+从这里知道，无穷积分经过换元之后可能变为定积分.
+
+我们说无穷积分$\displaystyle\int_{-\infty}^{+\infty}f(x)\dx$收敛是指关于$X_1,X_2$的极限
+$\lim\limits_{\substack{X_1\to-\infty\\X_2\to+\infty}}\displaystyle\int_{X_1}^{X_2}f(x)\dx$存在，
+其中$X_1,X_2$是独立的过程.如果仅考虑$\lim\limits_{X\to\infty}\displaystyle\int_{-X}^Xf(x)\dx$，
+则当它收敛时，我们称为\textbf{在柯西主值意义下是收敛的}.我们也记为
+$$V.P.\int_{-\infty}^{+\infty}f(x)\dx.$$
+\subsection{无穷积分的审敛法(1)}
+\begin{thm}[柯西准则]
+  设函数$f(x)$在$[a+\infty)$上有定义且在$[a,X]$上可积，则无穷积分收敛的充要条件是：对$\forall\varepsilon>0$,
+  $\exists M>a$,当$X''>X'>M$时，有
+  $$\left|\int_{X'}^{X''}f(x)\dx\right|<\varepsilon.$$
+\end{thm}
+\begin{thm}
+  设函数$f(x)$在$[a+\infty)$上有定义且在$[a,X]$上可积，若无穷积分$\displaystyle\int_a^{+\infty}f(x)\dx$
+  绝对收敛，则它本身必收敛.
+\end{thm}
+\begin{thm}
+  设非负函数$f(x)$在$[a+\infty)$上有定义且在$[a,X]$上可积，则无穷积分$\displaystyle\int_a^{+\infty}f(x)\dx$
+  收敛的充要条件是，存在$A>0$,使得对一切$X\ge a,$有
+  $$\int_a^Xf(x)\dx\le A.$$
+\end{thm}
+\begin{thm}[比较判别法1]
+  设非负函数$f(x),g(x)$在$[a+\infty)$上有定义且在$[a,X]$上可积.若存在常数$c_1>0,c_2>0$及$M_0\ge a,$使得
+  当$x\ge M_0$时成立不等式
+  $$c_1f(x)\le c_2g(x),$$则有下列结论：
+  \begin{enumerate}
+    \item 若$\displaystyle\int_a^{+\infty}g(x)\dx$收敛，则$\displaystyle\int_a^{+\infty}f(x)\dx$也收敛;
+    \item 若$\displaystyle\int_a^{+\infty}f(x)\dx$发散，则$\displaystyle\int_a^{+\infty}g(x)\dx$也发散.
+  \end{enumerate}
+\end{thm}
+\zm 由假设$\displaystyle\int_a^{+\infty}g(x)\dx$收敛，对于$\forall \varepsilon>0,\exists M_1>0,$当
+$X''>X'>M_1$时，有
+$$\int_{X'}^{X''}g(x)\dx<\frac{c_1}{c_2}\varepsilon.$$
+由于当$x\ge M_0$时，有
+$$f(x)\le \frac{c_2}{c_1}g(x),$$
+因此取$M=\max\{M_0,M_1\}$,当$X''>X'>M$时，有
+$$0\le\int_{X'}^{X''}f(x)\dx\ge\frac{c_2}{c_1}\int_{X'}^{X''}g(x)\dx<\varepsilon.$$证毕.\\
+\begin{thm}[比较判别法2]
+  设非负函数$f(x),g(x)(g(x)\ne0)$在$[a+\infty)$上有定义且在$[a,X]$上可积.若$\lim\limits_{x\to\infty}
+  \dfrac{f(x)}{g(x)}\l,$则
+  \begin{enumerate}
+    \item 当$0<l<+\infty$时，$f,g$同敛散;
+    \item 当$l=0$时,若$\displaystyle\int_0^{+\infty}g(x)\dx$收敛，
+    则$\displaystyle\int_0^{+\infty}f(x)\dx$收敛;
+    \item 当$l=+\infty$,若$\displaystyle\int_0^{+\infty}g(x)\dx$发散，
+    则$\displaystyle\int_0^{+\infty}f(x)\dx$发散.
+  \end{enumerate}
+\end{thm}
+\clearpage
+\section{习题课笔记(5)}
+\begin{exa}
+  设$f$在$[0,1]$可微且$|f'(x)|\le M.$证明：$\forall n\in\mathbb{N}有\left|\int_0^1f(x)\dx-
+  \dfrac{1}{n}\sum\limits_{n=1}^nf(\frac{i}{n})\right|\le\dfrac{M}{n}.$
+\end{exa}
+\zm 将$[0,1]$区间$n$等分，从而
+\begin{align*}
+  \int_0^1f(x)\dx-\frac{1}{n}\sum_{i=1}^nf(\frac{i}{n})&=\sum_{i=1}^n\int_{x_{i-1}}^{x_i}[f(x)
+  -f(\frac{i}{n})]\dx\\
+  &=\sum_{i=1}^n\int_{x_{i-1}}^{x_i}f'(\xi_i)(\frac{i}{n}-x)\dx\\
+  &\le M\sum_{i=1}^n\int_{x_{i-1}}^{x_i}(\frac{i}{n}-x)\dx\\
+  &=\sum_{i=1}^n M\frac{1}{2n^2}=\frac{M}{2n}.
+\end{align*}
+\begin{exa}
+  设$f,g\in C[a,x]$,$f$在点$a$可导，且右导数不为零.$g$在$[a,x]$上不变号，且$g(a)\ne0.$若
+  $\int_a^xf(t)g(t)\mathrm{d}t=f(\xi)\int_a^xg(t)\mathrm{d}t,\xi\in(a,x),$则$\lim\limits_{x\to a+}\dfrac{\xi-a}{x-a}=
+  \dfrac{1}{2}.$
+\end{exa}
+\zm 我们令
+$$h(x)=\frac{\int_a^xf(t)g(t)\mathrm{d}t-f(a)\int_a^xg(t)\mathrm{d}t}{\left(\int_a^xg(t)\mathrm{d}t\right)^2},$$
+从而
+\begin{align*}
+  \lim_{x\to a+}h(x)&=\frac{f(x)g(x)-f(a)g(x)}{2\int_a^xg(t)\mathrm{d}t\cdot g(x)}\\
+  &=\lim_{x\to a+}\frac{f(x)-f(a)}{2\int_a^xg(t)\mathrm{d}t}\\
+  &=\lim_{x\to a+}\frac{f(x)-f(a)}{x-a}\frac{x-a}{2\int_a^xg(t)\mathrm{d}t}=\frac{1}{2}.
+\end{align*}
+另一方面，利用题目条件，
+\begin{align*}
+  \lim_{x\to a+}h(x)&=\frac{f(\xi)-f(a)}{\int_a^xg(t)\mathrm{d}t}\\
+  &=\lim_{x\to a+}\frac{f(\xi)-f(a)}{\xi-a}\frac{\xi-a}{x-a}\frac{x-a}{\int_a^xg(t)\mathrm{d}t}\\
+  &=\lim_{x\to a+}\frac{\xi-a}{x-a}.
+\end{align*}
+利用已得到的结果得证.\\
+\fz 此题也可以用Taylor展开.
+\begin{exa}[最速降线问题]
+  给定竖直平面两点$A,B$(不在同一垂直线)，任一条光滑曲线连接$\gamma$这两点，一质点从$A$无初速度下落至$B$，
+  用时$T_\gamma$，求一条$\gamma,$使$T_\gamma$最小.
+\end{exa}
+\jie 设曲线$\gamma=f(x)$，任一点$(x,f(x))$及$(x+\dx,f(x+\dx))$，则经过这两点的弧所用的时间
+$\mathrm{d}t=\dfrac{\sqrt{\dx^2+(f(x+\dx)-f(x))^2}}{v_x}.$为了求得$v_x$，利用机械能守恒：
+$0=\dfrac{1}{2}mv_x^2-mgf(x),$得到$v_x=\sqrt{2gf(x)}.$从而得到
+$$\mathrm{d}t=\sqrt{\frac{1+(f'(x))^2}{2gf(x)}}\dx.$$
+所用时间
+$$T_\gamma=\int_0^{x_B}\sqrt{\frac{1+(f'(x))^2}{2gf(x)}}\dx.$$
+$\blacktriangleright$\textbf{有界变差函数与$C^1$函数}\\
+  (1).若$f(x)\in C^1[a,b]$，则$\exists M>0,$使得$|f'(x)|\le M.$对$[a,b]$作一个分割:$\Delta:a=x_0<x_1
+  <\cdots<x_n=b$.记$L(\Delta)=\sum\limits_{i=1}^n\sqrt{(x_i-x_{i-1})^2+(f(x_i)-f(x_{i-1}))^2}$.
+  由Lagrange中值定理和导函数的有界性得：$L(\Delta)\le\sqrt{1+M^2}(b-a).$从而$L(\Delta)$有上确界$L_0.$
+  且可以仿照Darboux和的性质断言：
+  $$L(\Delta)\to L_0,\|\Delta\|\to0.$$从而曲线是可求长的.\\
+  (2).设$f:[a,b]\rightarrow\mathbb{R},$且$\Delta$为$[a,b]$的分割.记$v_\Delta(f)=\sum\limits_{i=1}^n|
+  f(x_i)-f(x_{i-1})|,V_a^b(f)=\sup\{v_\Delta(f)\}$为全变差.若$V_a^b(f)<+\infty$，则称$f$为有界变差函数.
+  把$[a,b]$上有界变差函数的全体记为$BV([a,b])$.\\
+  (3).现在来探究两者的关系.首先显然有$v_\Delta(f)\le L(\Delta),$而右式有上界，则$v_\Delta(f)$有上界，从而
+  说明\textbf{可求长函数一定是有界变差函数}.而另一方面我们有：
+  $$\sqrt{(x_i-x_{i-1})^2+(f(x_i)-f(x_{i-1}))^2}\le(x_i-x_{i-1})+|f(x_i)-f(x_{i-1})|.$$
+  从而$L(\Delta)\le(b-a)+v_\Delta(f).$这说明\textbf{有界变差函数一定是可求长函数}.\\
+  (4).下面的函数都是有界变差函数：
+  \begin{enumerate}
+    \item $f$单调;
+    \item $f\in C^1$;
+    \item $f$满足Lipschitz条件：$|f(x)-f(y)|\le L|x-y|$;
+  \end{enumerate}
+  (5).有界变差函数的性质.
+  \begin{enumerate}
+    \item 若$f$为有界变差函数，则$f$有界,反之不成立;
+    \item $BV([a,b])$是一个线性空间;
+    \item 设$f$是有界变差函数且全变差为零，则$f$为常值函数;
+    \item 若$f,g$都是有界变差函数，则$fg$也为有界变差函数.
+    \item $[c,d]\subset[a,b]$且$f$是$[a,b]$上的有界变差函数，则$f$也是$[c,d]$上的有界变差函数;
+    \item $f$是有界变差函数$\Longleftrightarrow f=g-h$,其中$g,h$也为有界变差函数.
+  \end{enumerate}
+  \clearpage
+\section{课堂笔记(11):无穷积分的审敛法(2)、瑕积分}
+\begin{center}
+  2018年4月2日
+\end{center}
+\subsection{无穷积分的审敛法(2)}
+\begin{thm}[Dirichlet判别法]
+  函数$f,g$在$[a,+\infty)$上有定义，且满足下面的条件：
+  \begin{enumerate}
+    \item 对于$\forall X>a,g(x)\in R[a,X],\exists M>0$,使得
+    $$\left|\int_a^Xg(x)\dx\right|\le M.$$
+    \item $f(x)$在$[a,+\infty)$单调，并且$\lim\limits_{x\to+\infty}f(x)=0$.
+  \end{enumerate}
+  则无穷积分$\int_a^{+\infty}f(x)g(x)\dx$收敛.
+\end{thm}
+\zm 任取$\varepsilon>0$，由$\lim f(x)=0,\exists X>a,$当$x>X$时，有
+$$|f(x)|<\frac{\varepsilon}{4M}.$$
+对于任意的$X''>X'>X$,由两个条件，对积分$\int_{X'}^{X''}f(x)g(x)\dx$应用积分第二中值定理，存在$\xi$使得
+$$\left|\int_{X'}^{X''}f(x)g(x)\dx\right|=\left|f(X')\int_{X'}^\xi g(x)\dx+f(X'')\int_\xi^{X''}g(x)\dx\right|
+<\varepsilon.$$
+由柯西准则得证.
+\begin{thm}[Able判别法]
+  $f,g$在$[a,+\infty)$上满足：
+  \begin{enumerate}
+    \item 对$\forall X>a,g(x)\in R[a,X],\int_a^{+\infty}g(x)\dx$收敛;
+    \item $f(x)$在$[a,+\infty)$单调有界.
+  \end{enumerate}
+  则$\int_a^{+\infty}f(x)g(x)\dx$收敛.
+\end{thm}
+\begin{exa}
+  证明无穷积分$\displaystyle\int_{-\infty}^{+\infty}\dfrac{\sin x}{x}\dx$条件收敛.
+\end{exa}
+\zm 注意到被积函数为偶函数且连续，故只需要证明$\displaystyle\int_{2\pi}^{+\infty}\dx$收敛即可.\\
+对于$\forall X>2\pi，$我们有
+$$\left|\int_{2\pi}^X\sin x\dx\right|\le 2,$$
+故由Dirichlet判别法知该无穷积分收敛.\\
+由于$$\frac{|\sin x|}{x}\ge\frac{\sin^2}{x}=\frac{1}{2x}-\frac{\cos2x}{2x},$$
+我们可以证后式的无穷积分收敛，但前式发散，再由比较判别法知原无穷积分发散.从而我们证明了条件收敛.
+\begin{exa}
+  讨论$I=\displaystyle\int_1^{+\infty}\ln\left(1+\dfrac{\sin x}{x^p}\right)\dx(p>0)$的敛散性.
+\end{exa}
+由Taylor展开知
+$$\ln(1+\frac{\sin x}{x^p})=\frac{\sin x}{x^p}+\frac{\cos2x}{4x^{2p}}-[\frac{1}{4}-o(1)]\frac{1}{x^{2p}}.$$
+从而
+\begin{align*}
+  I&=\int_1^{+\infty}\ln\left(1+\dfrac{\sin x}{x^p}\right)\dx\\
+  &=\int_1^{+\infty}\frac{\sin x}{x^p}\dx+\int_1^{+\infty}\frac{\cos2x}{4x^{2p}}\dx-
+  \int_1^{+\infty}[\frac{1}{4}-o(1)]\frac{\dx}{2x^{2p}}\\
+  &=I_1+I_2+I_3.
+\end{align*}
+当$0<p\le\frac{1}{2}$时，由Dirichlet判别法知$I_1,I_2$收敛而$I_3$发散,因此$I$发散；
+当$1\ge p>\frac{1}{2}$时，$I_1$条件收敛而$I_2,I_3$绝对收敛,因此$I$条件收敛；
+当$p>1$时，显然$I$绝对收敛.\\
+\fz 此例可以说明若被积函数不保号时，不能用比较判别法判断是否收敛.
+\subsection{瑕积分的概念}
+\begin{dfn}
+  设函数$f(x)$在区间$(a,b]$上有定义，$a$是一个瑕点.若对于$\forall 0<\delta<b-a,f(x)$在区间$[a+\delta,b]$上可以，且
+  极限$$\lim_{\delta\to0+}\int_{a+\delta}^bf(x)\dx$$存在，则称瑕积分$\displaystyle\int_a^bf(x)\dx$收敛.
+\end{dfn}
+当$a$是函数$f(x)$在区间$[a,b]$上的唯一瑕点时，若$F$是$f$在$(a,b]$上的一个原函数，则瑕积分$\int_a^bf(x)\dx$可以表示为：
+$$\int_a^bf(x)\dx=\lim_{\delta\to0+}\int_{a+\delta}^bf(x)\dx=F(b)-\lim_{\delta\to0+}F(a+\delta).$$
+\begin{exa}
+  计算瑕积分$\displaystyle\int_{-1}^1\dfrac{\arccos x}{\sqrt{1-x^2}}\dx.$
+\end{exa}
+\jie 应用洛必达知$x=1$不是它的瑕点，而$x=-1$是唯一瑕点，故结果为$\dfrac{\pi^2}{2}$.
+\begin{exa}
+  计算瑕积分$\displaystyle\int_0^1\ln x\dx$.
+\end{exa}
+容易看出$x=0$是瑕点，用分部积分可以得出结果为$-1$.
+\begin{exa}
+  讨论瑕积分$\displaystyle\int_a^b\dfrac{\dx}{(b-x)^p}$的敛散性.
+\end{exa}
+\jie 可以证明，上式在$p<1$时收敛，在$p\ge1$时发散.这和无穷积分是相反的.
+
+\fz 瑕积分和无穷积分可以通过变量替换相互转化.
+\subsection{瑕积分的审敛法}
+\begin{thm}[柯西准则]
+  瑕积分$\displaystyle\int_a^bf(x)\dx$收敛的充要条件是：对于$\forall\varepsilon>0,\exists\delta>0,0$当
+  $0<\delta''<\delta'<\delta$时，有
+  $$\left|\int_{b-\delta'}^{b-\delta''}f(x)\dx\right|<\varepsilon.$$
+\end{thm}
+\begin{thm}[比较判别法]
+  设\textbf{非负函数}$f(x),g(x)$在区间$[a,b)$上满足：存在正常数$c_1,c_2$使得当$x\in[b-\delta_0,b)$时有
+  $$c_1f(x)\le c_2g(x),$$则
+  \begin{enumerate}
+    \item 若$\int_a^bg(x)\dx$收敛，则$\int_a^bf(x)\dx$也收敛;
+    \item 若$\int_a^bf(x)\dx$发散，则$\int_a^bg(x)\dx$也发散.
+  \end{enumerate}
+  同样地，可以考虑极限$\lim\limits_{x\to b-0}\dfrac{f(x)}{g(x)}=l$.
+\end{thm}
+\begin{exa}
+  讨论瑕积分$\displaystyle\int_{-1}^1\dfrac{\dx}{(1-x^2)^p}$的敛散性.
+\end{exa}
+\jie 非负被积函数有两个瑕点$x=\pm1$.由于
+$$\lim_{x\to1-}\frac{\frac{1}{(1-x^2)^p}}{\frac{1}{(1-x)^p}}=\frac{1}{2^p},\quad
+\lim_{x\to-1+}\frac{\frac{1}{(1-x^2)^p}}{\frac{1}{(1+x)^p}}=\frac{1}{2^p}.$$
+从而当$p<1$时收敛，$p\ge1$时发散.
+\begin{thm}[Dirichlet判别法]
+  设函数$f,g$在区间$[a,b)$上满足；
+  \begin{enumerate}
+    \item $\exists M>0,$使得对于$\forall\delta>0$，有
+    $$\left|\int_a^{b-\delta}g(x)\dx\right|\le M$$
+    \item $f(x)$在$[a,b)$上单调趋于零.
+  \end{enumerate}
+  则瑕积分$\int_a^bf(x)g(x)\dx$收敛.
+\end{thm}
+\begin{thm}[Able判别法]
+  设函数$f,g$在区间$[a,b)$上满足；
+  \begin{enumerate}
+    \item $\displaystyle\int_a^bg(x)\dx$收敛;
+    \item $f(x)$在$[a,b)$上单调有界.
+  \end{enumerate}
+    则瑕积分$\int_a^bf(x)g(x)\dx$收敛.
+\end{thm}
+\begin{exa}
+  讨论广义积分$\displaystyle\int_0^{+\infty}\dfrac{\ln(1+x)}{x^a}\dx$的敛散性.
+\end{exa}
+这个积分不仅是一个无穷积分，而且在$a>1$时还有$x=0$这个瑕点.我们必须分开讨论
+$$\int_0^1\dfrac{\ln(1+x)}{x^a}\dx,\quad \int_1^{+\infty}\dfrac{\ln(1+x)}{x^a}\dx$$的敛散性.\\
+当$x\to0+$时，我们有
+$$\dfrac{\ln(1+x)}{x^a}\dx\sim\frac{1}{x^{a-1}}.$$
+因此当$a<2$时收敛，$a\ge2$时发散.\\
+当$x\to+\infty$时，如果$a\le 1$，则有
+$$\lim_{x\to+\infty}\frac{\frac{\ln(1+x)}{x^a}}{\frac{1}{x^a}}=\lim_{x\to+\infty}\ln(1+x)=+\infty.$$
+从而发散.若$a>1$，取$1<a'<a$有
+$$\lim_{x\to+\infty}\frac{\frac{\ln(1+x)}{x^a}}{\frac{1}{x^{a'}}}=0.$$
+从而收敛.\\
+于是当$1<a<2$时积分收敛，当$a\le1$或$a\ge2$时积分发散.
+\clearpage
+\section{课堂笔记(12):数项级数、正项级数(1)}
+\begin{center}
+  2018年4月4日
+\end{center}
+\subsection{数项级数}
+\begin{dfn}
+  称$a_1+\cdots+a_n+\cdots$为一个数项级数，$S_n=\sum\limits_{k=1}^na_k$为其部分和.若$S_n$极限存在，则称级数
+  收敛，否则发散.
+\end{dfn}
+\begin{exa}
+  对固定的$n_0\in\mathbb{N},\sum\limits_{n=1}^\infty\dfrac{1}{n(n+n_0)}$收敛.
+\end{exa}
+\jie $S_n=\sum\dfrac{1}{k(k+n_0)}=\sum\dfrac{1}{n_0}\left(\dfrac{1}{k}-\dfrac{1}{k+n_0}\right)=\dfrac{1}{n_0}
+\sum\limits_{k=1}^{n_0}\dfrac{1}{k}+\dfrac{1}{n_0}\sum\dfrac{1}{k}.$从而收敛于第一项.
+
+数项级数有下列简单性质：
+\begin{enumerate}
+  \item 改变数项级数有限项不改变敛散性(但可能改变其值);
+  \item 对于任意$k\ne0,$数项级数$\sum a_n$和$\sum ka_n$敛散性相同;
+  \item 若$\sum a_n,\sum b_n$收敛，则$\sum(pa_n+qb_n)=p\sum a_n+q\sum b_n.$
+\end{enumerate}
+\begin{thm}[柯西准则]
+  设$\sum a_n$是一个数项级数，则它收敛的充要条件是：对于$\forall \varepsilon>0,\exists N>0,$当$n>m>N$时，有
+  $$\left|\sum_{k=m+1}^na_k\right|=|a_{m+1}+a_{m+2}+\cdots+a_n|<\varepsilon.$$
+\end{thm}
+显然数项级数收敛的必要条件是$a_n\to0.$
+\subsection{正项级数(1)}
+\begin{dfn}
+  若$\sum|a_n|$收敛，则称$\sum a_n$绝对收敛.
+\end{dfn}
+\begin{thm}
+  正项级数收敛的充要条件是部分和序列有界.
+\end{thm}
+\begin{thm}[比较判别法]
+  设$\sum a_n,\sum b_n$为两个正项级数，$c_1,c_2$是两个正数，若存在$N,$当$n>N$时有$$c_1a_n\le c_2b_n,$$
+  则
+  \begin{enumerate}
+    \item $\sum b_n$收敛时，$\sum a_n$收敛;
+    \item $\sum a_n$发散时，$\sum b_n$发散.
+  \end{enumerate}
+\end{thm}
+\begin{thm}
+  设正项级数$\sum a_n,\sum b_n$满足
+  $$\lim\frac{a_n}{b_n}=l,$$
+  则
+  \begin{enumerate}
+    \item 当$0<l<+\infty$时，$\sum a_n,\sum b_n$同敛散;
+    \item $l=0$时，若$\sum b_n$收敛则$\sum a_n$收敛;
+    \item $l=+\infty$时，若$\sum b_n$发散则$\sum a_n$发散.
+  \end{enumerate}
+\end{thm}
+\begin{exa}
+  证明级数$\sum\dfrac{1}{n^p}$在$p\le1$时发散，在$p>1$时收敛.
+\end{exa}
+\zm $p\le1$时的发散性是容易的.我们注意到这个事实：以为一个正项级数的部分和序列是单调上升的，因此若有一个子列
+是有界的，则它必收敛.\\
+注意到$\{\dfrac{1}{n^p}\}$是一个单调下降序列，对于$\forall k\in\mathbb{N}$,我们有
+\begin{align*}
+  S_{2^{k+1}-1}&=1+(\frac{1}{2^p}+\frac{1}{3^p})+(\frac{1}{4^p}+\cdots+\frac{1}{7^p})+\cdots\\
+  &+[\frac{1}{(2^k)^p}+\frac{1}{(2^k+1)^p}+\cdots+\frac{1}{(2^{k+1}-1)^p}]\\
+  &\le1+2\frac{1}{2^p}+2^2\frac{1}{2^{2p}}+\cdots+2^k\frac{1}{2^{2kp}}\\
+  &=\sum_{j=0}^k2^{(1-p)j}<\frac{1}{1-2^{1-p}}.
+\end{align*}
+这就证明了收敛性.
+\begin{exa}
+  试讨论正项级数$\sum[1-(\frac{n-1}{n+1})^k]^p(k>0,p>0)$的敛散性.
+\end{exa}
+\jie 记$a_n=[1-(\frac{n-1}{n+1})^k]^p$,由
+\begin{align*}
+  (\frac{n-1}{n+1})^k&=(1-\frac{1}{n})^k(1+\frac{1}{n})^{-k}\\
+  &=[1-\frac{k}{n}+o(\frac{1}{n})][1-\frac{k}{n}+o(\frac{1}{n})]\\
+  &=1-\frac{2k}{n}+o(\frac{1}{n}),n\to\infty
+\end{align*}
+得到
+$$a_n=[\frac{2k}{n}+o(\frac{1}{n})]^p\sim\frac{(2k)^p}{n^p}.$$
+从而在$p>1$时收敛，$p\le1$时发散.
+\clearpage
+\section{习题课笔记(6)}
+\begin{exa}
+  若$f\in C^1[a,+\infty),\int_a^{+\infty}f(x)\dx,\int_a^{+\infty}f'(x)\dx$都收敛
+  ，则$\lim\limits_{x\to+\infty}f(x)=0.$
+\end{exa}
+\zm 由于$\int_a^{+\infty}f'(x)\dx$收敛，故对$\forall\varepsilon>0,\exists A>a,$使得$x,y>A$时有
+$$\left|\int_x^yf'(x)\dx\right|<\varepsilon.$$
+也就是$|f(y)-f(x)|<\varepsilon.$故由柯西准则知$f(x)$收敛.那么易证极限为零.
+\begin{exa}
+  设$f$在任意有限区间内可积，且在$[a,+\infty)$上绝对收敛，$g(x)$是以$T$为周期的可积函数，证明
+  $$\lim_{\lambda\to+\infty}\int_a^{+\infty}f(x)g(\lambda x)\dx=\frac{1}{T}\int_0^Tg(x)\dx
+  \int_a^{+\infty}f(x)\dx.$$
+\end{exa}
+\zm 将右式移到左边并且估计：
+\begin{align*}
+  &\left|\int_a^{+\infty}f(x)g(\lambda x)\dx-\frac{1}{T}\int_0^Tg(x)\dx\int_a^{+\infty}f(x)\dx\right|\\
+  &\le\left|\int_a^Af(x)g(\lambda x)\dx-\frac{1}{T}\int_0^Tg(x)\dx\int_a^Af(x)\dx\right|\\
+  &+\left|\int_A^{+\infty}f(x)g(\lambda x)\dx\right|+\left|\frac{1}{T}\int_0^Tg(x)\dx\int_A^{+\infty}f(x)\dx\right|
+\end{align*}
+易知存在$M>0$使得$|g(x)|\le M.$又由绝对收敛，知对$\forall \varepsilon>0,\exists A>a$使得$\int_A^{+\infty}|f(x)|
+\dx<\varepsilon.$从而
+$$\int_A^{+\infty}|f(x)g(\lambda x)|\dx<M\varepsilon$$
+且
+$$\left|\frac{1}{T}\int_0^Tg(x)\dx\int_A^{+\infty}f(x)\dx\right|\le\left|\frac{1}{T}\int_0^Tg(x)\dx\right|
+\varepsilon.$$
+把这个$A$应用到上面的估计式中，从而得到证明.
+\begin{exa}
+  设$f\in C[0,+\infty),\int_0^{+\infty}g(x)\dx$绝对收敛.则
+  $$\lim_{n\to+\infty}\int_0^{\sqrt{n}}f(\frac{x}{n})g(x)\dx=f(0)\int_0^{+\infty}g(x)\dx.$$
+\end{exa}
+\zm 我们作出下面的估计
+\begin{align*}
+  &\left|\int_0^{\sqrt{n}}f(\frac{x}{n})g(x)\dx-f(0)\int_0^{+\infty}g(x)\dx\right|\\
+  &\le\left|\int_0^{\sqrt{n}}f(\frac{x}{n})g(x)\dx-f(0)\int_0^{\sqrt{n}}g(x)\dx\right|+|f(0)|
+  \left|\int_{\sqrt{n}}^{\infty}g(x)\dx\right|\\
+  &\le\int_0^{\sqrt{n}}\left|f(\frac{x}{n})-f(0)\right| |g(x)|\dx+
+  |f(0)|\int_{\sqrt{n}}^{\infty}|g(x)|\dx.
+\end{align*}
+当$x\in[0,\sqrt{n}]$时，$\dfrac{x}{n}\in[0,\frac{1}{\sqrt{n}}]$,从而存在$N_1,n>N_1$时，$|f(\frac{x}{n})-f(0)|<
+\varepsilon$.于是$I_1\le\varepsilon\int_0^{+\infty}|g(x)|\dx.$对于绝对收敛，存在$N_2,n>N_2$时，
+$\int_{\sqrt{n}}^{+\infty}|g(x)|\dx<\varepsilon$.于是证毕.
+\begin{exa}
+  设$f,g$都是$[a,+\infty)$上的正值可积函数，且$f$一致连续，则$\exists\xi\in[a,+\infty)$使得
+  $$\int_a^{+\infty}f(x)g(x)\dx=f(\xi)\int_a^{+\infty}g(x)\dx.$$
+\end{exa}
+\zm 对任意的$n$，有
+$$\int_a^nf(x)g(x)\dx=f(\xi_n)\int_a^ng(x)\dx,\xi_n\in(a,n).$$
+对于序列$\{\xi_n\}$，若无界，那么$f(\xi_n)\to0$，得到$\int_a^{+\infty}f(x)g(x)\dx=0$，矛盾！从而$\{\xi_n\}$
+有界，故存在收敛子列，得证.
+\begin{exa}
+  若$f$在$[0,+\infty)$上连续，并且$\alpha=\lim\limits_{x\to+\infty}f(x)$.证明，对于$0<a<b$有
+  $$\int_0^{+\infty}\frac{f(ax)-f(bx)}{x}\dx=[f(0)-\alpha]\ln\frac{b}{a}.$$
+\end{exa}
+\zm 由定义，我们知道
+$$\int_0^{+\infty}\frac{f(ax)-f(bx)}{x}\dx=\lim_{\substack{A\to+\infty\\\delta\to0+}}
+\int_{\delta}^A\frac{f(ax)-f(bx)}{x}\dx.$$
+从而
+\begin{align*}
+  &\int_{\delta}^A\frac{f(ax)-f(bx)}{x}\dx\\
+  &=\int_{\delta}^A\frac{f(ax)}{x}\dx-\int_{\delta}^A\frac{f(bx)}{x}\dx\\
+  &=\int_{a\delta}^{aA}\frac{f(t)}{t}\mathrm{d}t-\int_{b\delta}^{bA}\frac{f(t)}{t}\mathrm{d}t\\
+  &=\int_{a\delta}^{b\delta}\frac{f(t)}{t}\mathrm{d}t-\int_{aA}^{bA}\frac{f(t)}{t}\mathrm{d}t\\
+  &=f(\xi_\delta)\int_{a\delta}^{b\delta}\frac{1}{t}\mathrm{d}t-
+  f(\xi_A)\int_{aA}^{bA}\frac{1}{t}\mathrm{d}t\\
+  &\to [f(0)-\alpha]\ln\frac{b}{a}.
+\end{align*}
+\clearpage
+
+\section{课堂笔记(13):正项级数(2)}
+\begin{center}
+  2018年4月8日
+\end{center}
+\begin{exa}
+  讨论正项级数$\sum\frac{n^{n-2}}{e^nn!}$的敛散性.
+\end{exa}
+\jie 记$a_n=\frac{n^{n-2}}{e^nn!}$,对任意$n\ge2$，有
+\begin{align*}
+  \frac{a_{n+1}}{a_n}&=\frac{(1+\frac{1}{n})^{n-2}}{e}<\frac{(1+\frac{1}{n})^{n-2}}{(1+\frac{1}{n})^n}\\
+  &=\frac{\frac{1}{(n+1)^2}}{\frac{1}{n^2}}=\frac{b_{n+1}}{b_n}.
+\end{align*}
+其中$b_n=\frac{1}{n^2}.$从而得到：
+\[
+  \frac{a_n}{a_2}=\frac{a_n}{a_{n-1}}\cdot\frac{a_{n-1}}{a_{n-2}}\cdots\frac{a_3}{a_2}
+  <\frac{b_n}{b_2}=\frac{4}{n^2}.
+\]
+因此当$n\ge2$时，有
+$$a_n<\frac{2}{e^2}\frac{1}{n^2}.$$从而收敛.
+\begin{thm}[D'Alembert判别法]
+  设$\sum a_n$为正项级数，则
+  \begin{enumerate}
+    \item 当$\varlimsup\limits_{n\to\infty}\frac{a_{n+1}}{a_n}=\bar{r}<1$时，$\sum a_n$收敛；
+    \item 当$\varliminf\limits_{n\to\infty}\frac{a_{n+1}}{a_n}=\underline{r}>1$时，$\sum a_n$发散.
+  \end{enumerate}
+\end{thm}
+\zm 取$r_1$,使得满足$\bar{r}<r_1<1$，则存在$N_1,n>N_1$时，有$\frac{a_n}{a_{n+1}}<r_1$，因此有
+$$a_n=\frac{a_n}{a_{n-1}}\cdot\frac{a_{n-1}}{a_{n-2}}\cdots\frac{a_{N_1+1}}{a_{N_1}}a_{N_1}<C_1r_1^n.$$
+由于$\sum r_1^n$是收敛的，因此收敛.同理可以取$r_2:\underline{r}>r_2>1$证明发散.
+\begin{exa}
+  讨论级数$\sum\frac{x^nn!}{n^n}$的敛散性.
+\end{exa}
+\jie 用D'Alembert判别法易知在$0\le x<e$时收敛，在$x>e$时发散.而当$x=e$时，由于
+$$(n+1)^n<e^nn!,$$
+从而$\lim a_n\ne0$,因此级数发散.
+\begin{thm}[Cauchy判别法]
+  设$\sum a_n$为正项级数，记
+  $$\varlimsup\sqrt[n]{a_n}=r,$$
+  若$r<1$则收敛,$r>1$则发散.
+\end{thm}
+事实上，对一般的正项级数，下面的不等式总是成立的：
+$$\varliminf_{n\to\infty}\frac{a_{n+1}}{a_n}\le\varliminf_{n\to\infty}\sqrt[n]{a_n}\le
+\varlimsup_{n\to\infty}\sqrt[n]{a_n}\le\varlimsup_{n\to\infty}\frac{a_{n+1}}{a_n}.$$
+\begin{thm}[Raabe判别法]
+  设$\sum a_n$为正项级数，
+  \begin{enumerate}
+    \item 若$\varliminf\limits_{n\to\infty}n(\frac{a_{n}}{a_{n+1}}-1)=r>1,$则级数收敛；
+    \item 若$\varlimsup\limits_{n\to\infty}n(\frac{a_{n}}{a_{n+1}}-1)=r'<1$,则级数发散.
+  \end{enumerate}
+\end{thm}
+\zm 取$r_1:r>r_1>1$,则存在$N_1,n>N_1$时有
+$$\frac{a_n}{a_{n+1}}>1+\frac{r_1}{n}.$$再取$r_2:r_1>r_2>1,$由于$f(x)=1+r_1x-(1+x)^{r_2}$满足
+$f(0)=0$且$f'(x)=r_1-r_2(1+x)^{r_2-1}$在$x=0$的某个邻域内恒大于零，因此存在$N_2\ge N_1,n\ge N_2$时
+有$$\frac{a_n}{a_{n+1}}>1+\frac{r_1}{n}>(1+\frac{1}{n})^{r_2}=\frac{(n+1)^{r_2}}{n^{r_2}}.$$
+从而有
+$$(n+1)^{r_2}a_{n+1}<n^{r_2}a_n.$$
+因此当$n>N_2$时我们有
+$$a_n<\frac{N_2^{r_2}a_{N_2}}{n^{r_2}}=\frac{C}{n^{r_2}}.$$由比较判别法知收敛.对于发散同理.
+\begin{exa}
+  讨论正项级数$\sum C_n$的敛散性，其中
+  $$C_n=\begin{cases}a^{\frac{n+1}{2}},&n\text{为奇数},\\b^\frac{n}{2},&n\text{为偶数}\end{cases}(0<a<b<1).$$
+\end{exa}
+\jie 由于
+$$\varlimsup_{n\to\infty}\sqrt[n]{C_n}\le\lim_{n\to\infty}\sqrt[n]{b^\frac{n}{2}}<1.$$
+从而由Cauchy判别法知发散.
+\begin{exa}
+  讨论正项级数$\sum\frac{(2n-1)!!}{(2n)!!}$的敛散性.
+\end{exa}
+\jie 记$a_n=\frac{(2n-1)!!}{(2n)!!},$则有
+$$n(\frac{a_n}{a_{n+1}}-1)=n(\frac{2n+2}{2n+1}-1)\to\frac{1}{2}.$$
+从而由Raabe判别法知发散.
+\begin{thm}[积分判别法]
+  设$f(x)$在$[1,+\infty)$上单调下降趋于零，记$a_n=f(n),$则正项级数$\sum a_n$收敛的充要条件是无穷积分
+  $\int_1^{+\infty}f(x)\dx$收敛.
+\end{thm}
+\zm 对任何正整数$n$,当$n\le x\le n+1$时，有
+$$f(n+1)\le f(x)\le f(n).$$因此有
+$$a_{n+1}=\int_n^{n+1}f(n+1)\dx\le\int_n^{n+1}f(x)\dx\le\int_n^{n+1}f(n)\dx=a_n.$$
+求上式求和，得$$\sum_2 a_n\le\int_1^{+\infty}\le \sum_1 a_n.$$
+从而若无穷积分收敛，级数有上界，故收敛.反之，若级数收敛，无穷积分有上界，也收敛.
+
+从而由上述定理知，级数$\sum\frac{1}{n^p\ln^qn}$当$p>1$时对任何$q$都收敛，当$p=1$时对$q>1$收敛，而对其他情况发散.
+\begin{exa}
+  设正项级数$\sum a_n$收敛，记$r_n=\sum_{k=n} a_k$.证明：当$p<1$时，正项级数$\sum\frac{a_n}{r_n^p}$收敛.
+\end{exa}
+\zm 记$a_0=0,S=\sum a_n.$故$r_n=S-\sum_{k=0}^{n-1}a_k$及$\lim_n\sum_{k=0}^{n-1}a_k=S$知，$\{r_n\}$单调下降趋于零.
+因此我们有
+$$S=r_1\ge r_2\ge r_3\ge\cdots,$$
+且$r_n>0.$注意到对于任意$n\in\mathbb{N},$有
+$$\frac{a_n}{r_n^p}\le\int_{r_{n+1}}^{r_n}\frac{\dx}{x^p},$$
+从而当$p<1$时对于任意$n$有
+$$\sum_{k=1}^n\frac{a_k}{r_k^p}\le\sum_{k=1}^n\int_{r_{k+1}}^{r_k}\frac{\dx}{x^p}<\int_0^S\frac{\dx}{x^p}.$$
+从而收敛.\\
+这个例子告诉我们，当正项级数$\sum a_n$收敛时，
+我们总能找到另一个收敛的正项级数$\sum b_n$使得$\lim\frac{b_n}{a_n}=+\infty.$
+\clearpage
+
+\section{习题课笔记(7)}
+\begin{exa}
+  设正项级数$\sum a_n$收敛且$a_n$单调递减，证明: $\lim na_n\to0.$
+\end{exa}
+\zm 一方面有$2na_{2n}\le a_{n+1}+\cdots+a_{2n}<\varepsilon.$另一方面有
+$(2n+1)a_{2n+1}\le 2na_n+a_{2n+1}\to0.$
+\begin{exa}
+  设$\sum a_n$发散，且$a_n>0$，前$n$项和为$S_n.$证明：
+  \begin{enumerate}
+    \item $\sum\dfrac{a_n}{S_n}$发散;
+    \item $\sum\dfrac{a_n}{S^2_n}$收敛;
+    \item $\sum\dfrac{a_n}{1+a_n}$发散：
+    \item $\sum\dfrac{a_n}{1+n^2a_n}$收敛.
+  \end{enumerate}
+\end{exa}
+\zm \\
+(1).我们有
+$$\frac{a_{n+1}}{S_{n+1}}+\cdots+\frac{a_{n+p}}{S_{n+p}}\ge\frac{a_{n+1}+\cdots+a_{n+p}}{S_{n+p}}
+=1-\frac{S_p}{S_{n+p}}.$$
+所以存在$\varepsilon_0,\forall N,$取$n=N+1$,由于$\dfrac{S_p}{S_{n+p}}\to0,$从而存在$p$使得$\dfrac{S_n}{S_{n+p}}<\dfrac{1}{2}.$
+故由Cauchy准则知发散.\\
+(2).$\dfrac{a_n}{S_n^2}\le\dfrac{S_n-S_{n+1}}{S_nS_{n-1}}=\dfrac{1}{S_{n-1}}-\dfrac{1}{S_n}$.显然
+$\sum(\dfrac{1}{S_{n-1}}-\dfrac{1}{S_n})$收敛，故由比较判别法知收敛.\\
+(3).首先我们来进行下面的估计：
+$$\frac{a_{n+1}}{1+a_{n+1}}+\cdots+\frac{a_{n+p}}{1+a_{n+p}}>\frac{a_{n+1}+\cdots+a_{n+p}}{1+a_{n+1}+\cdots+a_{n+p}}.$$
+又因为$\sum a_n$是发散的，故存在$\varepsilon_0,\forall N,\exists n\ge N,p$使得$a_{n+1}+\cdots+a_{n+p}>\varepsilon_0.$
+从而上面的估计式$>\dfrac{\varepsilon_0}{1+\varepsilon_0}.$从而由Cauchy准则知发散.\\
+(4).$\dfrac{a_n}{1+n^2a_n}\le\dfrac{1}{n^2}.$故收敛.
+\begin{exa}[Cauchy凝聚判别法]
+  若$a_n$是单减的正数列，则$\sum a_n$收敛当且仅当$\sum 2^na_{2^n}$收敛.
+\end{exa}
+\begin{exa}
+  设$a_n$是单减的正数列，且$\lim\dfrac{a_{2n}}{a_n}=\rho.$若$\rho<\dfrac{1}{2}$则收敛，若$\rho>\dfrac{1}{2}$则发散.
+\end{exa}
+\zm 只需要考虑级数$\sum 2^na_{2^n}$的敛散性，对此使用D'Alembert判别法知
+$$\lim\frac{2^{k+1}a_{2^{k+1}}}{2^ka_{2^k}}=2\rho.$$
+从而得证.\\
+注意$\rho=\dfrac{1}{2}$无法判断敛散性,比如$\sum\dfrac{1}{n}$.\\
+此外，若$\lim\dfrac{a_{n+1}}{a_n}=l<1$，则$\lim\dfrac{a_{2n}}{a_n}=p=0$.\\
+下面这个例子不能用D'Alembert判别法但可以用该方法：$\sum\dfrac{n^n}{n!e^n}.$显然用D'Alembert判别法得到极限$l=1.$若用该
+方法与Stirling公式可以得到极限$p=\dfrac{1}{\sqrt{2}}.$
+\clearpage
+
+\section{课堂笔记(14):任意项级数、数项级数的性质(1)}
+\begin{center}
+  2018年4月16日
+\end{center}
+\subsection{交错级数}
+\begin{thm}
+  设数项级数$\sum a_n$满足条件：
+  \begin{enumerate}
+    \item $\lim a_n=0$;
+    \item 存在$N\in\mathbb{N},$使得在$\sum a_n$中加上一些括号，并且在每个括号中的加数不超过$N$(或有限项),
+    得到的级数$\sum b_k$是收敛的.
+  \end{enumerate}
+  则级数$\sum a_n$收敛.
+\end{thm}
+\zm 记$S_n=\sum\limits_{i=1}^na_i,$由于加括号后的级数收敛，因此存在$\{S_n\}$的一个子列$\{S_{n_k}\}$是收敛的.
+对任意的正整数$n>n_1$，必存在$n_k$使得$n_k\le n<n_{k+1},$又因为$n_k<n_{k+1}\le n_k+N$,因此有
+$$|S_n-S_{n_k}|\le\sum_{j=1}^N|a_{n_k+j}|.$$从而右式趋于零，因此$\lim S_n$存在，即$\sum a_n$收敛.
+\begin{thm}[Leibniz判别法]
+  设$a_n$单调趋于零，则$\sum (-1)^{n-1}a_n$收敛.
+\end{thm}
+\zm 不妨设$a_n$单调减趋于零，故$a_n\ge 0.$显然$\sum_{k=1}^\infty(a_{2k-1}-a_{2k})$是在原级数中加括号得到的正项级数.
+记前$n$项部分和为$S_n,$有
+\begin{align*}
+  0&\le S_n=(a_1-a_2)+(a_3-a_4)+\cdots+(a_{2n-1}-a_{2n})\\
+  &\le a_1-(a_2-a_3)-\cdots-(a_{2n-2}-a_{2n-1})-a_{2n}\\
+  &\le a_1.
+\end{align*}
+从而由上述定理知收敛.
+\begin{exa}
+  讨论交错级数$\sum\dfrac{(-1)^n}{n^p\ln^qn}$的敛散性.
+\end{exa}
+\jie 若$p<0$，则通项不趋于零，显然发散.若$p=0$,此时若$q<0$则通项也不趋于零，若$q>0$由Leibniz判别法知收敛，且是条件收敛.
+若$p>0$，我们可以通过求导的方法知通项单调下降趋于零，因此对$\forall q\in\mathbb{R}$级数收敛.特别地，$p>1$或
+$p=1,q>1$时绝对收敛;$0<p<1$时条件收敛.
+\begin{thm}[Dirichlet判别法]
+  设数项级数$\sum a_n$的部分和序列$\{S_n\}$是有界的，$\{b_n\}$单调趋于零，则级数$\sum a_nb_n$收敛.
+\end{thm}
+\zm 设$|S_n|\le\dfrac{M}{2},$从而对于任意的正整数$n,p$有
+$$|S_{n+p}-S_n|\le M.$$
+对于$\forall\varepsilon>0,$由$\lim b_n\to0,$存在$N$使得当$n>N$时就有
+$$|b_n|<\frac{\varepsilon}{6M}.$$
+因此当$n>N$时，对于任意正整数$p$,利用Abel变换，得
+\begin{align*}
+  \left|\sum_{k=n+1}^{n+p}a_kb_k\right|&=\left|b_{n+p}(S_{n+p}-S_n)-\sum_{k=n+1}^{n+p-1}(S_k-S_n)(b_{k+1}-b_k)\right|\\
+  &\le M\left\{|b_{n+p}|+\left|\sum_{k=n+1}^{n+p-1}(b_{k+1}-b_k)\right|\right\}\\
+  &\le M\{|b_{n+1}|+2|b_{n+p}|\}<\varepsilon.
+\end{align*}
+由Cauchy准则知收敛.
+\begin{thm}[Abel判别法]
+  设级数$\sum a_n$收敛，序列$\{b_n\}$单调有界，则级数$\sum a_nb_n$收敛.
+\end{thm}
+\jz 利用Dirichlet判别法易证.
+
+容易看出，Leibniz判别法是Dirichlet判别法的特例.
+\begin{exa}
+  设序列$\{a_n\}$单调且趋于零，且$\sum a_n$发散，则$\sum a_n\sin nx(x\ne k\pi),\sum a_n\cos nx(x\ne 2k\pi)$条件收敛.
+\end{exa}
+只需证明$S_n=\sum_1^n\sin kx$是有界的.事实上有
+$$2\sin\frac{x}{2}\cdot S_n=\sum_{k=1}^n[\cos(k-\frac{1}{2})x-\cos(k+\frac{1}{2})x]=\cos\frac{x}{2}-\cos(n+\frac{1}{2})x.$$
+当$x\ne k\pi$时，有
+$$|S_n|\le\frac{1}{|\sin\frac{x}{2}|}.$$
+然后又有
+$$|a_n\sin nx|\ge|a_n\sin^2 nx|=\frac{a_n}{2}(1-\cos 2nx),$$
+从而条件收敛.对$\sum a_n\cos nx$同理可证.
+\subsection{数项级数的性质(1)}
+\subsubsection{结合律(加括号)}
+\begin{thm}
+  设级数$\sum a_n$收敛，则在其中任意加括号后得到的级数$\sum b_k$也收敛，并且收敛于同一个数.
+\end{thm}
+\zm 设$S_n$是$\sum a_n$前$n$项和，$S_k'$是$\sum b_k$的前$k$项部分和.可以看出$\{S_k'\}$是$\{S_n\}$的一个子列，从而若
+$S_n$极限存在，则$S_k'$极限也存在，且相等.
+但要注意，级数加上括号得到的级数收敛并不能推出原来的级数收敛.\\
+对于正项级数$\sum a_n$，如果加上括号后得到的级数收敛，那么$\sum a_n$也收敛.对于一般的级数来说，如果加上括号后，
+并且在每个括号中的项都具有相同的符号，得到级数$\sum b_k.$则$\sum a_n$收敛的充要条件是$\sum b_k$收敛，且收敛于同一个数.
+\subsubsection{交换律(重排)}
+对级数$\sum(-1)^{n-1}\dfrac{1}{n}$重排，得到
+$$\sum_{n=1} b_n=\sum_{n=1}\left(\frac{1}{4n-3}+\frac{1}{4n-1}-\frac{1}{2n}\right)=
+1+\frac{1}{3}-\frac{1}{2}+\frac{1}{5}+\frac{1}{7}-\frac{1}{4}+\cdots$$
+其前$n$项部分和为
+$$T_n=\sum_{k=1}^nb_k=\sum_{k=1}^n\left(\frac{1}{4k-1}+\frac{1}{4k-3}-\frac{1}{4k-2}-\frac{1}{2k}\right)
++\sum_{k=1}^n\left(\frac{1}{4k}+\frac{1}{4k-2}\right).$$
+从而有
+$$T_n=S_{4n}+\frac{1}{2}S_{2n}\to\frac{3}{2}S.$$
+\begin{thm}
+  设$\sum a_n$为一个数项级数，$f(n):\mathbb{N}\to\mathbb{N}$为一个重排，再设$\exists M>0$使得对于$\forall n\in\mathbb{N},$
+  有$|f(n)-n|\le M$,则级数$\sum a_n$收敛当且仅当$\sum a_{f(n)}$收敛，且收敛于同一个数.
+\end{thm}
+\zm 必要性：设$\sum a_n$收敛，故$\lim a_n\to0,$从而有
+$$\lim_{n\to\infty}\sum_{j=-M}^j|a_{n+j}|=0.$$
+设$S_n,S_n'$分别为$\sum a_n,\sum a_{f(n)}$的部分和，由于$|f(n)-n|\le M$，容易看出
+$$|S_n-S_n'|\le\sum_{j=-M}^j|a_{n+j}|\to0(n\to\infty).$$
+从而$\lim S_n'=\lim S_n,$即$\sum a_{f(n)}$收敛.\\
+充分性：考虑$f^{-1}(n)$即可.
+\begin{thm}
+  如果$\sum a_n$\textbf{绝对收敛}，那么它的任意一个重排$\sum a_{f(n)}$也绝对收敛，且收敛到同一个数.
+\end{thm}
+\zm 设$\sum|a_n|$收敛.记$\{S_n'\}$为$\sum a_{f(n)}$的部分和序列，显然，对于任意$n$，有
+$$S_n'\le S=\sum_{n=1}^\infty|a_n|.$$
+即$\sum|a_{f(n)}|$收敛，也就是$\sum a_{f(n)}$绝对收敛，再令$n\to\infty,$得
+$$\sum_{n=1}^\infty|a_{f(n)}|\le S.$$
+由于$\sum a_n$是$\sum a_{f(n)}$的一个重排，那么同样有
+$$S\le\sum_{n=1}^\infty|a_{f(n)}|.$$
+于是这两个绝对值级数收敛于同一个数.\\
+为了证明$\sum a_n=\sum a_{f(n)}$,对于任意的$n$，我们定义
+\[
+a_n^+=\frac{|a_n|+a_n}{2},a_n^-=\frac{|a_n|-a_n}{2}.
+\]
+显然对于任意$n$,$a_n^+\le|a_n|,a_n^-\le|a_n|.$因此$\sum a_n^+,\sum a_n^-$都是收敛的正项级数，且有
+$\sum a_n^+=\sum a_{f(n)}^+,\sum a_n^-=\sum a_{f(n)}^-$.由此得到
+$$\sum a_n=\sum a_n^+-\sum a_n^-=\sum a_{f(n)}^+-\sum a_{f(n)}^-=\sum a_{f(n)}.$$
+证毕.\\
+注意到对于条件收敛的级数，上述定理可能不成立(发散或改变级数的和).\\
+\begin{thm}[黎曼定理]
+  设数项级数$\sum a_n$条件收敛，则对任意$S\in\mathbb{R}$,都存在重排$\sum a_{f(n)}$使得$\sum a_{f(n)}=S.$
+\end{thm}
+\clearpage
+
+\section{课堂笔记(15):数项级数的性质(2)、无穷乘积}
+\begin{center}
+  2018年4月18日
+\end{center}
+\subsection{分配律(乘法)}
+对于两个级数$\sum a_n,\sum b_n$，它们的乘积可以用对角线法或者正方形法写出来，用对角线方法得到的级数的乘积
+叫做\textbf{柯西乘积}.\\
+正方形方法即：$d_n=a_1b_n+a_2b_n+\cdots+a_nb_n+a_nb_{n-1}+\cdots+a_nb_1$.\\
+对角线方法即：$c_n=a_1b_n+a_2b_{n-1}+\cdots+a_nb_1.$
+
+若$\sum a_b,\sum b_n$都收敛，则按正方形法排列的$\sum a_nb_n$也收敛，且$\sum d_n=\sum a_n\sum b_n.$.\\
+\zm 设$A_n=\sum_{i=1}^na_n,B_n\sum_{i=1}^nb_n,$则$\sum d_n=A_nB_n\to AB.$
+
+对于两个绝对收敛的级数的乘积，我们有以下定理：
+\begin{thm}
+  若级数$\sum a_n,\sum b_n$都绝对收敛，则其乘积矩阵中所有元素的任一排列构成的级数也绝对收敛，并且它的和为
+  $\sum a_n\cdot\sum b_n.$
+\end{thm}
+\zm 设$\sum a_{k_n}b_{j_n}$为$\sum a_n,\sum _n$的乘积矩阵中所有元素的一个排列构成的级数，其前$n$项部分和记为$S_n.$
+对于$\forall n\in\mathbb{N},$记
+$$M_n=\max_{1\le i\le n}\{k_i,j_i\},$$
+则$$\sum_{i=1}^n|a_{k_n}b_{j_n}|\le\sum_{k=1}^{M_n}|a_k|\sum_{j=1}^{M_n}|b_j|\le
+\sum_{k=1}^\infty|a_k|\sum_{j=1}^\infty|b_j|.$$
+从而$\sum a_{k_n}b_{j_n}$绝对收敛.从而它的任何重排也绝对收敛且和不变.\\
+由于正方形方法排列得到的乘积收敛到$\sum a_n\sum b_n$，而$\sum d_n$是在乘积矩阵中所有元素的一个排列构成的级数
+加上一些括号所得，因此乘积矩阵中所有元素的任何一个排列构成的级数都收敛到$\sum a_n\sum b_n$.证毕.
+\begin{exa}
+  级数$\sum a_n=\sum\dfrac{(-1)^{n+1}}{n^a},a\le\dfrac{1}{2}.$证明:级数$\sum a_n$自乘得到的柯西乘积发散.
+\end{exa}
+\zm 记$\sum a_n$自乘的柯西乘积为$\sum c_n.$则
+$$c_n\sum_{k=1}^n\frac{(-1)^{n+1}}{k^a(n+1-k)^a}=(-1)^{n+1}\sum_{n=1}^n\frac{1}{k^a(n+1-k)^a}.$$
+由于
+$$\frac{1}{k^a(n+1-k)^a}\ge\frac{1}{k^\frac{1}{2}(n+1-k)^\frac{1}{2}}\ge\frac{2}{n+1}.$$
+因此对于$\forall n,$有
+$$|c_n|\ge \frac{2n}{n+1}\ge 1.$$
+从而发散(通项不趋于0).
+\begin{thm}
+  设$\sum a_n$绝对收敛，$\sum b_n$条件收敛，则柯西乘积$\sum c_n$收敛到$\sum a_n\sum b_n$.
+\end{thm}
+  记$A'=\sum |a_n|,A=\sum a_n,B=\sum b_n,c_n=\sum_{k=1}^na_kb_{n+1-k},C_n=\sum_{i=1}^nc_i.$
+  注意到$C_n=a_1B_n+a_2B_{n-1}+\cdots+a_nB_1.$从而有
+  $$|C_n-A_nB|\le|a_1||B_n-B|+|a_2||B_{n-1}-B|+\cdots+|a_n||B_1-B|.$$
+  设$|B_n|\le M,A'\le M,$对于$\forall \varepsilon>0,\exists N,$当$n\ge N$,$|B_n-B|<\varepsilon$,则
+  $$|C_n-A_nB|\le\sum_{k=N}^n|B_k-B||a_{n+1-k}|+\sum_{k=1}^{N-1}|B_k-B||a_{n+1-k}|
+  \le\varepsilon\sum_{k=N}^n|a_{n+1-k}|+\cdots\le M\varepsilon+\cdots$$
+  再由$C_n-AB=C_n-A_nB+A_nB-AB$得证.
+\subsection{无穷乘积}
+设$\{a_n\}$是一个序列，记$\prod\limits_{n=1}^\infty a_n$为它的无穷乘积.同样地可以定义它的部分积$T_n$.
+则$\{T_n\}$为部分积序列.若$\lim T_n$存在且不为零，那么称无穷乘积收敛，否则发散.
+\begin{thm}
+  若无穷乘积$\prod a_n$收敛，则$\lim a_n\to 1.$
+\end{thm}
+\zm $\lim a_n=\lim\dfrac{T_n}{T_{n-1}}=1.$
+\begin{thm}
+  假定$a_n>-1$,无穷乘积$\prod(1+a_n)$收敛的充要条件是级数$\sum \ln(1+a_n)$收敛.
+\end{thm}
+\zm 对于$\forall n\in\mathbb{N}$,记$T_n=\prod\limits_{k=1}^n(1+a_k),S_n=\sum\limits_{k=1}^n\ln(1+a_k)$,
+则$T_n=e^{S_n}.$由$e^x$的连续性，得证.
+\begin{thm}
+  若$a_n>0$,则$\prod(1+a_n)$收敛的充要条件是$\sum a_n$收敛.
+\end{thm}
+\begin{exa}
+  求无穷乘积$\prod[1-\frac{1}{(2n)^2}]$的积.
+\end{exa}
+\jie 无穷乘积的前$n$项和$T_n=\prod_{k=1}^n[1-\frac{1}{(2k)^2}]=\frac{[(2n-1)!!]^2}{[(2n)!!]^2}(2n+1)$.
+从而$\prod[1-\frac{1}{(2n)^2}]=\frac{2}{\pi}.$\\
+对于每个固定的$s>1$，令
+$$\zeta(s)=\sum_{n=1}^\infty\frac{1}{n^s}.$$
+首先我们观察
+$$(1-\frac{1}{2^s})\zeta(s)=\sum_{n=1}^\infty\frac{1}{n^s}-\sum_{n=1}^\infty\frac{1}{(2n)^s}=\sum\frac{1}{m^s}.$$
+在右边的求和中$m$将取遍所有奇数.然后再考虑
+$$(1-\frac{1}{2^s})(1-\frac{1}{3^s})=\sum\frac{1}{m^s}-\sum\frac{1}{(3m)^s}=\sum\frac{1}{k^s}.$$
+这里$k$取遍所有不是$2,3$的整数倍的正整数.依次取所有素数$2,3,5,7,\cdots$，则有
+$$\lim_{n\to\infty}\prod_{k=1}^n(1-\frac{1}{p_k^s})\zeta(s)=1.$$
+也就是
+$$\prod_{k=1}^\infty(1-\frac{1}{p_k^s})=\frac{1}{\zeta(s)}.$$
+\clearpage
+\section{习题课笔记(8)}
+\textbf{证明级数发散的方法}
+\begin{enumerate}
+  \item 证明通项不趋于零;
+  \item 利用Cauchy准则：$\exists\varepsilon_0>0,\forall N\in \mathbb{N},\exists n,p\ge N$使得
+  $|\sum_{i=n+1}^{n+p}|\ge\varepsilon_0;$
+  \item 按某种加括号的方法得到的级数发散;
+  \item 对于正项级数，证明它的部分和序列无界;
+  \item 将级数通项分解为一个收敛级数通项和一个发散级数通项的和(注意两个发散级数的通项和的级数不一定发散);
+\end{enumerate}
+\begin{exa}
+  设$0\le p_1\le p_2\le\cdots\le p_n\le\cdots$,则$\sum\dfrac{1}{p_n}$收敛等价于$\sum\dfrac{n}{p_1+\cdots+p_n}$
+  收敛.
+\end{exa}
+\zm 显然有下面的估计：
+$$\frac{n}{p_1+\cdots+p_n}\ge\frac{1}{p_n},$$
+从而右推左是容易的.又注意到
+$$p_1+p_2+\cdots+p_n\ge[\frac{n}{2}]p_{[\frac{n}{2}]}\ge\frac{n}{4}p_{[\frac{n}{2}]}.$$
+因此有
+$$\frac{n}{p_1+\cdots+p_n}\le\frac{4}{p_{[\frac{n}{2}]}}.$$
+由比较判别法知收敛.
+\begin{exa}
+  设$\sum a_n$为正项级数，满足
+  \begin{enumerate}
+    \item $\sum_{k=1}^n(a_k-a_n)$对$n$有界;
+    \item $a_n$单调减趋于零.
+  \end{enumerate}
+  则级数$\sum a_n$收敛.
+\end{exa}
+\zm 只需证明$S_n=a_1+\cdots+a_n$有界即可.由条件1知，存在$M>0$使得对$\forall n$满足$S_n-na_n\le M.$
+现在固定这个$n$，对$\forall m>n$，有
+$$S_n-na_m=\sum_{k=1}^n(a_k-a_m)\le\sum_{k=1}^m(a_k-a_m)\le M.$$
+令$m\to\infty$得$S_n\le M.$
+\begin{exa}
+  证明$\sum\limits_{n=1}^\infty\dfrac{(-1)^{[\sqrt{n}]}}{n}$收敛.
+\end{exa}
+\zm 我们可以把这个级数加上括号写为
+$$\sum_{n=1}^\infty (-1)^n\left(\frac{1}{n^2}+\frac{1}{n^2+1}+\cdots+\frac{1}{(n+1)^2-1}\right).$$
+现在即证明$a_n=\frac{1}{n^2}+\frac{1}{n^2+1}+\cdots+\frac{1}{(n+1)^2-1}$单调递减趋于零即可.\\
+实际上$a_n\in[\dfrac{2}{n+1},\dfrac{2}{n}].$只需要注意到：
+$$a_n=\frac{1}{n^2}+\cdots+\frac{1}{n^2+n-1}+\frac{1}{n^2+n}+\cdots+\frac{1}{(n+1)^2-1}
+\le\frac{1}{n^2}\cdot n+\frac{1}{n^2+n}\cdot(n+1)=\frac{2}{n}.$$
+$$a_n=\frac{1}{n^2}+\cdots+\frac{1}{n^2+n-1}+\frac{1}{n^2+n}+\cdots+\frac{1}{(n+1)^2-1}
+\ge\frac{1}{n^2+n}\cdot n+\frac{1}{(n+1)^2}\cdot(n+1)=\frac{2}{n+1}.$$
+\begin{exa}
+  级数$\sum a_n=\dfrac{1}{1^p}-\dfrac{1}{2^q}+\dfrac{1}{3^p}-\dfrac{1}{4^q}+\cdots,p,q>0$.考虑它的敛散性.
+\end{exa}
+\jie 显然若$p,q>1$,则绝对收敛.若$p=q\le 1,$这时候它是条件收敛的.若$0<p\le 1,p<q$或者$0<q\le 1,q<p.$这两个
+情况是对称的，所以只讨论第一种情况.\\
+考虑级数$\sum(\frac{1}{(2n-1)^p}-\frac{1}{(2n)^q})$,则有
+$$\lim\frac{\frac{1}{(2n-1)^p}-\frac{1}{(2n)^q}}{\frac{1}{(2n-1)^p}}=1.$$
+从而该级数与级数$\sum\frac{1}{(2n-1)^p}$同敛散.又$0<p\le1$,故发散.
+\begin{exa}
+  设级数$\sum a_n$收敛，$\sum(b_n-b_{n+1})$绝对收敛，则$\sum a_nb_n$收敛.
+\end{exa}
+\zm 对任意$\varepsilon>0,\exists N_1,$当$n>N_1,p>0$有$|a_{n+1}+\cdots+a_{n+p}|<\varepsilon.$再由
+$\sum(b_n-b_{n+1})$绝对收敛，从而收敛，则$b_n$有界，即$|b_n|\le M.$再由绝对收敛，$\exists N_2,$当$n>N_2,p>0$
+有$|b_{n+1}-b_{n+p+1}|<\varepsilon.$再利用Abel变换可以得到：
+$$|a_{n+1}b_{n+1}+\cdots+a_{n+p}b_{n+p}|<2M\varepsilon.$$
+\begin{exa}
+  设$k>0,a>0,$证明
+  \begin{enumerate}
+    \item $\int_a^\infty\frac{\sin2\pi nx}{x^k}\dx$收敛;
+    \item $\sum\frac{1}{n}\int_a^\infty\frac{\sin2\pi nx}{x^k}\dx$收敛.
+  \end{enumerate}
+\end{exa}
+\zm 第一个用Dirichlet判别法是显然的.对于第二个，对$\forall A>a,$有
+$$\left|\int_a^A\frac{\sin2\pi nx}{x^k}\dx\right|=\left|\frac{1}{a^k}\int_a^\xi\sin2\pi nx\dx\right|
+=\frac{1}{2\pi na^k}\left|\int_{2\pi na}^{2\pi n\xi}\sin t\mathrm{d}t\right|\le\frac{1}{n\pi a^k}.$$
+从而
+$$\left|\frac{1}{n}\int_a^\infty\frac{\sin2\pi nx}{x^k}\dx\right|\le\frac{1}{n^2}\frac{1}{\pi a^k}.$$
+\begin{exa}
+  正项级数$\sum a_n$收敛，$\{na_n\}$单调，证明$\lim\limits_{n\to\infty}na_n\ln n=0.$
+\end{exa}
+\clearpage
+
+\section{课堂笔记(16):函数项级数、一致收敛(1)}
+\begin{center}
+  2018年4月23日
+\end{center}
+\subsection{函数序列与函数项级数的概念}
+现有一个序列$\{f_n(x)\}$,且有公共的定义域$I_0$,我们称它为函数序列.对于固定的$x_0\in I_0$，便得到了一个序列
+$\{f_n(x_0)\}$,若它收敛，则称函数序列在$x_0$处收敛，$x_0$也叫收敛点.所有收敛点的集合叫做收敛域.设$\{f_n(x)\}$
+的收敛域为$I$,则对$x\in I$,得到一个函数$f(x):=\lim\limits_{n\to\infty}f_n(x),x\in I.$叫做$\{f_n(x)\}$
+在$I$上的极限函数.
+
+同样地$\{u_n(x)\}$定义在$I_0$上，则$\sum u_n(x)$为函数项级数.记$S_n(x)=\sum\limits_{k=1}^nu_k(x)$叫做部分和，且有
+部分和序列$\{S_n(x)\}$.它也有收敛点和收敛域.则$S(x):=\lim\limits_{n\to\infty} S_n(x)$为和函数.
+\begin{exa}
+  函数序列$f_n(x)=x^n$的收敛域是$(-1,1]$,其极限函数为
+  $$f(x)=\begin{cases}0,&|x|<1\\1,&x=1\end{cases}$$
+  注意到这个极限函数在$(-1,1]$上的连续性和可导性.
+\end{exa}
+\begin{exa}
+  $f_n(x)=nx(1-x^2)^n,x\in[0,1].$则$\lim\limits_{n\to\infty}f_n(x)=0,x\in[0,1]$.但是
+  $$\lim_{n\to\infty}\int_0^1f_n(x)\dx=\frac{1}{2}\ne\int_0^1\lim_{n\to\infty}f_n(x)\dx=0.$$
+\end{exa}
+\begin{exa}
+  设$f_n(x)=\dfrac{\sin nx}{\sqrt{n}}$,显然$\lim\limits_{nto\infty}f_n(x)=0=f(x),x\in\R.$但是
+  $f'_n(x)=\sqrt{n}\cos nx.$可以看出$\{f'_n(x)\}$在许多点不收敛，因此该函数序列的导函数序列不收敛于$f(x)$的导数.
+\end{exa}
+\begin{exa}
+  设$f_n(x)=\dfrac{2x}{\pi}\arctan nx$,则有$\lim\limits_{n\to\infty}f_n(x)=|x|=f(x),x\in\R.$而
+  $f_n'(x)=\dfrac{2}{\pi}\arctan nx+\dfrac{2nx}{\pi(1+n^2x^2)}.$可以看出$\{f_n'(x)\}$处处收敛，
+  但$f(x)$在$x=0$处不可导.
+\end{exa}
+在讨论函数序列或函数项级数时，主要研究极限函数(和函数)能从该函数序列(函数项级数)继承哪些性质，主要是:
+\textbf{连续性、可积性、可导性}.
+\subsection{一致收敛的概念}
+\begin{dfn}
+  设$f(x),f_n(x)$定义在$I$上，若对于$\forall\varepsilon>0,$存在$N$，当$n>N$时，对一切$x\in I$有
+  $$|f_n(x)-f(x)|<\varepsilon,$$
+  则称函数序列$\{f_n(x)\}$在$I$上一致收敛于$f(x)$,记为$f_n(x)\rightrightarrows f(x).$
+\end{dfn}
+显然，当$f_n(x)\rightrightarrows f(x)$时，$\{f_n(x)\}$在$I$上收敛于$f(x)$.
+\begin{dfn}
+  设$\sum u_n(x)$为定义在$I$上的函数项级数.若存在$I$上的函数，使得$\sum u_n(x)$的部分和序列$S_n(x)
+  =\sum\limits_{k=1}^nu_k(x)$在$I$上一致收敛到$S(x)$，则称$\sum u_n(k)$在$I$上一致收敛于$S(x).$
+  也就是：\\
+  对于$\forall \varepsilon>0$,存在$N,$当$n>N$时，对一切$x\in I$有
+  $$|S_n(x)-S(x)|<\varepsilon.$$
+\end{dfn}
+\begin{exa}
+  讨论函数序列$f_n(x)=x^n$在$(-r,r)(0<r<1)$与$(-1,1)$内的一致收敛性.
+\end{exa}
+\jie 我们已经知道$f(x)=0$.对于$\forall\varepsilon>0$,存在$N$,当$n>N$,且$x\in(-r,r)$时有
+$$|x^n-0|\le|r^n|<\varepsilon.$$
+从而$x^n\rightrightarrows0.$另一方面，取$\varepsilon_0=\dfrac{1}{2},$对任意的$N>0$，取$n'=N+1$,
+由$\lim\limits_{x\to1}x^{n'}=1$(对固定的$n'$)，因此存在$0<x'<1$，使得
+$$|x'^{n'}-0|=(x')^{n'}>1-\dfrac{1}{2}=\dfrac{1}{2}.$$从而在$(-1,1)$上内不一致收敛于零.
+\begin{exa}
+  设函数$f(x)\in C[0,1],$且$f(1)=0$.证明$x^nf(x)\rightrightarrows 0,x\in[0,1]$.
+\end{exa}
+\zm 显然$f(x)=0$.于是对于$\forall\varepsilon>0,$由于$f(x)$在$x=1$左连续，存在$\delta>0,$当
+$x\in(1-\delta,1]$时,有$|f(x)-0|<\varepsilon.$从而对于$\forall\varepsilon\in(1-\delta,1]$及
+$n\in\mathbb{N}$,有
+$$|x^nf(x)|\le|f(x)|<\varepsilon.$$
+设$M=\max\{|f(x)|\},$对于$\forall x\in[0,1-\delta]$,有$|x^nf(x)|\le M(1-\delta)^n.$因为
+$\lim\limits_{n\to\infty}(1-\delta)^n=0$,所以存在$N$,当$n>N$时对于$\forall x\in[0,1-\delta]$,有
+$|x^nf(x)|<\varepsilon.$从而当$n>N$时，对于$x\in[0,1]$有$|x^nf(x)-0|<\varepsilon.$得证.
+\clearpage
+\section{课堂笔记(17):一致收敛(2)、一致收敛的判别法(1)}
+\begin{center}
+  2018年4月25日
+\end{center}
+\subsection{一致收敛(2)}
+一致收敛具有下面的简单性质：
+\begin{thm}
+  若$f_n(x)\rightrightarrows f(x),g_n(x)\rightrightarrows g(x)$,那么对于任意$a,b\in\R$,有
+  $$af_n(x)+bg_n(x)\rightrightarrows af(x)+bg(x).$$
+\end{thm}
+由该结论可以得到下面的推论.
+\begin{thm}
+  若$\sum\limits_{n=1}^\infty u_n(x)$在$I$上一致收敛，则
+  $$u_n(x)\rightrightarrows 0.$$
+  这是因为$u_n(x)=S_n(x)-S_{n-1}(x).$
+\end{thm}
+\begin{thm}
+  设$\{f_n(x)\}$为函数序列，称$f_n(x)$在$I$上一致有界，若存在$M>0$使得对$\forall n,x\in I,$有$|f_n(x)|\le M.$
+\end{thm}
+\subsection{一致收敛的判别法(1)}
+\begin{thm}[Cauchy准则]
+  设$\{f_n(x)\}$为定义在$I$上的函数序列，则$f_n(x)$一致收敛的充要条件是：对于$\forall\varepsilon>0,$存在
+  $N\in\mathbb{N},$当$n,m>N$时，对一切$x\in I,$有
+  $$|f_n(x)-f_m(x)|<\varepsilon.$$
+\end{thm}
+\zm 必要性.设$f_n(x)\rightrightarrows f(x),$则对于$\forall \varepsilon>0,$存在$N,$当$n>N$时对于$\forall x\in I,$
+有$|f_n(x)-f(x)|<\dfrac{\varepsilon}{2}.$从而$|f_n(x)-f_m(x)|<\varepsilon.$\\
+充分性.设$\{f_n(x)\}$满足上述条件.特别地，对于每个固定的$x\in I$都成立，从而序列$\{f_n(x)\}$收敛，设其极限为$f(x)$.
+因此可以在区间$I$上得到$\{f_n(x)\}$的极限函数$f(x)$.在
+$$|f_n(x)-f_m(x)|<\frac{\varepsilon}{2}$$中令$m\to\infty,$就有
+$$|f_n(x)-f(x)|<\varepsilon$$对一切$n>N,x\in I$成立.
+
+对于函数项级数，我们有
+\begin{thm}
+  设$\sum\limits_{n=1}^\infty u_n(x)$是定义在$I$上的函数项级数，则$\sum u_n(x)$一致收敛的充要条件是：
+  对于$\forall\varepsilon>0,$存在$N,$当$n>m>N$时，对一切$x\in I$有
+  $$\left|\sum_{k=m+1}^nu_k(x)\right|<\varepsilon.$$
+\end{thm}
+\begin{exa}
+  设$\{f_n(x)\}$在$(a,b)$在闭区间$[a,b]$上连续，且$\{f_n(x)\}$在开区间$(a,b)$内一致收敛.则
+  也在闭区间$[a,b]$上一致收敛.
+\end{exa}
+\zm 由Cauchy准则，对于$\forall\varepsilon>0,$存在$N$，当$n,m>N$时，对于$\forall x\in(a,b)$有
+$$|f_n(x)-f_m(x)|<\varepsilon.$$
+由于连续，从而分别令$x\to a+,x\to b-$,就得到了闭区间的一致收敛性.\\
+同样地，对于函数项级数也有类似的结论.
+\begin{exa}
+  讨论函数项级数$\sum \dfrac{(-1)^n}{1+nx}$分别在区间$[a,+\infty)(a>0),(0,+\infty)$上的一致收敛性.
+\end{exa}
+\jie 对于区间$[a,+\infty)(a>0)$,我们有
+$$|S_n(x)-S(x)|=\left|\sum_{k=n+1}^\infty\frac{(-1)^k}{1+kx}\right|\le\frac{1}{1+(n+1)x}\le\frac{1}{1+(n+1)a}.$$
+从而对于$\forall\varepsilon>0,$存在$N,$当$n>N$时有$\dfrac{1}{1+(n+1)a}<\varepsilon.$从而一致收敛.\\
+对于区间$(0,+\infty).$若它一致收敛，注意到在$x=0$处连续，从而在$x=0$处也收敛.但是$\sum u_n(0)=\sum(-1)^n$是发散的.
+从而不一致收敛.也可以证明通项$u_n(x)$在$(0,+\infty)$上不一致收敛到零即可.
+实际上，存在$\varepsilon_0=\dfrac{1}{2},$对于任意$N,$存在$n=N+1>N$及$x'=\dfrac{1}{n}$,
+使得$|u_n(x')|=\dfrac{1}{2}=\varepsilon_0.$
+\begin{exa}[最值判别法]
+  设函数序列$\{f_n(x)\}$在集合$I$上定义，则$f_n(x)\rightrightarrows f(x)$的充要条件为
+  $$\lim_{n\to\infty}\sup_{x\in I}\{|f_n(x)-f(x)|\}=0.$$
+\end{exa}
+\zm 必要性.设$f_n(x)\rightrightarrows f(x)(x\in I),$则对于$\forall\varepsilon>0,$存在$N,$当$n>N$时对一切
+$x\in I,$有$|f_n(x)-f(x)|<\varepsilon.$因此有
+$$0\le\sup_{x\in I}\{|f_n(x)-f(x)|\}\le\varepsilon.$$
+充分性.由于对于$\forall\varepsilon>0,$都存在$N,$当$n>N$时，有
+$$\sup_{x\in I}\{|f_n(x)-f(x)|\}<\varepsilon.$$
+因此，当$n>N$时，对一切的$x\in I,$有
+$$|f_n(x)-f(x)|\le\sup_{x\in I}\{|f_n(x)-f(x)|\}<\varepsilon.$$
+这也就是一致收敛.
+\begin{exa}
+  讨论$f_n(x)=nxe^{-n^2x}(x>0)$的一致收敛性.
+\end{exa}
+\jie 显然极限函数$f(x)=0.$注意到$f(0),\lim\limits_{x\to+\infty}f_n(x)=0.$从而必然能在某个点$x_n$取得最大值.
+$f'_n(x)=n(1-n^2x)e^{-n^2x}$.从而得到$x_n=\dfrac{1}{n^2}.$于是有$f_n(x_n)=\dfrac{1}{en}.$于是当$n\to\infty$时
+趋于零.由最值判别法得到一致收敛.
+\begin{dfn}
+  设$\sum u_n(x)$是定义在$I$上的函数项级数，并且$\sum |u_n(x)|$在$I$上一致收敛，则称$\sum u_n(x)$绝对一致收敛.
+\end{dfn}
+若绝对一致收敛，则必一致收敛.
+\begin{thm}[Weirstrass判别法]
+  设函数项级数$\sum u_n(x)$在$I$上定义.若存在正数序列$\{M_n\}$使得对每个$n,x$都有
+  $$|u_n(x)|\le M_n,$$且$\sum M_n$收敛，则$\sum u_n(x)$绝对一致收敛.
+\end{thm}
+\zm 由于$\sum M_n$收敛，则对于$\forall\varepsilon>0,$存在$N,$当$n>m>N$时有
+$$\sum_{k=m+1}^nM_k<\varepsilon.$$
+从而对一切$x\in I,$有
+$$\sum_{k=m+1}^n|u_k(x)|\le\sum_{k=m+1}^nM_k<\varepsilon.$$
+再由Cauchy准则知绝对一致收敛.
+
+\fz 注意若$\sum u_n(x)$绝对收敛且一致收敛不等于\textbf{绝对一致收敛}.
+\begin{exa}
+  设$u_n(x)=\begin{cases}\dfrac{1}{n},&\dfrac{1}{n+1}\le x\le\dfrac{1}{n}\\0,&others\end{cases}$.
+\end{exa}
+\begin{exa}
+  证明$\sum x^ke^{-nx}(k>1)$在$[0,+\infty)$上一致收敛.
+\end{exa}
+\zm 每一项都是正的，$u_n(0)=0,\lim\limits_{x\to+\infty}x^ke^{-nx}=0.$那么$u_n'(x)=0,$得到$x=\dfrac{k}{n}.$
+因此$u_n(x)$取得最大值$e^{-k}\dfrac{k^k}{n^k}.$而级数$\sum e^{-k}\dfrac{k^k}{n^k}$在$k>1$时收敛，由
+Weirstrass判别法知$\sum x^ke^{-nx}$在$[0,+\infty)$上一致收敛.
+\begin{thm}[Dirichlet判别法]
+  设函数序列$u_n(x),v_n(x)$在$I$上定义，并且满足
+  \begin{enumerate}
+    \item $\sum u_n(x)$的部分和序列在$I$上一致有界，即存在$M>0$，使得对于$\forall n\ge1,x\in I$有
+    $$|S_n(x)|=|\sum_{k=1}^nu_k(x)|\le M;$$
+    \item 对每个$x\in I,\{v_n(x)\}$关于$n$是单调的，且$v_n(x)\rightrightarrows 0.$
+  \end{enumerate}
+  则$\sum u_n(x)v_n(x)$在$I$上一致收敛.
+\end{thm}
+\zm 由条件(1),当$n>m\ge 1$时，对一切$x\in I,$有
+$$\left|\sum_{k=m+1}^nu_k(x)\right|=|S_n(x)-S_m(x)|\le 2M.$$
+由$v_n(x)\rightrightarrows 0,$对于$\forall\varepsilon>0,$存在$N,$当$n>N$时对于$\forall x\in I,$有
+$$|v_n(x)|\le\frac{\varepsilon}{6M}.$$
+由于对于每个$x$,$\{v_n(x)\}$关于$n$是单调的，利用Abel变换，当$n>m\ge 1$，对$\forall x\in I,$有
+$$\left|\sum_{k=m+1}^nu_k(x)v_k(x)\right|\le 2M(|v_{m+1}(x)|+2|v_n(x)|)<\varepsilon.$$
+由Cauchy准则知一致收敛.
+\clearpage
+
+\section{习题课笔记(9)}
+\begin{exa}
+  设连续函数序列$\{f_n(x)\}$在区间$[0,1]$上一致收敛.证明$\{e^{f_n(x)}\}$在$[0,1]$上一致收敛.
+\end{exa}
+\zm 不妨设$\{f_n(x)\}$的极限函数为$f(x)$.下面证明$e^{f_n(x)}\rightrightarrows e^{f(x)}.$直接估计下式：
+\begin{align*}
+  |e^{f_n(x)}-e^{f(x)}|&=e^\xi|f_n(x)-f(x)|\\
+  &\le M|f_n(x)-f(x)|\\
+  &\le M\varepsilon.
+\end{align*}
+最后一个不等式由题设直接得出.
+\begin{exa}
+  1.设$f(x)$在区间$I$上可导，且$f'(x)$一致连续.证明$F_n(x)=n[f(x+\frac{1}{n})-f(x)]$在$I$上也一致收敛.
+
+  2.证明$f_n(x)=n(\sqrt{x+\frac{1}{n}}-\sqrt{x})$在$(0,+\infty)$内闭一致收敛,但在这个区间不一致收敛.
+\end{exa}
+\zm (1).注意到$F_n(x)$的极限函数为$f'(x).$从而可以进行下面的估计：
+$$|F_n(x)-f'(x)|=|f'(\xi)-f'(x)|,|\xi-x|<\frac{1}{n}.$$
+从而由$f'(x)$的一致连续性，对$\forall\varepsilon>0$,存在$\delta>0,$当$|x-y|<\delta$时有$|f(x)-f(y)|<\varepsilon.$
+于是存在$N$，当$n>N$时有$\dfrac{1}{n}<\delta$,从而有
+$$|f'(\xi)-f'(x)|<\varepsilon.$$得证.\\
+(2).在$\forall[a,b]\subset(0,+\infty)$上.令$f(x)=\sqrt{x},f'(x)=\dfrac{1}{2}x^{\frac{1}{2}},f''(x)=
+-\dfrac{1}{4}\dfrac{1}{x^4}$.所以$|f''(x)|\le M.$于是$f'(x)$一致连续，再由(1)立即得证.\\
+可以求得极限函数为$f(x)=\dfrac{1}{2\sqrt{x}}.$那么
+$$|f_n(x)-f(x)|=\dfrac{1}{\sqrt{x+\frac{1}{n}}+\sqrt{n}}-\dfrac{1}{2\sqrt{x}}.$$
+取$x_n=\dfrac{1}{n}$，从而上式为$\sqrt{n}J\ge J,J=\dfrac{1}{2}-\dfrac{1}{\sqrt{2}+1}$.\\
+也即存在$\varepsilon_0=J,$任意$N,$取$n=N+1>N,$存在$x_n=\dfrac{1}{n}$,使得$|f_n(x)-f(x)|\ge\varepsilon_0$.
+则不一致收敛.
+\begin{exa}
+  设$f(x)\in C(-\infty,+\infty),f_n(x)=\sum\limits_{k=0}^{n-1}\dfrac{1}{n}f(x+\frac{k}{n}).$证明$f_n(x)$
+  在任一有限区间内一致收敛.
+\end{exa}
+\zm 在任一有限区间$[a,b]$内，$f_n(x)$的极限函数$f(x)=\int_0^1f(x+t)\mathrm{d}t.$我们作出下面的估计：
+\begin{align*}
+  \left|f_n(x)-\int_0^1f(x+t)\mathrm{d}t\right|&=
+  \left|\sum_{k=0}^{n-1}\frac{1}{n}f(x+\frac{k}{n})-\int_0^1\right|\\
+  &=\left|\sum_{k=0}^{n-1}\left(\frac{1}{n}f(x+\frac{k}{n})-\int_{\frac{k}{n}}^{\frac{k+1}{n}}
+  f(x+t)\mathrm{d}t\right)\right|\\
+  &\le\sum_{k=0}^{n-1}\left|\int_{\frac{k}{n}}^{\frac{k+1}{n}}(f(x+\frac{k}{n})-f(x+t))\mathrm{d}t\right|\\
+  &\le\sum_{k=0}^{n-1}\int_{\frac{k}{n}}^{\frac{k+1}{n}}\left|f(x+\frac{k}{n})-f(x+t)\right|\mathrm{d}t.
+\end{align*}
+由$f$在$[a,b]$上的一致连续，对$\forall\varepsilon>0,$存在$N$，当$n>N$时，只要$|x-y|<\dfrac{1}{n}$，就有
+$|f(x)-f(y)|<\varepsilon.$所以$|f(x+\frac{k}{n})-f(x+t)|<\varepsilon,t\in[\dfrac{k}{n},\dfrac{k+1}{n}]$.
+从而$|f_n(x)-\int_0^1f(x+t)\mathrm{d}t|<\varepsilon$.
+\begin{exa}
+  证明$\sum\limits_{n=1}^\infty \arctan\dfrac{x}{x^2+n^3}$在$(-\infty,+\infty)$上一致收敛.
+\end{exa}
+\zm $|\arctan\dfrac{x}{x^2+n^3}|\le\dfrac{|x|}{x^2+n^3}\le\dfrac{|x|}{2|x|n^\frac{3}{2}}=
+\dfrac{1}{2n^\frac{3}{2}}$.从而绝对一致收敛.
+\begin{exa}
+  设$b>0,\sum a_n$收敛.证明$\sum\dfrac{a_n}{n!}\int_0^xt^ne^{-t}\mathrm{d}t$在$[0,b]$上一致收敛.
+\end{exa}
+\zm 用Abel判别法，知$\sum a_n$一致收敛(与$x$无关)，即要证明$u_n(x)=\dfrac{1}{n!}\int_0^xt^ne^{-t}\mathrm{d}t$
+是单调且一致有界的.注意到$u_{n+1}(x)=\dfrac{1}{n!}\int_0^1\dfrac{t}{n+1}t^ne^{-t}\mathrm{d}t.$从而当$n$充分
+大的时候，$\dfrac{t}{n+1}<1,$即$u_n(x)$对于任意$x\in[0,b]$关于$n$单调递减.又有
+$$\frac{1}{n!}\int_0^xt^ne^{-t}\mathrm{d}t\le\frac{1}{n!}\int_0^xt^ne^{-t}\mathrm{d}t\le\frac{b^n}{(n+1)!}\to0.$$
+于是$u_n(x)$是一致有界的.得证.
+\begin{exa}
+  证明$\sum \dfrac{\sin nx}{n}$在含有$x=0$的邻域内不一致收敛.
+\end{exa}
+\zm 取$x_n=\dfrac{\pi}{4n},$则$(n+i)x_n>\dfrac{\pi}{4},(2n)x_n=\dfrac{\pi}{2}.$于是
+$$\frac{\sin(n+1)x}{n+1}+\frac{\sin(n+2)x}{n+2}+\cdots+\frac{\sin(2n)x}{2n}\ge\dfrac{\frac{\sqrt{2}}{2}n}{2n}
+=\frac{\sqrt{2}}{4}=\varepsilon_0.$$
+故由Cauchy准则知不一致收敛.\\
+\textbf{尝试：}
+\begin{enumerate}
+  \item 用有限覆盖定理证明Dini定理;
+  \item 设$f_1(x)$在$[a,b]$上可积，$f_n(x)=\int_a^xf_n(t)\mathrm{d}t,$证明$\{f_n(x)\}$在$[a,b]$一致收敛到0;
+  \item 证明$\sum (1-x)\dfrac{x^n}{1-x^{2n}}\sin nx$在$[0,1)$上一致收敛.
+\end{enumerate}
+\clearpage
+
+\section{课堂笔记(18):一致收敛的判别法(2)、一致收敛的函数序列和函数项级数(1)}
+\begin{center}
+  2018年4月30日
+\end{center}
+\subsection{一致收敛的判别法(2)}
+\begin{thm}[Abel判别法]
+  设函数序列$\{u_n(x)\},v_n(x)$在$I$上有定义，且满足：
+  \begin{enumerate}
+    \item $\sum_nu_n(x)$一致收敛;
+    \item 对固定的$x$，$\{v_n(x)\}$关于$n$单调且$\{v_n(x)\}$一致有界.
+  \end{enumerate}
+  则$\sum_nu_n(x)v_n(x)$在$i$上一致收敛.
+\end{thm}
+\zm 由条件(2),存在$M>0$,使得对于$\forall n\ge1,\forall x\in I$,有
+$$|y_n(x)|\le M.$$
+再由(1)及Cauchy准则知，对于$\forall \varepsilon>0,\exists N\in \mathbb{N},$当$n>m>N$时，对一切$x\in I$有
+$$\left|\sum_{k=m+1}^nu_k(x)\right|\le\frac{\varepsilon}{3M}.$$
+由于$\{v_n(x)\}$是单调的，结合Abel变换,对任意的$n>m>N,\forall x\in I$,有
+$$\left|\sum_{k=m+1}^nu_k(x)v_k(x)\right|\le\frac{\varepsilon}{3M}[|v_{m+1}(x)+2|v_n(x)||]<\varepsilon.$$
+再由Cauchy准则知一致收敛.
+\begin{exa}
+  证明函数项级数$\sum\dfrac{(-1)^n}{n+x}$在
+  \begin{enumerate}
+    \item $[0,+\infty)$上一致收敛;
+    \item 任何不含负整数点的闭区间$I$上一致收敛;
+    \item 任何区间$I$上不绝对收敛.
+  \end{enumerate}
+\end{exa}
+\zm (1).令$u_n(x)=(-1)^n,v_n(x)=\dfrac{1}{n+x}.$显然$\sum u_k(x)$一致有界，而$v_n(x)$对任意$x\ge0$关于$n$单调
+递减一致趋于零.那么由Dirichlet判别法知一致收敛.\\
+(2).不妨设$I\subset(-K,-K+1)$.与(1)相同用Dirichlet判别法易证.\\
+(3).当$n$充分大时，$\dfrac{1}{n+x}\sim \dfrac{1}{n}.$从而由$\sum \dfrac{1}{n}$发散得证.
+\begin{exa}
+  证明函数项级数$\sum \dfrac{a_n}{n^x}$在$[1,+\infty)$上一致收敛的充要条件是$\sum\dfrac{a_n}{n}$收敛.
+\end{exa}
+\zm 必要性是显然的(取$x=1$即可).下面证明充分性.\\
+设$\sum\dfrac{a_n}{n}$收敛，且令$u_n(x)=\dfrac{a_n}{n},v_n(x)=\dfrac{1}{n^{x-1}}.$那么由Abel判别法得证.
+\begin{exa}
+  讨论函数项级数$\sum(-1)^n(1-x)x^n$在$[0,1]$上的一致收敛性、绝对收敛性、绝对一致收敛性.
+\end{exa}
+\jie (1).令$u_n(x)=(-1)^n,v_n(x)=(1-x)x^n$.从而由Dirichlet判别法知它一致收敛.\\
+(2).注意到$S_n(x)=\begin{cases}x-x^{n+1},&x\in[0,1)\\0,&x=1.\end{cases}$.当$x\in[0,1)$时，$\lim S_n(x)=S(x)
+=x.$因此当$x\in[0,1]$时，它绝对收敛.\\
+(3).在$[0,1)$中，$|S_n(x)-S(x)|=x^{n+1},$而我们知道$x^n$在$[0,1]$不一致收敛，因此不绝对一致收敛.
+
+\fz 这个例子说明了即使一个函数项级数在一个区间上一致收敛且绝对收敛，但不一定绝对一致收敛.
+\subsection{一致收敛的函数序列和函数项级数(1)}
+\subsubsection{连续性}
+\begin{thm}
+  设函数$f_n(x)\in C[a,b],$且$f_n(x)\rightrightarrows f(x),$则$f(x)\in C[a,b]$.
+\end{thm}
+\zm 任取$x_0\in[a,b]$,对于$\forall\varepsilon>0,$由于$f_n(x)\rightrightarrows f(x),$所以存在$N,$当$n>N$
+时对一切$x\in [a,b]$，有
+$$|f_n(x)-f(x)|<\frac{\varepsilon}{3}.$$
+取定$n_0>N$，由于$f_{n_0}(x)$的连续性，从而存在$\delta>0,$当$x\in U(x_0,\delta)\cap[a,b]$时，有
+$$|f_{n_0}(x)-f_{n_0}(x_0)|<\frac{\varepsilon}{3}.$$
+因此当$x\in U(x_0,\delta)\cap[a,b]$时，有
+$$|f(x)-f(x_0)|\le|f(x)-f_{n_0}(x)|+|f_{n_0}(x)-f_{n_0}(x_0)|+|f_{n_0}(x_0)-f(x_0)|<\varepsilon.$$
+这就意味着下式成立：
+$$\lim_{x\to x_0}\lim_{n\to\infty}f_n(x)=\lim_{n\to\infty}\lim_{x\to x_0}f_n(x).$$
+
+类似地，我们得到关于函数项级数的相应结论：
+\begin{thm}
+  设函数$u_n(x)\in C[a,b]$,且$\sum u_n(x)$一致收敛.且$\sum u_n(x)$的和函数在$[a,b]$上连续.
+\end{thm}
+这就意味这下式成立：
+$$\lim_{x\to x_0}\sum_{n=1}^\infty u_n(x)=\sum_{n=1}^\infty \lim_{x\to x_0}u_n(x)$$
+\fz 上面的闭区间$[a,b]$可以替换为任意有限区间(\textbf{局部一致收敛}).
+\begin{dfn}[内闭一致收敛]
+  设函数序列$\{f_n(x)\}$在区间$I$上有定义，若对任意闭区间$[a,b]\subset I$，$\{f_n(x)\}$在$[a,b]$上一致收敛，则称
+  $\{f_n(x)\}$在$I$\textbf{内闭一致收敛}.
+\end{dfn}
+\fz 不难证明，对于开区间$I$来说，内闭一致收敛等价于局部一致收敛.
+\begin{thm}
+  设函数$f_n(x)\in C(a,b)$,且$\{f_n(x)\}$在$(a,b)$内闭一致收敛于$f(x)$,则$f(x)\in C(a,b)$.
+\end{thm}
+\begin{thm}
+  $\{f_n(x)\}$在$(0,+\infty)$连续且内闭一致收敛到$f(x)$，则$f(x)$在$(0,+\infty)$连续.
+\end{thm}
+\begin{exa}
+  设$\{a_n\}$为单调趋于零的序列，证明$\sum a_n\cos nx$与$\sum a_n\sin nx$的和函数在$(0,2\pi)$内连续.
+\end{exa}
+\zm 令$u_n(x)=a_n,v_n(x)=\cos nx$.任取闭区间$[\delta_0,2\pi-\delta_0]$,对于$\forall n$有
+$$\left|\sum_{k=1}^n\right|\le\frac{1}{\sin\dfrac{\delta_0}{2}}.$$
+由Dirichlet判别法知$\sum a_n\cos nx$在$[\delta_0,2\pi-\delta_0]$上一致收敛.所以和函数也在该闭区间连续.
+由$\delta_0$的任意性，那么$\sum a_n\cos nx\in C(0,2\pi).$
+
+\fz 上面给出的是极限函数连续的充分条件，而不是必要条件.
+\begin{thm}[Dini定理]
+  设函数$f_n(x)$在闭区间$[a,b]$连续，且对于$\forall x\in[a,b]$及$\forall n,$有$f_n(x)\le f_{n+1}(x)$.
+  设对于$\forall x\in[a,b]$,有$\lim_nf_n(x)=f(x)$.则$f(x)$在区间$[a,b]$上连续的充要条件是：
+  $$f_n(x)\rightrightarrows f(x),x\in[a,b].$$
+\end{thm}
+\zm 充分性是显然的，下证必要性.由条件知，$\forall x\in[a,b],\forall \varepsilon>0,$存在$N=N(x,\varepsilon)$
+，当$n>N$时有$$f(x)-\varepsilon<f_n(x).$$
+由于$f_n,f$都连续，故存在$\delta>0$，使得对$|x'-x|<\delta$时有$f_n(x')>f(x')-\varepsilon.$从而对每一个$x$我们
+都找到这样一个$x$的邻域，从而形成$[a,b]$上的开覆盖，因此有有限覆盖$\{U_i(x_i,\delta_i)\}$.现在令$N_0$等于
+其中最大的一个，那么对$\forall x\in[a,b]$,有
+$$f_{N_0}(x)>f(x)-\varepsilon.$$
+于是当$n>N_0$时，就有$$f_n(x)>f(x)-\varepsilon.$$
+这也就是一致收敛.
+
+同样地，对于函数项级数也有相应的定理：
+\begin{thm}
+  设函数项级数$\sum u_n(x)$在区间$[a,b]$收敛，且$u_n(x)$连续非负，则$\sum u_n(x)$的和函数连续的充要条件是
+  $\sum u_n(x)$在$[a,b]$上一致收敛.
+\end{thm}
+\fz Dini定理的闭区间不能改为开区间.
+\begin{exa}
+  对于函数项级数$\sum (1-x)x^nf(x),x\in[0,1]$,且$f(x)$在$[0,1]$上非负连续且$f(1)=0.$则该函数项级数一致收敛.
+\end{exa}
+\zm 直接计算它的和函数$S(x)=xf(x),x\ne 1;0,x=1.$于是可以合并为$xf(x)$的情况，从而$xf(x)$是连续的.易知
+它满足函数项级数的Dini定理的条件，从而一致收敛.
+\begin{exa}
+  证明$\sum x^n\dfrac{\ln x}{1+|\ln\ln\frac{1}{x}|}$在$(0,1)$内一致收敛.
+\end{exa}
+\zm 令$u_n=x^n\dfrac{\ln x}{1+|\ln\ln\frac{1}{x}|}$,我们有$\lim_{x\to0+}u_n(x)=0,\lim_{x\to1-}u_n(x)=0.$
+记$\bar{u}_n(x)=\begin{cases}0,&x=0,1\\-u_n(x),&x\in(0,1)\end{cases}.$则$\bar{u}_n(x)$在$[0,1]$上连续非负，且
+它的和函数在$[0,1]$上连续.从而由Dini定理知$\sum \bar{u}_n(x)$在$[0,1]$上一致收敛，从而$\sum u_n(x)$在$(0,1)$
+内一致收敛.
+\subsubsection{可积性}
+\begin{thm}
+  设函数$f_n(x)$在$[a,b]$可积，且$f_n(x)\rightrightarrows f(x)$,则$f(x)$在$[a,b]$可积且
+  $$\lim_{n\to\infty}\int_a^bf_n(x)\dx=\int_a^bf(x)\dx=\int_a^b\lim_{n\to\infty}f_n(x)\dx.$$
+\end{thm}
+证明见教材P199.同理可以证明下列结论：
+\begin{thm}
+  设函数$u_n(x)$在区间$[a,b]$上可积，且$\sum u_n(x)$一致收敛，则$\sum u_n(x)$的和函数在$[a,b]$可以且成立
+  $$\int_a^b\left(\sum_{n=1}^\infty u_n(x)\right)=\sum_{n=1}^\infty \int_a^bu_n(x)\dx.$$
+\end{thm}
+\begin{exa}
+  证明：当$x\in(-1,1)$时，成立
+  $$\frac{1}{2}\ln\frac{1+x}{1-x}=\sum_{n=0}^\infty\frac{x^{2n+1}}{2n+1}.$$
+\end{exa}
+\zm 设$f(x)=\dfrac{1}{1-x^2},$则当$|x|<1$时，它是一下几何级数的和函数：
+$$f(x)=\frac{1}{1-x^2}=\sum_{n=0}^\infty x^{2n}.$$
+其部分和为
+$$S_n(x)=\frac{1-x^{2n+2}}{1-x^2}$$
+在$(-1,1)$内闭一致收敛到$\dfrac{1}{1-x^2}.$因为对固定的$x\in(-1,1)$，该函数项级数在$[0,x]$或$[x,0]$上
+逐项积分.因此有
+$$\frac{1}{2}\ln\frac{1+x}{1-x}=\int_0^x\frac{\mathrm{d}t}{1-t^2}=\sum_{n=0}^\infty\int_0^x t^{2n}
+\mathrm{d}t=\sum_{n=0}^\infty\frac{x^{2n+1}}{2n+1}.$$
+
+\clearpage
+\section{课堂笔记(19):一致收敛的函数序列和函数项级数(2)、幂级数的收敛半径与收敛域}
+\begin{center}
+  2018年5月7日
+\end{center}
+\subsection{可导性}
+  \begin{thm}
+    设函数$f_n(x)$在区间$[a,b]$上可微，且满足：
+    \begin{enumerate}
+      \item 存在$x_0\in[a,b]$，使得$\lim\limits_{n\to\infty}f_n(x_0)$存在;
+      \item $f_n'(x)\rightrightarrows g(x),x\in[a,b].$
+    \end{enumerate}
+    则有以下结论：
+    \begin{enumerate}
+      \item 存在$[a,b]$上的函数$f(x)$使得$f_n(x)\rightrightarrows f(x);$
+      \item $f(x)$在$[a,b]$可微且$f'(x)=g(x)$,即
+      $$\lim_{n\to\infty}f'_n(x)=[\lim_{n\to\infty}f_n(x)]'.$$
+    \end{enumerate}
+  \end{thm}
+  \zm 利用Cauchy准则证明.对于$\forall\varepsilon>0,$由$\lim f_n(x_0)$存在和$f_n'(x)\rightrightarrows g(x)$知，
+  存在$N$,当$n>m>N$时有
+  $$|f_n(x_0)-f_m(x_0)|<\frac{\varepsilon}{2}.$$
+  并且对$\forall x\in[a,b]$,有
+  $$|f_n'(x)-f_m'(x)|<\frac{\varepsilon}{2(b-a)}.$$
+  对任意$n>m\ge N$对$f_n(x)-f_m(x)$应用Lagrange中值定理，在$x_0,x$之间存在$\xi$使得
+  \begin{align*}
+    &|[f_n(x)-f_m(x)]-[f_n(x_0)-f_m(x_0)]|\\
+    &=|f_n'(\xi)-f_m'(\xi)||x-x_0|\\
+    &<\frac{|x-x_0|\varepsilon}{2(b-a)}\le\frac{\varepsilon}{2}.
+  \end{align*}
+  这就证明了$\{f_n(x)\}$在$[a,b]$上一致收敛.为了证明2，对于$\forall x^*\in[a,b]$及$n=1,2,...$，令
+  $$h_n(x)=\frac{f_n(x)-f_n(x^*)}{x-x^*}(x\ne x^*),h_n(x^*)=f'_n(x^*).$$
+  和
+  $$h(x)=\frac{f(x)-f(x^*)}{x-x^*}.$$
+  则$h_n(x)$在$[a,b]$上连续，现在证明$\{f_n(x)\}$在$[a,b]\backslash\{x^*\}$上一致收敛到$h(x).$事实上，从上面的推导中，
+  对$\forall \varepsilon>0,\exists N,n>m\ge N$时，对于$\forall x\in[a,b]\backslash\{x^*\}$，有
+  $$|h_n(x)-h_m(x)|\le\frac{\varepsilon}{2(b-a)}.$$
+  这就证明了一致收敛.注意到$\lim\limits_{x\to x^*}h_n(x)=f_n'(x^*),$我们有$f'(x^*)=\lim\limits_{x\to x^*}h(x)$
+  存在，并且$f'(x^*)=\lim\limits_{n\to\infty}f_n'(x^*).$由$x^*\in[a,b]$的任意性，得证.
+
+  同样地，对于函数项级数也有类似的定理，这时称为逐项求导.
+  \begin{exa}
+    证明$\sum\dfrac{1}{n^x}$在$(1,+\infty)$上无穷次可微.
+  \end{exa}
+  \zm 任取$\delta_0>0$，我们已经知道$\sum\dfrac{1}{n^x}$在$(1+\delta_0,+\infty)$上一致收敛.由于
+  $$\left(\frac{1}{n^x}\right)'=\frac{-\ln n}{n^x}\in C(0,+\infty).$$
+  并且对于$\forall x\in(1+\delta_0,+\infty)$，有
+  $$\left|\frac{-\ln n}{n^x}\right|<\frac{\ln n}{n^{1+\delta_0}}.$$
+  右式是收敛的，从而$\sum\dfrac{-\ln n}{n^x}$一致收敛,于是$\sum\dfrac{1}{n^x}$的和函数在$(1+\delta_0,+\infty)$
+  上有连续的导函数且
+  $$\left(\sum\dfrac{1}{n^x}\right)'=\sum\frac{-\ln n}{n^x}.$$
+  依次下去，则$\sum\dfrac{1}{n^x}$的和函数在$(1+\delta_0,+\infty)$上具有任意阶导数.再由$\delta_0$的任意性知，
+  在$(0,+\infty)$上无穷次可导.
+
+  \begin{exa}
+    设$\{x_n\}$为一个序列且两两不同，证明$\sum\limits_{n=1}^\infty\dfrac{\sgn(x-x_n)}{2^n}$的和函数当且仅当
+    $x=x_n$时不连续.
+  \end{exa}
+  \zm 首先显然有
+  $$\left|\dfrac{\sgn(x-x_n)}{2^n}\right|\le\frac{1}{2^n}.$$
+  故$\sum\limits_{n=1}^\infty\dfrac{\sgn(x-x_n)}{2^n}$一致收敛.对于$\forall k\in\mathbb{N},$该函数项级数中
+  仅有一项$\dfrac{\sgn(x-x_k)}{2^k}$在$x=x_k$处不连续，而其他项均在$x=x_k$处连续，因此$\sum\limits_{n=1}^\infty
+  \dfrac{\sgn(x-x_n)}{2^n}$的和函数在$x=x_k$处不连续.当$x_0\notin\{x_n\}$时，由于该函数项级数每一项都在$x=x_0$处
+  连续，从而$\sum\limits_{n=1}^\infty\dfrac{\sgn(x-x_n)}{2^n}$的和函数在$x=x_0$处连续.得证.
+  \fz 如果将符号函数换为
+  $$f(x)=\begin{cases} x^2\sin\dfrac{1}{x},& x\ne0\\ 0,& x=0,\end{cases}$$
+  作
+  $$g(x)=\sum_{n=1}^\infty\frac{f(x-x_n)}{2^n},$$
+  则可以证明$g(x)$在$[0,1]$上可导，但$g'(x)$在$x=x_n$处不连续，而在其他点连续.
+
+  令
+  $$W(x)=\sum_{n=1}^\infty\frac{\sin 3^nx}{2^n}.$$
+  则可以证明$W(x)$处处连续但处处不可导.
+\subsection{幂级数的收敛半径与收敛域}
+  形如$\sum a_n(x-x_0)^n$的函数项级数称为幂级数.我们只讨论$x_0=0$的幂级数.
+  \begin{thm}
+    设幂级数$\sum\limits_{n=0}^\infty$在$x_0\ne 0$处收敛，则该级数在$(-|x_0|,|x_0|)$内闭绝对一致收敛.
+  \end{thm}
+  \jz 只需要注意到$|a_nx^n|=\left|a_nx_0^n\dfrac{x^n}{x_0^n}\right|$即可.
+  \begin{thm}
+    设幂级数在$x_0\ne0$处收敛，且在$x_1\ne 0$处发散，则存在唯一数$R>0$使幂级数在$(-R,R)$收敛，
+    在$(-\infty,-R),(R,+\infty)$上发散.
+  \end{thm}
+  \zm 令
+  $$R=\sup\{|x|:\sum a_nx^n\text{收敛}\}.$$
+  则有$R\ge |x_0|,R\le|x_1|.$
+  \begin{thm}[Cauchy-Hadama定理]
+    设幂级数$\sum a_nx^n$的收敛半径为$R$，记
+    $$\rho=\varlimsup\sqrt[n]{|a_n|},$$
+    则当$\rho=+\infty$时$R=0;\rho=0,R=+\infty;0<\rho<+\infty,R=\dfrac{1}{\rho}.$
+  \end{thm}
+  \jz 考虑数项级数的Cauchy判别法.
+  \begin{thm}
+    设幂级数$\sum a_nx^n$的收敛半径为$R$，记
+    $$\rho=\lim\dfrac{|a_{n+1}|}{|a_n|},$$
+    则当$\rho=+\infty$时$R=0;\rho=0,R=+\infty;0<\rho<+\infty,R=\dfrac{1}{\rho}.$
+  \end{thm}
+  \begin{exa}
+    求幂级数$\sum n!x^{n^n}$的收敛半径和收敛域.
+  \end{exa}
+  \jie 这个幂级数的许多项系数为0，由
+  $$1<(n!)^\frac{1}{n^n}<(n^n)^\frac{1}{n^n}.$$
+  及$\lim(n^n)^\frac{1}{n^n}=1,$得
+  $$\lim\sqrt[n]{a_n}=\lim\sqrt[n^n]{n!}=\lim(n!)^\frac{1}{n^n}=1.$$
+  因此收敛半径为$1$.而且得到收敛域为$(-1,1).$
+  \begin{exa}
+    求幂级数$\sum\dfrac{\ln(n+1)}{n^2}(x-3)^n$的收敛半径和收敛域.
+  \end{exa}
+  \jie 由
+  $$\lim\dfrac{|a_{n+1}|}{|a_n|}=1$$
+  知该幂级数的收敛半径为$1$.在端点处，即$x=2,4$时，容易验证是收敛的，故收敛域为$[2,4]$.
+  \begin{exa}
+    求幂级数$\sum\dfrac{(x+1)^n}{2^{n^a}}(a>0)$的收敛半径和收敛域.
+  \end{exa}
+  \jie 由于
+  $$\lim\sqrt[n]{\dfrac{1}{2^{n^a}}}=\begin{cases}1,&0<a<1\\ \dfrac{1}{2},&a=1\\ 0,&a>1 \end{cases}$$
+  从而当$0<a<1$时收敛半径为$1$，容易验证收敛域为$[-2,0]$.当$a=1$时，收敛半径为$2$，容易验证收敛域为$(-3,1).$
+  当$a>1$时，收敛半径为$+\infty$,收敛域为$(-\infty,+\infty.)$
+  \clearpage
+\section{课堂笔记(20):幂级数的性质}
+\begin{center}
+  2018年5月9日
+\end{center}
+  \begin{thm}[Abel定理]
+    设幂级数$\sum a_nx^n$的收敛半径$R>0$,则
+    \begin{enumerate}
+      \item $\sum a_nx^n$在$(-R,R)$内闭一致收敛;
+      \item 若$\sum a_nR^n$收敛，则$\sum a_nx^n$在$(-R,R]$的任何闭子区间一致收敛;
+      \item 若$\sum (-1)^na_nR^n$收敛，则$\sum a_nx^n$在$[-R,R)$的任何闭子区间一致收敛;
+    \end{enumerate}
+  \end{thm}
+
+  \jz 1是显然的，2/3用Abel判别法即可.
+  \begin{thm}
+    设幂级数$\sum a_n(x-x_0)^n$的收敛半径$R>0$，则和函数$\sum a_n(x-x_0)^n$在其\textbf{收敛域}上连续.
+  \end{thm}
+  \fz 最重要的是端点处的连续性.
+  \begin{thm}
+    设幂级数$\sum a_n(x-x_0)^n$的收敛半径$R>0$,则对于其收敛域内任意两点$t_1,t_2$,有
+    $$\int_{t_1}^{t_2}\sum a_n(x-x_0)^n=\sum a_n\int_{t_1}^{t_2}(x-x_0)^n.$$
+  \end{thm}
+  \fz 在上述定理中，取$t_1=x_0,t_2=x,$则幂级数逐项积分得到幂级数$\sum \dfrac{a_n}{n+1}(x-x_0)^{n+1}.$
+  容易看出这两个幂级数有相同的收敛半径，但在端点处可能有不同的敛散性.一般来说，若$\sum a_n(x-x_0)^n$
+  在端点处收敛，则$\sum \dfrac{a_n}{n+1}(x-x_0)^{n+1}$也在端点处收敛，反之一般不真.
+
+  比如对$\dfrac{1}{1-x}=1+x+x^2+\cdots,x\in(-1,1)$,对$\forall x\in(-1,1),$有
+  $$\int_0^x\dfrac{\dx}{1-x}=\sum\int_0^x t^ndt.$$
+  也即
+  $$\ln(1+x)=\sum_1\dfrac{(-1)^{n-1}x^n}{n}.$$
+  右式级数的收敛域为$(-1,1].$
+  \begin{thm}
+    设幂级数$f(x)=\sum a_n(x-x_0)^n$的收敛半径$R>0$，则对于$\forall x\in(x_0-R,x_0+R)$,f(x)在$x$
+    处具有任意阶导数，并且对$k=1,2,\cdots,$有
+    $$f^{(k)}(x)=\sum_k n(n-1)\cdots(n-k+1)a_n(x-x_0)^{n-k}.$$
+  \end{thm}
+  \zm 设$\rho=\varlimsup\sqrt[n]{|a_n|},$则对固定的$k$，有
+  $$\varlimsup\sqrt[n]{n(n-1)\cdots(n-k+1)a_n}=\rho.$$
+  这说明求导后的幂级数与原幂级数有相同的收敛半径，因此在开区间内均内闭一致收敛.分别对$k=1,2,\cdots$应用
+  函数项级数逐项求导定理即证.
+
+\clearpage
+\section{习题课笔记(10)}
+\begin{exa}
+  设正项级数$\sum a_n$收敛且$\{na_n\}$单调，证明$\lim n a_n\ln n=0.$
+\end{exa}
+\zm 令$b_n=na_n,$即$\sum\dfrac{b_n}{n}$收敛.对$\forall\varepsilon>0,$存在$N,$当$n>N,\forall p$，都有
+$$\dfrac{b_{n+1}}{n+1}+\cdots+\dfrac{b_{n+p}}{n+p}<\varepsilon.$$
+如果$b_n$是单调增的，则$\dfrac{b_n}{n}\ge\dfrac{b_1}{n}$,而$\sum\dfrac{b_n}{n}$发散，矛盾.从而$\{b_n\}$
+是单调递减的，如果极限$l>0$，那么$b_n\ge l,$又推出了矛盾，即$b_n\to0.$从而有：
+\begin{align*}
+  \varepsilon&>\dfrac{b_{N+1}}{N+1}+\cdots+\dfrac{b_{N+p}}{N+p}\\
+  &\ge b_{N+p}(\frac{1}{N+1}+\cdots+\frac{1}{N+p})\\
+  &=b_{N+p}(\ln(N+p)-\ln N+\gamma_{N+p}-\gamma_N)\\
+  &=b_{N+p}\ln(N+p)-b_{N+p}(\ln N-\gamma_{N+p}+\gamma_N)
+\end{align*}
+从而得到
+$$b_{N+p}\ln(N+p)<\varepsilon+b_{N+p}(\ln N-\gamma_{N+p}+\gamma_N).$$
+存在$N_1,$当$p>N_1$时，$b_{N+p}(\ln N-\gamma_{N+p}+\gamma_N)<\varepsilon.$
+于是就得到了$b_{N+p}\ln(N+p)<2\varepsilon.$这也就证明了结论.
+\begin{exa}
+  设$f_1(x)\in R[a,b]$,且$f_{n+1}(x)=\int_a^x f_n(t) dt.$证明，$f_n(x)$在$[a,b]$上一致收敛到0.
+\end{exa}
+\zm 显然$|f_1(x)|\le M$,因为可积函数是有界的.那么$|f_2(x)|\le M(x-a).$这样下去，就得
+$$|f_n(x)|\le\frac{M}{(n-1)!}(x-a)^{n-1}.$$
+从而由最值判别法得证.
+\begin{exa}
+  设$[0,1]$上的连续函数序列$\{f_n(x)\}$点收敛到$f(x)$,证明$f_n(x)\rightrightarrows f(x),x\in[0,1]$
+  的充要条件是$\{f_n(x)\}$在$[0,1]$上是\textbf{等度连续}的，即$\forall \varepsilon>0,\exists\delta>0,$
+  当$x',x''\in[0,1]$且$|x'-x''|<\delta$时，对于$\forall n\ge 1,$有$|f_n(x')-f_n(x'')|<\varepsilon.$
+\end{exa}
+\zm 必要性：由一致收敛知，对$\forall \varepsilon>0$，存在$N$,当$n>N$时对$\forall x\in[0,1]$有
+$$|f_n(x)-f(x)|<\varepsilon.$$
+又因为$f_n(x)$在闭区间上连续，从而$f(x)$一致连续，即存在$\delta>0$,当$|x'-x''|<\delta$时，有
+$|f(x')-f(x'')|<\varepsilon.$从而有($n>N$时)
+$$|f_n(x')-f_n(x'')|\le|f_n(x')-f(x')|+|f(x')-f(x'')|+|f(x'')-f_n(x'')|<3\varepsilon.$$
+而当$n\le N$时，那么就有$N$个$\delta:\delta_1,\cdots,\delta_N$，其中就取最小的那一个为$\delta$，
+当$|x'-x''|<\delta$时，就有$|f_n(x')-f_n(x'')|<\varepsilon.$
+
+充分性：首先证明$f(x)$也是一致连续的.由于$f_n(x)$是等度连续的，则对$\forall\varepsilon>0,\exists\delta>0,
+|x-y|<\delta$时就有$|f_n(x)-f_n(y)|<\varepsilon/2.$此时令$n\to\infty$就有
+$$|f(x)-f(y)|<\varepsilon.$$这也即$f(x)$是一致连续的.\\
+由于点点收敛，则对$\forall x\in[0,1],\exists N_x,$当$n>N_x$时有
+$$|f_n(x)-f(x)|<\frac{\varepsilon}{2}.$$
+再由等度连续性，当$|y-x|<\delta$时，$|f_n(y)-f(y)-(f_n(x)-f(x))|<\varepsilon.$那也就是
+$$|f_n(y)-f(y)|<2\varepsilon,\forall y\in(x-\delta,x+\delta).$$
+这样的话，由有限覆盖定理知，存在有限多个长为$2\delta$的区间覆盖$[0,1]$.这样就有有限多个$N_x$，
+令$N$为其中最大的一个，当$n>N$时就有
+$$|f_n(x)-f(x)|<\varepsilon.$$这就是一致收敛的定义.
+\begin{exa}
+  证明函数项级数$\sum\dfrac{x^n(1-x)}{1-x^{2n}}\sin nx$在$[0,1]$上一致收敛.
+\end{exa}
+\zm 将区间$[0,1]$分为$[0,\dfrac{1}{2}],[\dfrac{1}{2},1]$.显然由Dirichlet判别法知该级数在第二个区间上
+是一致收敛的.只需要注意到
+$$\dfrac{x^n}{1+x+\cdots+x^{n-1}}\le\dfrac{x^n}{1+x+\cdots+x^{n-1}}\le\dfrac{x^n}{nx^{n-1}}\le\dfrac{1}{n}\to0.$$
+那么在$[0,\dfrac{1}{2}]$上，
+$$\left|\frac{x^n(1-x)}{1-x^{2n}}\sin nx\right|=\left|\frac{x^n}{1+x+x^2+\cdots+x^{2n-1}}\sin nx\right|\le
+x^n\le(\frac{1}{2})^n.$$
+由Weierstrass判别法知一致收敛.
+\begin{exa}
+  在$(0,1)$上选取一列互不相同的数$\{a_n\}$,作级数$\sum\dfrac{|x-a_n|}{2^n}.$证明：
+  \begin{enumerate}
+    \item 级数在$(0,1)$上定义了一个连续函数$f(x)$;
+    \item $f(x)$在$a_k$处不可微，在其他点可微.
+  \end{enumerate}
+\end{exa}
+\zm (1).用由Weierstrass判别法知一致收敛.\\
+(2).对$\forall x_0\ne a_k,$要证在$x_0$处可导，即
+$$\lim_{l\to0}\frac{f(x_0+l)-f(x_0)}{l}$$存在即可.
+注意到
+$$\frac{f(x_0+l)-f(x_0)}{l}=\sum_{n=1}^\infty\frac{|x_0+l-a_n|-|x_0-a_n|}{l\cdot 2^n}.$$
+且有
+$$\left|\frac{|x_0+l-a_n|-|x_0-a_n|}{l\cdot 2^n}\right|\le\frac{|x_0+l-a_n-(x_0-a_n)|}{|l|2^n}=\frac{1}{2^n}.$$
+由由Weierstrass判别法知这个级数对$l$一致收敛.从而有
+$$\lim_{l\to0}\frac{f(x_0+l)-f(x_0)}{l}=\sum_{n=1}^\infty\lim_{l\to0}\frac{|x_0+l-a_n|-|x_0-a_n|}{l\cdot 2^n}
+=\sum_{n=1}^\infty\frac{1}{2^n}|x-a_n|_{x_0}'.$$
+从而可导.
+对于$x=a_k$，则
+$$\sum_{n=1}^\infty\frac{|x-a_n|}{2^n}=\frac{|x-a_k|}{2^k}+\cdots,$$
+显然这一项在$a_k$处不可导.
+\begin{exa}
+  设$g(x)$及$f_n(x)\ge0$在$[a,b]$可积，且对$\forall c\in(a,b),f_n(x)\rightrightarrows 0$在$[c,b]$上成立.
+  且$\lim_n\int_a^bf_n(x)=1,\lim\limits_{x\to a+}g(x)=A.$证明：$\lim_n\int_a^b f_n(x)g(x)\dx=A.$
+\end{exa}
+\zm 直接估计下式：
+\begin{align*}
+  \left|\int_a^bf_(x)g(x)\dx-A\right|&\le\left|\int_a^bf_n(x)(g(x)-A)\dx\right|+
+  \left|A\left(\int_a^bf_n(x)\dx-1\right)\right|\\
+  &\le\left|\int_a^{a+\delta}f_n(x)(g(x)-A)\dx\right|+\left|\int_{a+\delta}^bf_n(x)(g(x)-A)\dx\right|+|A|\varepsilon\\
+  &\le\varepsilon\int_a^bf_n(x)\dx+|b-a|\varepsilon+|A|\varepsilon\\
+  &<K\varepsilon.
+\end{align*}
+在上式中，对$\forall \varepsilon>0,\exists \delta>0,$当$x\in(a,a+\delta)$时有
+$$|g(x)-A|<\varepsilon.$$
+同时存在$M>0$使得
+$$|g(x)|+|A|<M.$$
+又$\int_a^bf_n(x)\dx\to 1,$从而存在$N_1$，当$n>N_1$时有
+$$\left|\int_a^bf_(x)\dx-1\right|<\varepsilon.$$
+再由一致收敛性，存在$N_2$,当$n>N_2$时，有$|f_n(x)|\le\dfrac{\varepsilon}{M},\forall x\in[a+\delta,b].$
+
+\clearpage
+\section{课堂笔记(21):初等函数的幂级数展开(1)}
+\begin{center}
+  2018年5月14日
+\end{center}
+  设$f(x)$在$(x_0-\delta,x_0+\delta)$上成立$f(x)=\sum a_n(x-x_0)^n,$则称$f(x)$在$x_0$处\textbf{可展成幂级数}.
+
+  设$f(x)$在$x\in(-R,R)$时成立等式
+  $$f(x)=\sum_{n=0}^\infty a_nx^n,$$
+  则首先我们有
+  $$f(0)=a_0.$$
+  对于$\forall n\in\mathbb{N},$两边对$n$求导数后令$x=0,$我们有
+  $$a_n=\frac{f^{(n)}(0)}{n!}.$$
+  这告诉我们，如果$f(x)$能展开成幂级数，则一定是：
+  $$f(x)=\sum_{n=0}^\infty\frac{f^{(n)}(0)}{n!}x^n.$$
+  \begin{dfn}
+    设函数$f(x)$在$x=x_0$处有任意阶导数，则称幂级数$\sum \frac{f^{(n)}(x_0)}{n!}(x-x_0)^n$为$f(x)$
+    在$x_0$处的泰勒级数.当$x_0=0$时就称为麦克劳林级数.如果在$x_0$的\textbf{某个邻域}内成立
+    $f(x)=\sum \frac{f^{(n)}(x_0)}{n!}(x-x_0)^n$,则$\sum \frac{f^{(n)}(x_0)}{n!}(x-x_0)^n$称为$f(x)$
+    在该邻域内的泰勒展式.
+  \end{dfn}
+  \begin{exa}
+    设函数$f(x)=\begin{cases} e^{-\frac{1}{x^2}},& x\ne0\\ 0,& x=0 \end{cases}$,则$f(x)$在$\R$上任意阶可导，
+    但在$x=0$的邻域内不是实解析的.
+  \end{exa}
+  \zm 若能展开为幂级数，则在$x=0$的某个邻域内有
+  $$f(x)=\sum \frac{f^{(n)}(0)}{n!}x^n\equiv 0.$$
+  这显然是不成立的.
+  \begin{thm}
+    若$f(x)=\sum \frac{f^{(n)}(x_0)}{n!}(x-x_0)^n$在$(x_0-R,x_0+R)$上成立，则必有
+    $a_n=\frac{f^{(n)}(x_0)}{n!}$.也就是说幂级数展开式是唯一的.
+  \end{thm}
+
+  可以证明$f(x)$在$(x_0-\delta,x_0+\delta)$内有泰勒展式的充要条件是：当$n\to\infty$时，
+  $f(x)$的泰勒公式中的余项$R_n(x)$趋于零.
+  \begin{exa}
+    $\ln(1+x)=\sum\limits_{n=1}^\infty \dfrac{(-1)^{n+1}x^n}{n},x\in(-1,1].$
+  \end{exa}
+  \begin{exa}
+    $e^x=\sum\limits_{n=0}^\infty \dfrac{x^n}{n!},x\in \R.$
+  \end{exa}
+  \begin{exa}
+    $\sin x=\sum\limits_{n=0}^\infty \dfrac{(-1)^nx^{2n+1}}{(2n+1)!},x\in \R.$
+  \end{exa}
+  \begin{exa}
+    $\cos x=\sum\limits_{n=0}^\infty \dfrac{(-1)^nx^{2n}}{(2n)!},x\in \R.$
+  \end{exa}
+  \begin{exa}
+    $(1+x)^a=1+\sum\limits_{n=0}^\infty \dfrac{a(a-1)\cdots(a-n+1)}{n!}x^n,x\in(-1,1).$
+  \end{exa}
+  \zm 若$a$为正整数，则由二项式定理知成立，下面设$a$不为正整数.对于$\forall n\in\mathbb{N},$我们有
+  积分余项：
+  \begin{align*}
+    |R_n(x)|&=\left|\frac{a(a-1)\cdots(a-n)}{n!}a\int_0^x(1+t)^{a-n+1}(x-t)^n\mathrm{d}t\right|\\
+    &=\left|\left[\frac{a(a-1)\cdots(a-n)}{n!}x^n\right]a\int_0^x(1+t)^{a-1}\frac{(x-t)^n}{x^n(1+t)^n}\mathrm{d}t\right|\\
+    &\le\left|\left[\frac{a(a-1)\cdots(a-n)}{n!}x^n\right]a\int_0^x(1+t)^{a-1}\mathrm{d}t\right|\\
+    &=\left|\left[\frac{a(a-1)\cdots(a-n)}{n!}x^n\right][(1+x)^a-1]\right|.
+  \end{align*}
+  其中我们利用了不等式
+  $$\left|\frac{x-t}{x(1+t)}\right|\le 1,|x|<1,t\in(0,x)/(x,0).$$
+  显然当$|x|<1$时，$R_n(x)\to0.$下面讨论端点处的情况.\\
+  当$a>0$时，由于$(1+a)^a$在$x=-1$处连续，将$-1,1$代入幂级数后由Raabe判别法知都绝对收敛，从而在$[-1,1]$上成立.\\
+  当$a\le-1$时，通项不趋于零，因此在$x=1$处不成立.\\
+  当$-1<a<0$时，可以由Leibniz判别法知在$x=1$处成立，但在$x=-1$处没有定义，故不成立.于是我们有：
+
+  $a\le -1$时，在$(-1,1)$上成立；在$-1<a<0$时，在$(-1,1]$上成立；当$a>0$时，在$[-1,1]$上成立.
+  \begin{exa}
+    $\arcsin x=x+\sum\limits_{n=1}^\infty\dfrac{(2n-1)!!}{(2n)!!}\dfrac{x^{2n+1}}{2n+1},x\in[-1,1].$
+  \end{exa}
+  \begin{exa}
+    $(1+x)^\frac{1}{2}=1+\sum\limits_{n=1}^\infty (-1)^{n-1}\dfrac{(2n-1)!!}{(2n)!!}\dfrac{x^n}{2n-1},x\in[-1,1].$
+  \end{exa}
+  若在上式令$x=t^2-1,|t|\le 1,$则有
+  $$|t|=\sum_{n=0}^\infty \binom{\frac{1}{2}}{n} (t^2-1)^n.$$
+  且上述级数在$|t|\le 1$上一致收敛.$S_n(t)=\sum\limits_{k=0}^n\binom{\frac{1}{2}}{n} (t^2-1)^k$为$t$的多项式.
+
+  也就是说，存在多项式$P_n(x)$使得$P_n(x)\rightrightarrows |x|,|x|\le 1.$
+  \begin{exa}
+    求$\ln^2(1+x)$的麦克劳林展开.
+  \end{exa}
+  \jie 我们有
+  $$\ln(1+x)=\sum_{n=0}^\infty\dfrac{(-1)^nx^{n+1}}{n+1},x\in(-1,1],$$
+  则
+  \begin{align*}
+    \ln^2(1+x)&=\left[\sum_{n=0}^\infty\frac{(-1)^nx^{n+1}}{n+1}\right]^2
+    =x^2\left[\sum_{n=0}^\infty\frac{(-1)^nx^n}{n+1}\right]^2\\
+    &=x^2\sum_{n=0}^\infty c_nx^n,x\in(-1,1),
+  \end{align*}
+  其中
+  \begin{align*}
+    c_n&=(-1)^n\sum_{k=0}^n\frac{1}{(k+1)(n-k+1)}\\
+    &=\frac{(-1)^n}{n+2}\sum_{k=0}^n\frac{(k+1)+(n-k+1)}{(k+1)(n-k+1)}\\
+    &=\frac{(-1)^n}{n+2}\sum_{k=0}^n\left(\frac{1}{k+1}-\frac{1}{n-k+1}\right)\\
+    &=2\frac{(-1)^n}{n+2}\sum_{k=0}^n\frac{1}{k+1}.
+  \end{align*}
+  因此
+  $$\ln^2(1+x)=2\sum_{n=1}^\infty\frac{(-1)^{n+1}}{n+1}\left(1+\frac{1}{2}+\cdots+\frac{1}{n}\right)x^{n+1},x\in(-1,1).$$
+  可以证明当$x=1$时也收敛，$x=-1$时发散.
+  \begin{thm}
+    设级数$f(x)=\sum a_nx^n,g(x)=\sum b_nx^n$的收敛半径为$R_1,R_2,R_1\le R_2.$则幂级数的乘积
+    $\sum c_nx^n$的收敛半径$R\ge R_1$且
+    $$\sum_{n=0}^\infty c_nx^n=\sum_{n=0}^\infty a_nx^n \sum_{n=0}^\infty b_nx^n,x\in(-R_1,R_1)$$
+  \end{thm}
+
+  \clearpage
+  \section{课堂笔记(22):连续函数的多项式逼近}
+  \begin{center}
+    2018年5月16日
+  \end{center}
+  \begin{dfn}
+    设函数$f(x)$在区间$I$上定义，若对于$\forall\varepsilon>0,$存在多项式$P(x)$,使得对一切$x\in I,$有$|f(x)-P(x)|<\varepsilon,$
+    则称$f(x)$在$I$上可被多项式逼近.
+  \end{dfn}
+  显然，$f(x)$在$I$上可被多项式逼近的充要条件是存在多项式序列$\{P_n(x)\}$使得$P_n(x)\rightrightarrows f(x),x\in I.$
+  因此，若$f(x)$可被多项式逼近，则在$I$上必定连续.
+
+  可以证明，若$f(x)$在有限开区间$(a,b)$内可被多项式逼近，则$f(x)$必可以连续延拓到$[a,b]$.若$I$为无界区间，当
+  $f(x)$不是多项式时，$f(x)$在$I$上一定不能被多项式逼近.
+  \begin{thm}[Weierstrass定理]
+    设$f(x)\in C[a,b]$,则$f(x)$可被多项式逼近.
+  \end{thm}
+  这个定理的证明比较复杂，见教材P236.
+
+  下面补充两个定理.
+  \begin{dfn}
+    设$\mathscr{A}\subset C([a,b])$，若满足$\forall f,g\in \mathscr{A},\forall c\in\R$，
+    都有$f+g,cf,fg\in \mathscr{A},$则称$\mathscr{A}$为一个代数.
+  \end{dfn}
+  称$\mathscr{A}$能分离$[a,b]$中的点，若$\forall x_1,x_2\in[a,b],x_1\ne x_2,\exists f\in \mathscr{A}$使得
+  $f(x_1)\ne f(x_2)$.
+
+  称$\mathscr{A}$有公共零点，若存在$x_0\in[a,b]$使得对$\forall f\in \mathscr{A}$有$f(x_0)=0.$
+  \begin{lem}
+    设$\mathscr{A}\subset C([a,b])$为一个代数，分离$[a,b]$中的点且没有公共零点.
+    $\forall x_1,x_2\in[a,b],x_1\ne x_2,\forall c_1,c_2\in\R$,则存在$f\in \mathscr{A}$,使得
+    $$f(x_1)=c_1,f(x_2)=c_2.$$
+  \end{lem}
+  \zm 若能找$f_1(x_1)=0,f_1(x_2)=c_2;f_2(x_1)=c_1,f_2(x_2)=c_2$,那么$f(x)=f_1(x)+f_2(x)$就是要求的.\\
+  由分离性知，$\exists f\in\mathscr{A},$使得$f(x_1)\ne f(x_2).$若$f(x_1)=0,$令$f_1(x)=
+  \dfrac{c_2}{f(x_2)}f,$若$f(x_1)\ne0,$令$f_1=f-\dfrac{f(x_1)}{f^3(x_1)}f^3.$
+
+  \begin{add}[Stone定理]
+    设$\mathscr{A}\subset C([a,b])$为一个代数，分离$[a,b]$中的点且没有公共零点，则$C[a,b]$中的任何元素都可被
+    $\mathscr{A}$中的元素一致逼近.即$\forall f\in C([a,b]),\forall \varepsilon>0$，存在$P\in\mathscr{A}$,
+    使得对$\forall x\in[a,b]$都有
+    $$\left|f(x)-P(x)\right|<\varepsilon.$$
+  \end{add}
+  \zm 首先可以证明$|x|$能被多项式逼近，即$\forall\varepsilon>0,\exists a_i$使得：
+  $$\left||x|-\sum_{i=1}^na_ix^i\right|<\varepsilon,x\in[-M,M].$$
+  任给$f\in C([a,b])$,取$M=\max\{|f(x)|\}$.对$\forall t\in[a,b]$,在上述中令$x=f(t),$就有：
+  $$\left||f(t)|-\sum_{i=1}^na_if^i(t)\right|<\varepsilon.$$
+  若$f$能被$\mathscr{A}$中的元素逼近，则$\sum_{i=1}^na_if^i(t)$也能被$\mathscr{A}$中元素逼近，
+  $|f|$也能被$\mathscr{A}$中元素逼近.记$\mathscr{B}\subset C([a,b])$表示能被$\mathscr{A}$中元素逼近的全体.
+  对$\forall f,g\in\mathscr{B}$，则由
+  $$\max\{f,g\}=\max\{f-g,0\}+g=\frac{f-g+|f-g|}{2}+g=\frac{f+g+|f-g|}{2}$$知
+  $\min\{f,g\}\in \mathscr{B}.$从而对$f_1,f_2,\cdots,f_n\in\mathscr{B},$它们中的最大值和最小值都属于$\mathscr{B}.$
+
+  对$\forall f\in C([a,b]),\forall\varepsilon>0,$要证存在$g\in\mathscr{A},$使得
+  $$f-\varepsilon<g<f+\varepsilon.$$
+  对$\forall x,y\in[a,b]$,构造$h_y\in \mathscr{A}$，使得(由引理)
+  $h_y(x)=f(x),h_y(y)=f(y).$故存在$y$的邻域$U_y$使得$\forall t\in U_y$
+  $$h_y(t)<f(t)+\varepsilon.$$
+  那么这个邻域的集合构成$[a,b]$的一个开覆盖，从而存在有限多个邻域$y_1,\cdots,y_n$覆盖之.令$g_x=\max\{
+  h_{y_1},\cdots,h_{y_n}\}\in \mathscr{A},\forall t\in[a,b],\exists i,$使得$t\in U_{y_i}$且$g_x(t)>f(t)-\varepsilon.$
+  也就是，对$\forall\varepsilon>0,\forall x\in[a,b],\exists g_x\in\mathscr{A}$使得
+  $$g_x(t)>f(t)-\varepsilon,g_x(x)=f(x).$$
+  存在$x$的邻域$U_x$使得$\forall t\in U_x$
+  $$g_x(t)<f(t)+\varepsilon.$$
+  取有限覆盖，再令$g$为其中的最小值即可.
+
+  记$C_p[0,2\pi]$为$2\pi$周期的连续函数的全体.$\mathscr{A}=\{\sin x,\cos x\}$生成的代数,其中的元素
+  称为三角多项式.可以通过Stone定理的证明得出下面的定理：
+  \begin{thm}[Weierstrass]
+    以$2\pi$为周期的连续函数可被三角多项式逼近.
+  \end{thm}
+  下面首先阐述一下\textbf{等度一致连续}的概念：
+  \begin{thm}
+    设$f_n\in C[a,b],$且$\{f_n(x)\}$在$[a,b]$上一致收敛，则$\forall\varepsilon>0,\exists \delta>0,
+    \forall x_1,x_2\in[a,b]$,只要$|x_1-x_2|<\delta,$对$\forall n$都有
+    $$|f_n(x_1)-f_n(x_2)|<\varepsilon.$$
+  \end{thm}
+  \zm 假设$f_n(x)\rightrightarrows f(x).$从而$f(x)$在$[a,b]$上就是一致连续的.
+  对$\forall \varepsilon>0$,存在$\delta>0,$使得$\forall x_1,x_2\in[a,b]$,
+  只要$|x_1-x_2|<\delta$就有$|f(x_1)-f(x_2)|<\dfrac{\varepsilon}{3}$.于是可以将$f_n(x_1)-f_n(x_2)$写为
+  $$f_n(x_1)-f_n(x_2)=f_n(x_1)-f(x_1)+f(x_1)-f(x_2)+f(x_2)-f_n(x_2).$$
+  另一方面只需要注意到$n$是有限的即可.
+
+  关于等度连续，还可以证明，若$\{f_n'(x)\}$是一致有界的，则$\{f_n(x)\}$是等度连续的.
+
+  下面就给出本节第二个定理：
+  \begin{thm}[Arzela-Ascoli]
+    设$f_n(x)\in C[a,b],$若$\{f_n(x)\}$一致有界且在$[a,b]$是等度连续的，则$\{f_n(x)\}$有子列$\{f_{n_k}\}$
+    在$[a,b]$上一致收敛.
+  \end{thm}
+  这个定理的证明从略.
+\clearpage
+  \section{习题课笔记(11)}
+  \begin{exa}
+    求和$\sum\limits_{n=1}^\infty n(n+1)x^n.$
+  \end{exa}
+  \jie 显然收敛域为$(-1,1)$.记$S(x)=\sum n(n+1)x^n,S(0)=0.$从而有$\dfrac{S(x)}{x}=\sum n(n+1)x^{n-1},x\in(-1,1).$
+  这样对左右进行两次积分(右式可以逐项积分)就有
+  $$\frac{S(x)}{x}=h''(x)=\left[\sum_{n=1}^\infty x^{n+1}\right]''=\frac{2}{(1-x)^3}.$$
+  所以有$S(x)=\dfrac{2x}{(1-x)^3},x\in(-1,1).$
+  \begin{exa}
+    求$f(x)=\ln(x+\sqrt{1+x^2})$的麦克劳林展开.
+  \end{exa}
+  \jie 求导得$f'(x)=(1+x^2)^{-\frac{1}{2}}=1+\sum\limits_{n=1}^\infty(-1)^n\dfrac{(2n-1)!!}{(2n)!!}x^{2n},x\in(-1,1).$
+  从而$f(x)=x+\sum\limits_{n=1}^\infty(-1)^n\dfrac{(2n-1)!!}{(2n)!!}\dfrac{x^{2n+1}}{2n+1},x\in(-1,1).$
+  可以验证$x=\pm 1$时也收敛，从而收敛域为$[-1,1].$
+  \begin{exa}
+    设非常数函数$f(x)$在$(a,b)$内每一点都可以展成幂级数.证明$f(x)$的零点集在$(a,b)$内没有聚点.
+  \end{exa}
+  \zm 设$x_0\in(a,b)$为$f(x)$的零点.将$f(x)$在$x_0$处展开有：
+  $$f(x)=f(x_0)+f'(x_0)(x-x_0)+\cdots+\frac{f^{(n)}(x_0)}{n!}(x-x_0)^n+\cdots$$
+  由于$f(x_0)=0,$那么记$n$为第一个使得$f^{(n)}(x_0)$不为零的值，则
+  $$f(x)=\frac{f^{(n)}(x_0)}{n!}(x-x_0)^n+\cdots=(x-x_0)^n\left(\frac{f^{(n)}(x_0)}{n!}+\cdots\right)=(x-x_0)^ng(x).$$
+  那么$g(x_0)\ne0.$因而$g(x)$在$x_0$附近没有零点.又因为$(x-x_0)^n$在$x_0$附近没有零点，从而$f(x)$在$x_0$附近只有
+  这一个零点.
+  \begin{exa}
+    设函数$f(x)$在一个无穷区间上可被多项式逼近，证明$f(x)$必是一个多项式.
+  \end{exa}
+  \zm 假设可以被多项式逼近，也即存在多项式序列$\{P_n(x)\}$使得$P_n(x)\rightrightarrows f(x).$因此，存在$N$,当$n>N$时，
+  $|P_n(x)-P_N(x)|<\dfrac{1}{2},x\in\R.$又$P_n(x)-P_N(x)$是一个多项式且有界，那么它只能是常数，即
+  $|P_n(x)-P_N(x)|=|a_n|<\dfrac{1}{2}.$这样就存在子列$\{a_{n_k}\}$使得$a_{n_k}\to a.$这时候再在
+  $P_{n_k}(x)-P_N(x)=a_{n_k}$中，令$k\to\infty,$得到$f(x)-P_N(x)=a.$所以$f(x)$就是一个多项式.
+  \begin{exa}
+    证明恒等式：$\sum\limits_{k=0}^n\binom{n}{k}(k-nx)x^k(1-x)^{n-k}=0.$
+  \end{exa}
+  \zm 考虑
+  $$S(t)=\sum\limits_{k=0}^n\binom{n}{k}x^k(1-x)^{n-k}e^{(k-nx)t}.$$
+  我们有
+  $$S(t)=\left(\sum\limits_{k=0}^n\binom{n}{k}x^k(1-x)^{n-k}e^{tk}\right)e^{-nxt}=
+  e^{-nxt}\sum\limits_{k=0}^n\binom{n}{k}(xe^t)^k(1-x)^{n-k}=e^{-nxt}(1-x+xe^t)^n.$$
+  从而$S'(0)=0,S''(0)=nx(1-x).$
+  \begin{exa}
+    设函数$f(x)$在$[0,1]$上连续，对每个正整数$n$，定义
+    $$B_n(f,x)=\sum_{k=0}^n\binom{n}{k}f(\frac{k}{n})x^k(1-x)^{n-k}.$$
+    证明$B_n(f,x)\rightrightarrows f(x),x\in[0,1].$
+  \end{exa}
+  \zm 对$\forall\varepsilon>0,\exists \delta>0$,当$|\frac{k}{n}-x|<\delta$时有$|f(\frac{k}{n})-f(x)|<\varepsilon.$
+  其中有一些$k$满足上述条件，另外一些$k$使得$|\frac{k}{n}-x|\ge\delta$.并且存在$M>0$使得$|f(x)|\le M.$我们有
+  \begin{align*}
+    \left|B_n(f,x)-f(x)\right|&=\left|\sum_{k=0}^n\binom{n}{k}f(\frac{k}{n})x^k(1-x)^{n-k}-f(x)\right|\\
+    &=\left|\sum_{k=0}^n\binom{n}{k}f(\frac{k}{n})x^k(1-x)^{n-k}-\sum_{k=0}^n\binom{n}{k}f(x)x^k(1-x)^{n-k}\right|\\
+    &\le\sum_{k=0}^n\binom{n}{k}\left|f(\frac{k}{n})-f(x)\right|x^k(1-x)^{n-k}\\
+    &=\varepsilon+\sum_{k=0}^n\binom{n}{k}\cdot 2M\cdot x^k(1-x)^{n-k}\\
+    &\le\varepsilon+\frac{2M}{\delta^2}\sum_{k=0}^n\binom{n}{k}(\frac{k}{n}-x)^2x^k(1-x)^{n-k}\\
+    &=\varepsilon+\frac{2M}{\delta^2}\frac{x(1-x)}{n}\\
+    &<2\varepsilon.
+  \end{align*}
+  上式第四个等号是将$k$分为那些使$|\frac{k}{n}-x|<\delta$和$|\frac{k}{n}-x|\ge\delta$的部分.
+  \begin{exa}
+    若$f(x)=\sum a_nx^n(a_n>0)$且收敛半径为$\infty$.若$\sum a_n n!$收敛,则$\int_0^{+\infty}e^{-x}f(x)\dx=\sum a_nn!.$
+  \end{exa}
+  \zm 我们有
+  $\int_0^{+\infty}e^{-x}f(x)\dx=\lim\limits_{A\to+\infty}\int_0^Ae^{-x}\sum\limits_{n=0}^\infty a_nx^n\dx.$注意到
+  如果求和和积分号、求和与极限都可以交换顺序的话，就能变为$\sum\limits_{n=0}^\infty a_n\int_0^{+\infty}e^{-x}x^n\dx$.
+  令$H_n=\int_0^{+\infty}e^{-x}x^n\dx.$容易知道$H_n=nH_{n-1}=n!H_0=n!.$那么我们只需要证明交换顺序是可以的,也就是要证明：
+  $\sum a_nx^n$对$x\in[0,A]$一致收敛,$\sum a_n\int_0^Ae^{-x}x^n\dx$对$A\in(0,+\infty)$一致收敛.\\
+  第一个一致收敛是显然的,因为收敛半径是无穷大.对第二个，我们有
+  $$a_n\int_0^Ae^{-x}x^n\dx\le a_nn!.$$
+  从而是成立的.
+
+  \clearpage
+  \section{课堂笔记(23):函数的傅里叶级数(1)}
+  形如$\dfrac{a_0}{2}+\sum\limits_{n=1}^\infty(a_n\cos nx+b_n\sin nx)$的级数称为Fourier级数.可以将Fourier级数看成函数系
+  $$1,\cos x,\sin x,\cos 2x,\sin 2x,\cdots,\cos nx,\sin nx,\cdots$$
+  的一个线性组合,这个函数系我们以后称之为\textbf{基本三角函数系}.
+
+  若$[a,b]$上的可积函数$f(x),g(x)$满足$\int_a^bf(x)g(x)\dx=0$，则称$f,g$在$[a,b]$上\textbf{正交}.称$\int_a^bf(x)g(x)\dx$
+  为\textbf{内积}.容易证明下面的结论：
+  \begin{enumerate}
+    \item $\int_{-\pi}^\pi\sin mx\sin nx\dx=0,(m\ne n);$
+    \item $\int_{-\pi}^\pi\cos mx\cos nx\dx=0,(m\ne n);$
+    \item $\int_{-\pi}^\pi\sin mx\cos nx\dx=0.$
+  \end{enumerate}
+  这也即，基本三角函数系的任意两个不同的函数在长度为$2\pi$的任意区间上是正交的.
+
+  若$f(x)=\dfrac{a_0}{2}+\sum\limits_{n=1}^\infty(a_n\cos nx+b_n\sin nx)$在$[-\pi,\pi]$上成立，且右边的级数一致收敛到
+  $f(x)$.显然$f(x)$此时是连续函数.对它逐项积分，利用基本三角函数系的正交性得
+  \begin{align*}
+    \int_{-\pi}^\pi f(x)\cos kx\dx&=\int_{-\pi}^\pi \frac{a_0}{2}\cos kx\dx+\sum_{n=1}^\infty a_n\int_{-\pi}^\pi
+    \cos nx\cos kx\dx\\
+    &+\sum_{n=1}^\infty b_n\int_{-\pi}^\pi\sin nx\cos kx\dx\\
+    &=\pi a_k.
+  \end{align*}
+  因此有
+  $$a_k=\frac{1}{\pi}\int_{-\pi}^\pi f(x)\cos kx\dx.$$
+  同理有
+  $$b_k=\frac{1}{\pi}\int_{-\pi}^\pi f(x)\sin kx\dx.$$
+  这告诉我们两点：
+  \begin{enumerate}
+    \item 若一个函数$f$可以展为Fourier级数且能逐项积分，则Fourier级数唯一;
+    \item 若一个函数$f$在$[-\pi,\pi]$可积，我们就可以计算出$a_n(n\ge 0),b_n(n\ge 1).$
+  \end{enumerate}
+  将$a_n,b_n$称为$f(x)$的Fourier系数，并称$\dfrac{a_0}{2}+\sum\limits_{n=1}^\infty(a_n\cos nx+b_n\sin nx)$为
+  $f(x)$的Fourier级数,记作
+  $$f(x)\sim \dfrac{a_0}{2}+\sum\limits_{n=1}^\infty(a_n\cos nx+b_n\sin nx).$$
+  需要注意的是，这里只是$f(x)$与Fourier级数有关，而不是相等.这是因为我们还不知道该Fourier级数是否收敛于$f(x)$.
+  比如改变$f(x)$有限多个点的值，并不改变$a_n,b_n$的值，设改变后的函数为$g(x)$，显然$f(x),g(x)$具有相同的Fourier级数，
+  但是在这有限多个点，该Fourier级数显然不可能同时收敛到$f(x),g(x)$.
+
+  但是对于连续函数$f(x)$而言，有下列结论：
+  \begin{thm}
+    设$f(x)$在$\R$上连续，以$2\pi$为周期，且$f$的Fourier系数全为0，则$f(x)$在$\R$上恒为0.
+  \end{thm}
+  \zm 设$f(x)$在$[-\pi,\pi]$上不恒为$0$,则在$(-\pi,\pi)$内存在$x_0$，使得$f(x_0)\ne 0$，不妨设$f(x_0)>0$.
+  由$f$的连续性，存在$\delta>0$使得$x\in(x_0-\delta,x_0+\delta)$时，有
+  $$f(x)>\frac{f(x_0)}{2}=M_0>0.$$
+  由于$f(x)$的Fourier系数全为0，容易看出对于任何的三角多项式$T(x)$,有
+  $$\int_{-\pi}^\pi f(x)T(x)\dx=0.$$
+  现在取定以下的三角多项式
+  $$T_0(x_0)=1+\cos(x-x_0)-\cos\delta,$$
+  显然存在$r>1$，对于$x\in(x_0-\frac{\delta}{2},x_0+\frac{\delta}{2})$,有$T_0(x_0)\ge r>1.$注意到当
+  $x\in[x_0-\pi,x_0+\pi]\backslash(x_0-\delta,x_0+\delta)$时，有$|T_0(x)|\le 1.$
+  对于$\forall n\in \mathbb{N}$，由于$T_0^n(x)$是一个三角多项式，因此有
+  $$\int_{x_0-\pi}^{x_0+\pi}f(x)T_0^n(x)\dx=\int_{-\pi}^\pi f(x)T_0^n(x)\dx=0.$$
+  另一方面，设$|f(x)|\le M,$则对于$\forall n,$我们有
+  $$\left|\int_{x_0-\pi}^{x_0-\delta}f(x)T_0^n(x)\dx+\int_{x_0+\delta}^{x_0+\pi}f(x)T_0^n(x)\dx\right|
+  \le 2\pi M\cdot 1^n=2\pi M.$$
+  而当$n\to\infty$时，我们有
+  $$\int_{x_0-\delta}^{x_0+\delta}f(x)T_0^n(x)\dx\ge\int_{x_0-\frac{\delta}{2}}^{x_0+\frac{\delta}{2}}f(x)T_0^n(x)\dx
+  \ge M_0r^n\delta\to+\infty.$$
+  因此有
+  $$\int_{x_0-\pi}^{x_0+\pi}f(x)T_0^n(x)\dx\to+\infty.$$
+  矛盾.证毕.
+  \begin{exa}
+    求$f(x)=x,x\in[-\pi,\pi)$的傅里叶级数.
+  \end{exa}
+  \jie 将$f(x)$延拓到$\R$上.由于$\sin nx$是奇函数，$\cos nx$是偶函数，因此$a_n=0,n=0,1,\cdots$,且
+  \begin{align*}
+    b_n&=\frac{1}{\pi}\int_{-\pi}^\pi x\sin nx\dx=\frac{2}{\pi}\int_0^\pi x\sin nx\dx\\
+    &=(-1)^{n-1}\frac{2}{n}
+  \end{align*}
+  因此
+  $$f(x) \sim \sum_{n=1}^\infty(-1)^{n-1}\frac{2}{n}\sin nx,x\in[-\pi,\pi)$$
+  \fz 严格来说，$f(x)$只在$(-\pi,\pi)$上是奇函数，但由于改变$x=-\pi$一点的函数值不会改变$f(x)$的Fourier系数，因为不妨设
+  $f(x)$在$[-\pi,\pi]$上是奇函数.
+  \begin{exa}
+    设函数$f(x)=\dfrac{\pi-x}{2},x\in[0,2\pi).$求$f$的Fourier级数.
+  \end{exa}
+  \jie 将$f$延拓之后可见$f$为奇函数，因此$a_n=0$.有
+  $$b_n=\frac{2}{\pi}\int_0^\pi\frac{\pi-x}{2}\sin nx\dx=\frac{1}{n}.$$
+  从而
+  $$f(x)\sim \sum_{n=1}^\infty\frac{\sin nx}{n},x\in[0,2\pi)$$
+  \fz 可以看出，当考察$f(x)$的奇偶性时，应结合其延拓后的图像.
+
+  \clearpage
+  \section{习题课笔记(12)}
+  \begin{exa}[thm]
+    设在$(-1,1)$上，$f(x)=\sum a_nx^n,$且$\lim na_n=0.$若$\lim_{x\to1-}\sum a_nx^n=S,$则
+    $\sum a_n$收敛到$S.$
+  \end{exa}
+  \zm 我们作出下列的估计
+  \begin{align*}
+    \left|\sum_{k=0}^na_k-S\right|&\le\left|\sum_{k=0}^na_k-\sum_{k=0}^\infty a_kx^k\right|+
+    \left|\sum_{k=0}^\infty a_kx^k-S\right|\\
+    &\le\left|\sum_{k=0}^na_k(1-x^k)\right|+\left|\sum_{k=n+1}^\infty a_kx^k\right|+\left|\sum_{k=0}^\infty a_kx^k-S\right|
+  \end{align*}
+  由于$\lim_{x\to1-}\sum a_nx^n=S,$故对$\forall\varepsilon>0,$存在$N_1,$当$n\ge N_1$时
+  $$\left|\sum_{k=0}^\infty a_k(1-\frac{1}{n})^k-S\right|<\varepsilon.$$
+  则上式第一项有
+  $$\left|\sum_{k=0}^na_k(1-x^k)\right|=\left|\sum_{k=0}^na_k(1-x)(1+x\cdots+x^{k-1})\right|\le
+  \frac{1}{n}\sum_{k=0}^nk|a_k|.$$
+  又由于$\lim na_n=0,$故由Cauchy命题知
+  $$\frac{|a_1|+2|a_2|+\cdots+n|a_n|}{n}\to0.$$
+  也就是存在$N_2$，当$n\ge N_2$时，有
+  $$\left|\sum_{k=0}^na_k(1-x^k)\right|<\varepsilon.$$
+  对于第二项：
+  $$\left|\sum_{k=n+1}^\infty a_kx^k\right|\le\sum_{k=n+1}^\infty|a_k|x^k\le\frac{1}{n}\sum_{k=n+1}^\infty
+  k|a_k|x^k.$$
+  由条件知存在$N_3$,当$n\ge N_3$时有$|na_n|<\varepsilon.$故上式
+  $$\le\frac{\varepsilon}{n}\sum_{k=n+1}^\infty x^k=\frac{\varepsilon}{n}\frac{x^{n+1}}{1-x}<\varepsilon.$$
+
+  \fz 若把条件$\lim na_n=0$改为$a_n>0$，结论亦成立
+  \begin{exa}
+    设$S_n=\sum\limits_{k=0}^na_k,\sigma_n=\dfrac{s_0+s_1+\cdots+s_{n-1}}{n},$证明，若$\{\sigma_n\}$收敛，
+    则$\lim\dfrac{a_n}{n}=0$；$f(x)=\sum\limits_{n=0}^\infty a_nx^n$在$(-1,1)$上绝对收敛，且
+    $f(x)=(1-x)^2\sum\limits_{n=0}^\infty(n+1)\sigma_{n+1}x^n$. 若$\lim \sigma_n=S$,则$\lim_{x\to1-}f(x)=S.$
+  \end{exa}
+  \zm (1).我们有
+  $$\frac{a_n}{n}=\frac{S_n-S_{n-1}}{n}=\frac{[(n+1)\sigma_{n+1}-n\sigma_n]-[n\sigma_n-(n-1)\sigma_{n-1}]}{n}.$$
+  由此可推出结论.\\
+  (2).只需要证收敛半径$\ge 1$即可.由(1)知，存在$N$，当$n\ge N$时有$\left|\dfrac{a_n}{n}\right|<1,$即$|a_n|<n.$
+  于是$\lim\sqrt[n]{|a_n|}\le 1.$这就是收敛半径$R\ge 1.$\\
+  注意到$\dfrac{f(x)}{1-x}=\sum a_nx^n\cdot \sum x^n=\sum S_nx^n.$再进行一次就有
+  $$\frac{f(x)}{(1-x)^2}=\sum(S_0+S_1+\cdots+S_n)x^n.$$
+  这就是要证的.\\
+  (3).由第二问可以知道
+  \begin{align*}
+    \left|f(x)-S\right|&=\left|(1-x)^2\sum_{n=0}^\infty(n+1)\sigma_{n+1}x^n-S\right|\\
+    &=\left|(1-x)^2\sum_{n=0}^{N_0}(n+1)\sigma_{n+1}x^n+(1-x)^2\sum_{n=N_0+1}^\infty(n+1)\sigma_{n+1}x^n-S\right|\\
+    &\le\left|(1-x)^2\sum_{n=0}^{N_0}(n+1)\sigma_{n+1}x^n\right|\\&+
+    \left|(1-x)^2\sum_{n=N_0+1}^\infty(n+1)\sigma_{n+1}x^n-(1-x)^2\sum_{n=N_0+1}^\infty(n+1)Sx^n\right|\\&+
+    \left|(1-x)^2\sum_{n=N_0+1}^\infty(n+1)Sx^n-S\right|
+  \end{align*}
+  对上式第一项，有
+  $$I_1\le(1-x)^2\sum_{n=0}^{N_0}(n+1)|\sigma_{n+1}|\to0,x\to1-.$$
+  对于第二项，可以令
+  $$h(x)=\sum_{n=N_0+1}^\infty(n+1)x^n=\frac{x^{N_0+1}(N_0+1-N_0x)}{(1-x)^2},x\in(-1,1).$$
+  则$$I_2\le 2\varepsilon.$$
+  对于第三项，也可以证明$<\varepsilon.$
+
+  \begin{exa}
+    设$\{y_n(x)\}$满足方程
+    $$\frac{d}{dx}(p(x)\frac{d}{dx}y_n(x))=-\lambda_ny_n(x),x\in[a,b].$$
+    且$n\ne m$时，$\lambda_n\ne\lambda_m.$有边界条件$y_n(a)=y_n(b)=0.$证明：$\{y_n(x)\}$为$[a,b]$上的正交系.
+  \end{exa}
+  \zm $L=\frac{d}{dx}(p(x)\frac{d}{dx})$为一线性算子，$-\lambda_n$为特征值，$y_n$为特征向量.则
+  $$-\lambda_n\int_a^by_n(x)y_m(x)\dx=\int_a^b\frac{d}{dx}(p(x)\frac{d}{dx}y_n)y_m\dx.$$
+  对上式进行分部积分可得
+  $$=-\int_a^bp(x)\frac{dy_n}{dx}\frac{dy_m}{dx}\dx.$$
+  同理有
+  $$-\lambda_m\int_a^by_n(x)y_m(x)\dx=-\int_a^bp(x)\frac{dy_n}{dx}\frac{dy_m}{dx}\dx.$$
+  从而有
+  $$\int_a^by_n(x)y_m(x)\dx=0.$$
+  \begin{exa}
+    设$f(x)$有界，以$2\pi$为周期，并在$(-\pi,\pi)$上单调.证明：$a_n=O(\frac{1}{n}),b_n=O(\frac{1}{n})$.
+  \end{exa}
+  \zm $a_n=\frac{1}{\pi}\int_{-\pi}^\pi f(x)\cos nx\dx=\frac{1}{\pi}f(-\pi)\int_{-\pi}^\xi\cos nx\dx+
+  \frac{1}{\pi}f(\pi)\int_\xi^\pi\cos nx\dx=\frac{1}{n\pi}(f(-\pi)\sin n\xi-f(\pi)\sin n\xi).$
+  同理对$b_n.$
+  \clearpage
+  \section{课堂笔记(24):函数的Fourier级数(2)、Fourier级数的敛散性}
+  \begin{center}
+    2018年5月28日
+  \end{center}
+  \subsection{函数的Fourier级数}
+  \begin{exa}
+    设函数$f(x)=x^2,x\in[0,2\pi)$,求它的傅里叶级数.
+  \end{exa}
+  \jie 先将它延拓，可以看出$f$不具有奇偶性.由于$f(x)$的Fourier系数的积分中的被积函数均为以$2\pi$为周期的函数，
+  因此只需在一个长度为$2\pi$的区间来求之即可.因此有
+  $$a_0=\frac{1}{\pi}\int_{-\pi}^{\pi}f(x)\dx=\frac{1}{\pi}\int_{0}^{2\pi}x^2\dx=\frac{8}{3}\pi^2.$$
+  \begin{align*}
+    a_n&=\frac{1}{\pi}\int_{0}^{2\pi}x^2\cos nx\dx\\
+    &=\frac{4}{n^2},n=1,2,\cdots
+  \end{align*}
+  \begin{align*}
+    b_n&=\frac{1}{\pi}\int_{0}^{2\pi}x^2\sin nx\dx\\
+    &=-\frac{4\pi}{n},n=1,2,\cdots
+  \end{align*}
+  因此，
+  $$f(x)\sim \frac{4\pi^2}{3}+4\sum_{n=1}^\infty\frac{\cos nx}{n^2}-4\pi\sum_{n=1}^\infty\frac{\sin nx}{n}.$$
+
+  若函数$f(x)$在$(a,b)$内有定义，而且它是一个在$[a,b]$上可积函数的限制，我们将称$f(x)$在$(a,b)$内可积.设$f(x)$
+  在$(0,\pi)$内可积，则我们可以将$ff(x)$延拓成$(-\pi,\pi)$中的奇函数$\bar{f}(x)$，然后再将它延拓到$\R$上，在这种情况下,
+  $\bar{f}(x)$的Fourier系数中$a_n=0$，而$b_n=\frac{2}{\pi}\int_0^\pi f(x)\sin nx\dx.$因此
+  $$f(x)\sim \sum_{n=1}^\infty b_n\sin nx.$$
+  此时我们称$\sum_{n=1}^\infty b_n\sin nx$为$f(x)$在$(0,\pi)$上的正弦级数.
+
+  同样地，我们可以先将$f(x)$延拓为$(-\pi,\pi)$上的偶函数$\bar{f}(x)$，再延拓到$\R$上，此时为偶延拓。此时
+  $b_n=0$且$a_n=\frac{2}{\pi}\int_0^\pi f(x)\cos nx\dx.$则
+  $$f(x)\sim \frac{a_0}{2}+\sum_{n=1}^\infty a_n\cos nx.$$
+  称$\frac{a_0}{2}+\sum_{n=1}^\infty a_n\cos nx$为余弦级数.
+
+  除此之外，设$f(x)$以$2T$为周期且在任何有限闭区间上可积，作自变量变换$x=\dfrac{T}{\pi}t$,则函数
+  $F(t)=f(\frac{T}{\pi}t)$以$2\pi$为周期.设
+  $$F(t)\sim \frac{a_0}{2}+\sum(a_n\cos nt+b_n\sin nt)$$
+  则将变量$t$换回$x$后得到$f(x)$的Fourier级数：
+  $$f(x)\sim \frac{a_0}{2}+\sum(a_n\cos n\frac{\pi x}{T}+b_n\sin n\frac{\pi x}{T}).$$
+  其中
+  $$a_n=\frac{1}{T}\int_{-T}^{T}f(x)\cos\frac{n\pi}{T}x\dx,b_n=\frac{1}{T}\int_{-T}^{T}f(x)\sin\frac{n\pi}{T}x\dx.$$
+  \subsection{Fourier级数的敛散性(1)}
+  如果周期函数$f(x)$在$[-\pi,\pi]$上可积，则可以形式地得到Fourier级数.现在来考察傅里叶系数的部分和序列
+  \begin{align*}
+    S_n(x)&=\frac{a_0}{2}+\sum_{k=1}^\infty(a_k\cos kx+b_k\sin kx)\\
+    &=\frac{1}{2\pi}\int_{-\pi}^\pi f(u)du+\sum_{k=1}^n\frac{1}{\pi}\int_{-\pi}^\pi f(u)[\cos kx\cos ku+\sin kx\sin ku]du\\
+    &=\frac{1}{\pi}\int_{-\pi}^\pi f(u)\left[\frac{1}{2}+\sum_{k=1}^n\cos k(u-x)\right]du\\
+    &=\frac{1}{\pi}\int_{-\pi}^\pi f(u)\frac{\sin(n+\frac{1}{2})(u-x)}{2\sin\frac{u-x}{2}}du\\
+    &=\frac{1}{\pi}\int_0^\pi(f(x+t)+f(x-t))\frac{\sin(n+\frac{1}{2})t}{2\sin\frac{t}{2}}dt\\
+  \end{align*}
+  我们直接使用
+  $$S_n(x)=\int_{-\pi}^\pi f(x+t)\dfrac{\sin(n+\frac{1}{2})t}{2\pi\sin\frac{t}{2}}dt.$$
+  令$D_n(x)=\dfrac{\sin(n+\frac{1}{2})t}{2\pi\sin\frac{t}{2}}dt$称为Dirichlet核,上述积分为Dirichlet积分.
+
+  现取定$x_0\in[-\pi,\pi]$，我们来研究$f(x)$的傅里叶级数部分和序列$\{S_n(x_0)\}$是否以$S_0$为极限.由于
+  \begin{align*}
+    S_n(x_0)-S_0&=\int_0^\pi(f(x_0+t)+f(x_0+t)-2S_0)D_n(t)dt\\
+    &=\int_0^\pi\frac{f(x_0+t)+f(x_0+t)-2S_0}{2\pi\sin\frac{t}{2}}\sin(n+\frac{1}{2})tdt\\
+    &=\int_0^\pi G(t)\sin(n+\frac{1}{2})tdt.
+  \end{align*}
+  其中
+  $$G(t)=\frac{f(x_0+t)+f(x_0+t)-2S_0}{2\pi\sin\frac{t}{2}}.$$
+  对上述积分我们观察出，当$n$很大，$\sin(n+\frac{1}{2})t$的值随着$t$在$[0,\pi]$上的变化，不断在$x$轴的上下波动.
+  $G(t)$是个常数的话，显然有
+  $$\int_0^\pi G(t)\sin(n+\frac{1}{2})tdt\to 0.$$
+  但它不是常数，却可积.当$n\to\infty$时，则由$\sin(n+\frac{1}{2})t$在$x$轴上下不断波动，使得$G(t)\sin(n+\frac{1}{2})t$
+  的积分不断相抵，因此上面的积分也应趋于零.
+
+  我们有下面的黎曼-勒贝格引理：
+  \begin{lem}[黎曼-勒贝格引理]
+    设$f(x)$在区间$[a,b]$上可积或有瑕点时绝对可积，则
+    $$\lim_{\lambda\to+\infty}\int_a^bf(x)\sin \lambda x\dx=\lim_{\lambda\to+\infty}\int_a^bf(x)\cos\lambda x\dx.$$
+  \end{lem}
+  这个引理的证明见教材P258.
+
+  现在回过头来考察以下等式：
+  $$S_n(x_0)-S_0=\int_0^\pi \frac{f(x_0+t)+f(x_0+t)-2S_0}{2\pi\sin\frac{t}{2}}\sin(n+\frac{1}{2})tdt.$$
+  设$f(x)$在$[-\pi,\pi]$上可积或有瑕点时绝对可积，来看当$n\to\infty$时的变化情况.\\
+  在$t=0$的某个邻域外，若$G(t)$没有瑕点显然是可积的，并且有瑕点时也绝对可积，因此由黎曼-勒贝格引理有
+  $$\int_\delta^\pi G(t)\sin(n+\frac{1}{2})tdt\to 0.$$
+  所以当$n$趋于无穷时，$S_n(x_0)-S_0$是否趋于0仅与$f(x_0\pm t)$在$t=0$附近的值有关，换句话说仅与$f(x)$在$x_0$附近
+  的值有关，因此我们有
+  \begin{thm}[黎曼局部化定理]
+    设周期为$2\pi$的函数$f(x)$在$[-\pi,\pi]$上可积或有瑕点时绝对可积，则$f(x)$的傅里叶级数在$x_0\in[-\pi,\pi]$
+    处的敛散性只与$f(x)$在$(x_0-\delta,x_0+\delta)$的值有关.
+  \end{thm}
+  值得指出的是，一个函数$f(x)$的傅里叶系数是由$f(x)$与基本三角函数系中每个函数的乘积在$[-\pi,\pi]$上的积分得到.换句话说，
+  它们依赖于$[-\pi,\pi]$上$f(x)$的取值.而以上定义却告诉我们，傅里叶级数在$x_0$处的敛散性只依赖于$f(x)$在$x_0$的局部性质.
+
+  \clearpage
+  \section{课堂笔记(25):傅里叶级数的敛散性(2)}
+  \begin{center}
+    2018年5月30日
+  \end{center}
+  \begin{thm}
+    设$f,f_1$为$2\pi$周期的函数，且在$[\pi,\pi]$上绝对可积.对$x_0\in\R$，存在$\delta>0$使得当$|x-x_0|<\delta$时有
+    $f(x)=f_1(x)$，则$f$与$f_1$的Fourier级数同时敛散，且收敛到同一个和.
+  \end{thm}
+  \jz 只需利用黎曼局部化定理.
+
+  为了更容易地估计$S_n(x_0)-S_0$,我们注意到在$f(x)$的Dirichlet积分中被积函数的$2\sin\frac{t}{2}$可以用$t$代替.换句话说，
+  若$f(x)$在$[0,\delta]$上可积或具有瑕点时绝对可积，则当$n\to\infty$时，下面两个积分具有相同的敛散性，且收敛时具有相同极限.
+  $$\int_0^\delta \frac{\sin(n+\frac{1}{2})t}{2\sin\frac{t}{2}}f(t)dt,
+  \int_0^\delta \frac{\sin(n+\frac{1}{2})t}{t}f(t)dt$$
+
+  对给定的$x_0\in[-\pi,\pi]$，我们知道$f(x)$的Fourier级数在$x_0$处收敛到$S_0$的充要条件是：对充分小的正数$\delta$，有
+  $$\lim_{n\to\infty}\int_0^\delta\frac{f(x_0+t)+f(x_0-t)-2S_0}{t}\sin(n+\frac{1}{2})tdt=0.$$
+
+  设$f(x)$在$x_0$处可导，则有
+  $$\lim_{t\to0}\frac{f(x_0+t)-f(x_0)}{t}=f'(x_0).$$
+  则$S_n(x_0)\to f(x_0).$
+
+  下面来引入分段可微的概念.
+  设函数$f(x)$在区间$[a,b]$上有定义，若存在$[a,b]$的分割
+  $$\Delta:a=x_0<x_1<\cdots<x_n=b,$$
+  使得$f(x)$仅以$x_i$为第一类间断点，并且在$x_i$处，存在推广的单侧导数，即
+  $$\lim_{h\to0+}\frac{f(x_i+h)-f(x_i+0)}{h}=f'_+(x_i)$$与
+  $$\lim_{h\to0-}\frac{f(x_i+h)-f(x_i-0)}{h}=f'_-(x_i)$$
+  存在；而当$x\in(x_{i-1},x_i)$时，$f'(x)$存在.此时称$f(x)$在$[a,b]$上是分段可微的.
+  \begin{thm}[不知道叫什么名字的最常用定理]
+    设$f(x)$是周期为$2\pi$的函数，且在$[-\pi,\pi]$内分段可微，则$f(x)$的傅里叶级数处处收敛到$\dfrac{f(x-0)+f(x+0)}{2}$,
+    即$$\frac{a_0}{2}+\sum_{n=1}^\infty(a_n\cos nx+b_n\sin nx)=\dfrac{f(x-0)+f(x+0)}{2}.$$
+  \end{thm}
+
+  \begin{exa}
+    $f(x)=\frac{\pi-x}{2},0\le x<2\pi$.其傅里叶级数
+    $$\sum_{n=1}^\infty\frac{\sin nx}{n}=\begin{cases}\dfrac{\pi-x}{2},& 0<x<2\pi\\0,&x=0,2\pi \end{cases}$$
+  \end{exa}
+
+  对于$x_0\in[-\pi,\pi]$，我们令
+  $$\phi(t)=f(x_0+t)+f(x_0-t)-2S_0,$$
+  则$\phi(t)$在$t=0$附近的性质对Fourier级数的收敛起着至关重要的作用.由Riemann-Lebesgue引理，若要Fourier级数收敛
+  到$S_0$，只要$\dfrac{\phi(t)}{t}$在$t=0$的邻域绝对可积即可.因此我们有
+  \begin{thm}[Dini]
+    设$f(x)$是周期为$2\pi$的函数，在$[-\pi,\pi]$上可积或有瑕点时绝对可积，并且对于$x_0\in[-\pi,\pi]$，存在$\delta>0$，使得
+    $\delta>0$，使得
+    $$\int_0^\delta\frac{|\phi(t)|}{t}dt<+\infty,$$
+    则$f(x)$的傅里叶级数在$x_0$处收敛到$S_0.$
+  \end{thm}
+  \clearpage
+  \section{习题课笔记(13)}
+  \begin{exa}
+    设$f(x)$以$2\pi$为周期，且满足$\alpha>0$阶的Lipschitz条件,证明：$a_n(b_n)=O(\frac{1}{n^\alpha})$.
+  \end{exa}
+  \zm $a_n=\frac{1}{\pi}\int_{-\pi}^\pi f(x)\cos nx\dx=\frac{1}{\pi}\int_{-\pi-\frac{\pi}{n}}^{\pi-\frac{\pi}{n}}
+  f(t+\frac{\pi}{n})\cos(nt+\pi)dt=-\frac{1}{\pi}\int_{-\pi}^\pi f(t+\frac{\pi}{n})\cos ntdt$.从而有
+  $$2a_n=\frac{1}{\pi}\int_{-\pi}^\pi (f(x)-f(x+\frac{\pi}{n}))\cos nx\dx.$$
+  所以有
+  $$|2a_n|\le\frac{1}{\pi}\int_{-\pi}^\pi L(\frac{\pi}{n})^\alpha \dx=...$$
+  $b_n$同理，从而得证.
+  \begin{exa}
+    求$f(x)=\dfrac{r\sin x}{1-2r\cos x+r^2},|r|<1$的傅里叶级数.
+  \end{exa}
+  \jie 法一：显然$f(x)$为奇函数，所以只需要求$b_n=\frac{1}{\pi}\int_{-\pi}^\pi f(x)\sin nx\dx$.
+  设$z=e^{ix}=\cos x+i\sin x$，则$z^n=\cos nx+i\sin nx,\bar{z}=\cos x-i\sin x,\cos x=\dfrac{z+\bar{z}}{2},
+  \sin x=\dfrac{z-\bar{z}}{2i}.$于是
+  $$f(x)=\frac{r\dfrac{z-\bar{z}}{2i}}{1-2r\dfrac{z+\bar{z}}{2}+r^2}=...=\frac{1}{2i}(\frac{1}{1-rz}-
+  \frac{1}{1-r\bar{z}}).$$
+  下面对两个分式Taylor展开，为
+  $$\frac{1}{2i}(\sum_{i=1}^\infty[(rz)^n-(r\bar{z})^n])=\frac{1}{2}\sum_{i=1}^\infty r^n2i\sin nx=
+  \sum_{n=1}^\infty r^n\sin nx.$$
+  法二(待定系数法)：我们考虑$\dfrac{1-r^2}{1-2r\cos x+r^2}=1+\sum_i a_n r^n.$然后将分母乘到右式
+  \begin{align*}
+    1-r^2&=(1+\sum_1 a_nr^n)(1-2r\cos x+r^2)\\
+    &=1-2r\cos x+r^2+\sum_1a_n(1-2r\cos x+r^2)r^n\\
+    &=1-2r\cos x+r^2+\sum_1(a_nr^n-2a_n\cos xr^{n+1}+a_nr^{n+2})\\
+    &=1-2r\cos x+r^2+\sum_1a_nr^n-\sum_22a_{n-1}\cos xr^n+\sum_3a_{n-2}r^n\\
+    &=1-2r\cos x+r^2+a_1r+a_2r^2-2a_1\cos xr^2+\sum_3(a_n-2a_{n-1}\cos x+a_{n-2})r^n\\
+    &=1+(a_1-2\cos x)r+(1+a_2-2a_1\cos x)r^2+\sum_3(a_n-2a_{n-1}\cos x+a_{n-2})r^n.
+  \end{align*}
+  从而解得，$a_1=2\cos x,a_2=2\cos 2x,\cdots,a_n=2\cos nx.$从而就可以得到原式的幂级数展开.
+  \begin{exa}
+    $f(x)$以$2\pi$为周期且连续，设
+    $$V_n(x)=\frac{(2n)!!}{2\pi(2n-1)!!}\int_{-\pi}^\pi f(t)\cos^{2n}\frac{t-x}{2}dt.$$
+    证明$V_n(x)\rightrightarrows f(x),x\in[-\pi,\pi].$
+  \end{exa}
+  \zm 首先对$V_n(x)$我们有：
+  \begin{align*}
+    V_n(x)&=\frac{(2n)!!}{2\pi(2n-1)!!}\int_{-\pi}^\pi f(t)\cos^{2n}\frac{t-x}{2}dt\\
+    &=\frac{(2n)!!}{2\pi(2n-1)!!}\int_{-\pi}^\pi f(u+x)\cos^{2n}\frac{u}{2}dt\\
+    &=\frac{(2n)!!}{\pi(2n-1)!!}\int_{-\frac{\pi}{2}}^\frac{\pi}{2} f(x+2y)\cos^{2n}ydy
+  \end{align*}
+  再注意到：
+  $$\frac{(2n)!!}{\pi(2n-1)!!}\int_{-\frac{\pi}{2}}^\frac{\pi}{2}\cos^{2n}ydy=1,$$
+  从而有
+  $$\frac{(2n)!!}{\pi(2n-1)!!}\int_{-\frac{\pi}{2}}^\frac{\pi}{2}f(x)\cos^{2n}ydy=f(x).$$
+  于是对$\forall\varepsilon>0,$我们有
+  \begin{align*}
+    |V_n(x)-f(x)|&\le\frac{(2n)!!}{\pi(2n-1)!!}\int_{-\frac{\pi}{2}}^\frac{\pi}{2}|f(x+2y)-f(x)|\cos^{2n}ydy\\
+    &\le\frac{(2n)!!}{\pi(2n-1)!!}[\int_{-\delta}^\delta+\int_{-\frac{\pi}{2}}^{-\delta}+\int_{\delta}^\frac{\pi}{2}]\\
+    &\le \varepsilon+2M\frac{(2n)!!}{\pi(2n-1)!!}\cos^{2n}\delta\frac{\pi}{2}\cdot2\\
+    &\le 3\varepsilon.
+  \end{align*}
+  其中，当$y<\delta$时有$|f(x+2y)-f(x)|<\varepsilon.$又由$f$的连续性知$|f(x)|\le M.$而且，我们可以证明上面倒数第二式
+  当$n$充分大的时候是小于$\varepsilon$的(用数项级数收敛时通项趋于零即可).
+  \clearpage
+  \section{课堂笔记(26):傅里叶级数的敛散性(3)}
+  \begin{center}
+    2018年6月4日
+  \end{center}
+  \begin{thm}[Lipschitz]
+    设$f(x)$是周期为$2\pi$的函数，在$[-\pi,\pi]$上可积或有瑕点时绝对可积.再设$f(x)$在$x_0$处满足$Holder$条件：
+    存在$L>0,\delta>0$使得对于$t\in U(x_0,\delta)$有
+    $$|f(x_0+t)-f(x_0)|\le L|t|^\alpha,$$
+    则$f(x)$的傅里叶级数在$x_0$处收敛到$f(x_0).$
+  \end{thm}
+  \zm 由条件我们有
+  $$\frac{|f(x_0+t)-f(x_0)|}{t}\le\frac{L}{t^{1-\alpha}}.$$
+  由于$\alpha>0$我们就得到
+  $$\int_0^\delta\frac{|\phi(t)|}{t}dt<+\infty.$$
+  \begin{thm}[Dirichlet]
+    设$f(x)$为周期$2\pi$的函数，在$[-\pi,\pi]$可积或有瑕点时绝对可积，再设$x_0\in[-\pi,\pi]$不是瑕点，且
+    存在$\delta_0>0$使得$f(x)$在$(x_0-\delta_0,x_0)$及$(x_0,x_0+\delta_0)$内分别单调，则$f(x)$的傅里叶级数在
+    $x_0$收敛到
+    $$\frac{f(x_0-0)+f(x_0+0)}{2}$$
+  \end{thm}
+  \zm 不妨设$f(x)$在$(x_0,x_0+\delta_0)$内单调增.由于
+  $$\int_0^{+\infty}\frac{\sin t}{t}dt=\frac{\pi}{2}.$$
+  从而连续函数$G(x)=\displaystyle\int_0^x\dfrac{\sin t}{t}$在$[0,+\infty)$上有界.由此，存在常数$M$,对任意的
+  $0\le t_1\le t_2$有
+  $$\left|\int_{t_1}^{t_2}\frac{\sin t}{t}dt\right|\le M.$$
+  由于单调性，对于$\forall \varepsilon>0,\exists 0<\delta<\delta_0$使得当$0<t<\delta$时有
+  $$0\le f(x_0+t)-f(x_0+0)<\frac{\varepsilon}{2M}.$$
+  现在来估计积分：
+  \begin{align*}
+    &\int_0^{\delta_0}\frac{f(x_0+t)-f(x_0+0)}{t}\sin \lambda tdt\\
+    &=\int_0^\delta+\int_\delta^{\delta_0}\\
+    &=I+J
+  \end{align*}
+  由Riemann-Lebesgue引理知$|J|<\dfrac{\varepsilon}{2}.$对于积分$I$，由定积分第二中值定理有：
+  \begin{align*}
+    |I|&=\left|\int_0^\delta \frac{f(x_0+t)-f(x_0+0)}{t}\sin \lambda tdt\right|\\
+    &=|f(x_0+\delta)-f(x_0+0)|\left|\int_\xi^\delta\frac{1}{t}\sin\lambda tdt\right|\\
+    &=|f(x_0+\delta)-f(x_0+0)|\left|\int_{\lambda\xi}^{\lambda\delta}\frac{\sin t}{t}dt\right|\\
+    <\frac{\varepsilon}{2}
+  \end{align*}
+  所以得证.
+
+  我们来总结一下，设$f(x)$是周期为$2\pi$的函数，若满足以下条件之一：
+  \begin{enumerate}
+    \item 在$[-\pi,\pi]$分段单调;
+    \item 在$[-\pi,\pi]$分段可微;
+    \item 满足Dini条件或Lipschitz条件.
+  \end{enumerate}
+  则$\forall x\in[-\pi,\pi]$,$f(x)$的傅里叶级数收敛到
+  $$\frac{f(x-0)+f(x+0)}{2}.$$
+
+  但是，连续函数的Fourier级数却不一定收敛到自身，比如下面的例子.
+  \begin{exa}
+    设$p>q\ge 1$,且$t_{p,q}(x)=\dfrac{\cos(p-q)x}{q}+\dfrac{\cos(p-q+1)x}{q-1}+\cdots+\dfrac{\cos(p-1)x}{1}-
+    \dfrac{\cos(p+q)x}{q}-\cdots-\dfrac{\cos(p+1)x}{1}=2\sin px\left(\dfrac{\sin qx}{q}+
+    \dfrac{\sin (q-1)x}{q-1}+\cdots+\dfrac{\sin x}{1} \right).$
+  \end{exa}
+  这个函数的Fourier级数在0处是发散到无穷的.
+  \clearpage
+  \section{课堂笔记(27):傅里叶级数的其他收敛性(1)}
+  \subsection{连续函数的三角多项式一致逼近}
+  首先我们说明，一个级数的Cesaro和比原级数有更好的收敛性.于是将第$n+1$项的Cesaro和化简为：
+  $$S_n^*(x)=\frac{1}{\pi}\int_{-\pi}^\pi f(x+t)\Phi_n(t)dt.$$
+  其中
+  $$\Phi_n(t)=\frac{\sin^2\frac{n+1}{2}t}{2(n+1)\sin^2\frac{t}{2}}$$
+  叫做费叶核.显然有
+  $$\frac{1}{\pi}\int_{-\pi}^\pi\Phi_n(t)dt=1.$$
+  \begin{thm}[Weierstrass]
+    设$f(x)$是以$2\pi$为周期的连续函数，则存在三角多项式$T_n(x)$，使得$\forall \varepsilon>$0,
+    存在$N\in\mathbb{N}$，当$n>N$时，对一切$x\in(-\infty,+\infty)$有
+    $$|f(x)-T_n(x)|<\varepsilon.$$
+    特别地，$f(x)$的傅里叶级数部分和序列的Cesaro和在$[-\pi,\pi]$上一致收敛于$f(x)$.
+  \end{thm}
+  \begin{exa}
+    设$f(x)$在$\R$上连续且以$2\pi$为周期，再设$f(x)$的傅里叶级数处处收敛.证明$f(x)$的傅里叶级数必处处收敛于$f(x)$.
+  \end{exa}
+  \zm 设
+  $$f(x)\sim\frac{a_0}{2}+\sum_{n=1}^{+\infty}(a_n\cos nx+b_n\sin nx).$$
+  记$S_n(x)$为Fourier级数前$n$项和，$S_n^*(x)$为第$n$项Cesaro和.由于$f$的傅里叶级数处处收敛，因此存在$\R$上的函数
+  $g(x)$使得对于$\forall x\in\R$有
+  $$\lim_{n\to\infty}S_n(x)=g(x).$$
+  因此，对于$\forall x\in\R$有
+  $$\lim_{n\to\infty}S_n^*(x)=g(x).$$
+  由极限的唯一性我们就知道$g(x)=f(x).$
+  \subsection{傅里叶级数的均方收敛}
+  \begin{dfn}
+    设函数$f(x),f_n(x)$在区间$[a,b]$平方可积，并且满足
+    $$\lim_{n\to\infty}\int_a^b[f_n(x)-f(x)]^2\dx=0.$$
+    则称函数序列$\{f_n(x)\}$在$[a,b]$上均方收敛于$f(x)$.
+  \end{dfn}
+  显然，若$f(x)$平方可积，则$f(x)$在$[a,b]$上必定绝对可积.
+
+  对于$[a,b]$上的平方可积函数$f(x),g(x)$：
+  \begin{enumerate}
+    \item $f(x)g(x)$在$[a,b]$上绝对可积;
+    \item $f(x)+g(x)$在$[a,b]$上平方可积.
+  \end{enumerate}
+  记$L^2(0,2\pi)$为$[0,2\pi]$上所有平方可积函数的集合.现在$\forall f,g\in L^2$，则定义
+  $$(f,g)=\int_0^{2\pi}f(x)g(x)\dx.$$
+  我们有Schwarz不等式:
+  $$|(f,g)|\le |f|\cdot|g|.$$
+  随之可以得到Minkowski不等式：
+  $$|f+g|\le |f|+|g|.$$
+  \begin{lem}
+    设$f\in L^2,$则$$(f(x)-a_n\cos nx,\cos nx)=0.$$
+  \end{lem}
+  \begin{lem}
+    设$S_n(x)$为$f(x)$的傅里叶级数前$n$项和，$T_n(x)$为任意三角多项式，则
+    $$(f(x)-S_n(x),T_n(x))=0.$$
+  \end{lem}
+  \begin{thm}[傅里叶级数最佳逼近]
+    设$f$在$[-\pi,\pi]$上平方可积，则对任何$n$阶三角多项式$T_n(x)$，成立
+    $$|f(x)-S_n(x)|\le|f(x)-T_n(x)|.$$
+  \end{thm}
+  \zm $|f-T_n|^2=|f-S_n+S_n-T_n|^2=|f-S_n|^2+|S_n-T_n|^2.$
+
+  对于最佳逼近，有结论：
+  $$|f-S_{n+1}|\le|f-S_{n}|.$$
+  \begin{thm}
+    设$f(x)$在$[-\pi,\pi]$上平方可积，则对$f(x)$的傅里叶级数部分和序列，有
+    $$|f(x)-S_n(x)|\to 0.$$
+  \end{thm}
+  \begin{thm}[Parseval]
+    设$f(x)$在$[-\pi,\pi]$上平方可积，则有
+    $$\frac{a_0^2}{2}+\sum_{n=1}^\infty(a_n^2+b_n^2)=\frac{1}{\pi}\int_{-\pi}^\pi f^2(x)\dx.$$
+  \end{thm}
+  \zm 由上述定理知，$\forall \varepsilon>0,\exists N,$当$n>N$时，有
+  $$\frac{1}{\pi}\int_{-\pi}^\pi[f(x)-S_n(x)]^2\dx<\varepsilon,$$
+  因此我们有
+  $$0\le\frac{1}{\pi}\int_{-\pi}^\pi f^2(x)\dx-
+  \left[\frac{a_0^2}{2}+\sum_{n=1}^n(a_n^2+b_n^2)\right]=
+  \frac{1}{\pi}\int_{-\pi}^\pi[f(x)-S_n(x)]^2\dx<\varepsilon.$$
+  我们知道，并不是任意一个三角级数都是某个平方可积函数的傅里叶级数.
+
+  设$f(x),g(x)$都是平方可积函数，且都有傅里叶级数，则成立：
+  $$\frac{1}{\pi}\int_{-\pi}^\pi f(x)g(x)\dx=
+  \frac{a_0\alpha_0}{2}+\sum_{n=1}^\infty(a_n\alpha_n+b_n\beta_n).$$
+  这可以从$f+g,f-g$的Parseval等式相减得到.
+  \clearpage
+  \section{习题课笔记(14)}
+  \begin{exa}
+    设函数$f(x)$在$\R$上只有有限个第一类间断点，且以$2\pi$为周期，再设$f(x)$的傅里叶级数处处收敛.证明$f(x)$的傅里叶级数
+    必处处收敛于$f(x)$.
+  \end{exa}
+  \begin{exa}
+    设$f(x)$是以$2\pi$为周期的连续函数,$S_n(x)$是其傅里叶级数的前$n$项和，
+    $g_n(x)=\int_{-\pi}^\pi\frac{\cos(x-u)}{\sqrt{1+\sin^2(x+u)}}S_n(u)du.$证明：
+    \begin{enumerate}
+      \item 存在与$x$和$n$无关的$K>0$使得$|g_n(x)|\le K$.
+      \item 当$n\to+\infty$时，$g_n(x)\rightrightarrows \int_{-\pi}^\pi
+      \frac{\cos(x-u)}{\sqrt{1+\sin^2(x+u)}}f(u)du$.
+    \end{enumerate}
+  \end{exa}
+  \zm (1).利用Cauchy不等式，我们有：
+  $$|g_n(x)|\le\sqrt{\int_{-\pi}^\pi\frac{\cos^2(x-u)}{1+\sin^2(x+u)}du}\sqrt{\int_{-\pi}^\pi S_n^2(u)du}\le\sqrt{2\pi}M.$$
+  这是因为$\|S_n(x)\|$有界.\\
+  (2).两式相减我们有
+  $$\left|\int_{-\pi}^\pi\frac{\cos(x-u)}{1+\sin(x+u)}(f(u)-S_n(u))du\right|\le
+  \sqrt{2\pi}\|S_n-f\|\to 0.$$
+  \begin{exa}
+    将周期为$2\pi$的函数$f(x)=\frac{1}{4}x(2\pi-x),x\in[0,2\pi]$展开为傅里叶级数.并求$\sum\frac{1}{n^2},
+    \sum\frac{1}{n^4}.$
+  \end{exa}
+  \jie 可以求得
+  $$f(x)=\frac{\pi^2}{6}-\sum_{n=1}^\infty\frac{\cos nx}{n^2}.$$
+  令$x=0$可以求得$\sum\dfrac{1}{n^2}=\dfrac{\pi^2}{6}.$接下来利用Parseval等式有：
+  $$\frac{1}{\pi}\int_0^{2\pi}f^2(x)\dx=\frac{a_0^2}{2}+\sum_{n=1}^\infty a_n^2.$$
+  从而得到$\sum\dfrac{1}{n^4}=\dfrac{\pi^4}{90}.$
+  \begin{exa}
+    求$\ln|\sin\frac{x}{2}|$的傅里叶展开.
+  \end{exa}
+  \jie $a_0=-2\ln2.$下面来计算$a_n$:
+  \begin{align*}
+    a_n&=\frac{1}{\pi}\int_{-\pi}^\pi\ln|\sin\frac{t}{2}|\cos ntdt\\
+    &=\frac{2}{\pi}\int_0^\pi\ln|\sin\frac{t}{2}|\cos ntdt\\
+    &=\frac{4}{\pi}\int_0^\frac{\pi}{2}\ln|\sin x|\cos 2nx\dx\\
+    &-\frac{1}{2n}\frac{4}{\pi}\int_0^\frac{\pi}{2}\frac{\cos x\sin 2nx}{\sin x}\dx\\
+    &-\frac{2}{n\pi}\int_0^\frac{\pi}{2}\frac{\sin(2n+1)x+\sin(2n-1)x}{2\sin x}\dx\\
+    &=-\frac{1}{n}.
+  \end{align*}
+  \begin{exa}
+    设$f\in C^1[0,2\pi],f(0)=f(2\pi)=0,\int_0^{2\pi}f(x)=0.$证明：
+    $$\int_0^{2\pi}[f'(x)]^2\dx\ge\int_0^{2\pi}[f(x)]^2\dx.$$
+  \end{exa}
+  \zm $f,f'$都满足Parseval等式，且导数的傅里叶系数$a'_n,b'_n$和$f$的傅里叶系数$a_n,b_n$有关系：
+  $$a'_n=nb_n,b'_n=-na_n.$$
+  所以结论就显然了.
+  \begin{exa}
+    \begin{enumerate}
+      \item 求函数$f(x)=\cos ax$在$(-\pi,\pi),0<a<1$的傅里叶级数，并指出其和函数;
+      \item 证明$\dfrac{\pi}{\sin a\pi}=\dfrac{1}{a}+\sum_{n=1}^\infty(-1)^n\dfrac{2a}{a^2-n^2}$;
+      \item 令$a=\dfrac{x}{\pi},$证明$\int_0^{+\infty}\dfrac{\sin x}{x}=\dfrac{\pi}{2}.$
+    \end{enumerate}
+  \end{exa}
+  \zm (1).$$f(x)=\frac{\sin a\pi}{\pi}\left(\frac{1}{a}+\sum_{n=1}^\infty\frac{(-1)^n2a}{a^2-n^2}\cos nx\right).$$
+  (2).令$x=0$得证.\\
+  (3).将$a=\dfrac{x}{\pi}$代入得到：
+  $$\frac{1}{\sin x}=\frac{1}{x}+\sum_{n=1}^\infty\frac{(-1)^n2x}{x^2-n^2\pi^2}.$$
+  从而有
+  $$1=\frac{\sin x}{x}+\sum_{n=1}^\infty\frac{(-1)^n2x\sin x}{x^2-n^2\pi^2}.$$
+  然后在$[0,\pi]$上积分得到：
+  \begin{align*}
+  \pi&=\int_0^\pi\frac{\sin x}{x}\dx+\int_0^\pi\sum_{n=1}^\infty\frac{(-1)^n2x\sin x}{x^2-n^2\pi^2}\dx\\
+  &=\int_0^\pi\frac{\sin x}{x}\dx+\sum_{n=1}^\infty\int_0^\pi\frac{(-1)^n2x\sin x}{x^2-n^2\pi^2}\dx\\
+  &=\int_0^\pi\frac{\sin x}{x}\dx+
+  \sum_{n=1}^\infty\int_0^\pi\sin (x-n\pi)\left(\frac{1}{x-n\pi}-\frac{1}{x+n\pi}\right)\dx\\
+  &=\int_{-\infty}^{+\infty}\frac{\sin x}{x}
+  \end{align*}
+  从而就得到了证明.
+  \clearpage
+  \section{课堂笔记(28):傅里叶级数的其他收敛性(2)}
+  \begin{center}
+    2018年6月11日
+  \end{center}
+  \begin{thm}
+    设函数$f(x)$以$2\pi$为周期，且可导，且$f'(x)$在$[-\pi,\pi]$上可积，则$f(x)$的傅里叶级数在$\R$上一致收敛
+    到$f(x)$.
+  \end{thm}
+  \zm 设$f(x)$的Fourier级数为
+  $$f(x)\sim \frac{a_0}{2}+\sum_{n=1}^\infty(a_n\cos nx+b_n\sin nx),$$
+  $f'(x)$的傅里叶级数为
+  $$f'(x)\sim \frac{a_0'}{2}+\sum_{n=1}^\infty(a_n'\cos nx+b_n'\sin nx).$$
+  我们有
+  \begin{gather*}
+    a_0'=0\\
+    a_n'=nb_n\\
+    b_n'=-na_n
+  \end{gather*}
+  从而对于$\forall N\in \mathbb{N},$有
+  \begin{align*}
+    \sum_{n=1}^N(|a_n|+|b_n|)&=\sum_{n=1}^N\frac{|a_n'|+|b_n'|}{n}\\
+    &\le\left[\sum_{n=1}^Na_n'^2+b_n'^2\right]^\frac{1}{2}\left(\sum_{n=1}^N\frac{2}{n^2}\right)^\frac{1}{2}\\
+    &<\left[\frac{1}{\pi}\int_{-\pi}^\pi(f'(x))^2\dx\right]^\frac{1}{2}\left(\frac{\pi^2}{3}\right)^\frac{1}{2}
+  \end{align*}
+  因此Fourier级数绝对一致收敛.
+  \begin{thm}
+    设$f(x)$以$2\pi$为周期，$f''(x)$存在且可积，设$f$的傅里叶级数为
+    $$f(x)=\frac{a_0}{2}+\sum_{n=1}^\infty(a_n\cos nx+b_n\sin nx),$$
+    则$$f'(x)=\sum_{n=1}^\infty(nb_n\cos nx-na_n\sin nx).$$
+  \end{thm}
+  \begin{thm}
+    设函数$f(x)$在$[0,2\pi]$可积且以$2\pi$为周期，设
+    $$f(x)\sim\frac{a_0}{2}+\sum_{n=1}^\infty(a_n\cos nx+b_n\sin nx),$$
+    则$$\int_0^xf(t)dt=\frac{a_0}{2}x+\sum_{n=1}^\infty\left[\frac{a_n}{n}\sin nx+\frac{b_n(1-\cos nx)}{n}\right].$$
+  \end{thm}
+  \zm 对于$x\in[0,2\pi]$,作
+  \[ g(t)=
+  \begin{cases}
+    \dfrac{\pi}{2},&t=0,x;\\
+    \pi,&t\in(0,x);\\
+    0,&t\in(x,2\pi)
+  \end{cases}
+  \]
+  设$g(x)$的Fouier级数为$\frac{\alpha_0}{2}+\sum_{n=1}^\infty(\alpha_n\cos nx+\beta_n\sin nx)$,则有：
+  \begin{gather*}
+    \alpha_0=x,\\
+    \alpha_n=\frac{\sin nx}{n},\\
+    \beta_n=\frac{1-\cos nx}{n}
+  \end{gather*}
+  由关于$f(t)$和$g(t)$的Parseval等式得
+  $$\frac{1}{\pi}\int_0^x\pi f(t)dt=\frac{a_0}{2}x+
+  \sum_{n=1}^\infty\left[\frac{a_n}{n}\sin nx+\frac{b_n(1-\cos nx)}{n}\right],x\in[0,2\pi].$$
+  \begin{exa}[等周问题]
+    给定一长为$L$的封闭曲线，何时围成的面积最大?
+  \end{exa}
+  \jie 假设曲线为$\begin{cases}x=\varphi(s)\\y=\phi(s)\end{cases}$,其中$s$为弧长参数，也即
+  $\varphi'^2(s)+\phi'^2(s)=1.$设$\varphi,\phi$的Fourier级数为：
+  \begin{gather*}
+    \varphi(s)\sim\frac{a_0}{2}+...\\
+    \phi(s)\sim\frac{\alpha_0}{2}+...
+  \end{gather*}
+  则
+  \begin{gather*}
+    \varphi'(s)\sim\sum_{i=1}^\infty(nb_n\cos nx-na_n\sin nx)\\
+    \phi'(s)\sim\sum_{i=1}^\infty(n\beta_n\cos nx-n\alpha_n\sin nx)
+  \end{gather*}
+  曲线围成的面积为：
+  $$S=\int_0^{2\pi}xdy=\int_0^{2\pi}\varphi(s)\phi'(s)ds=n\pi\left(\sum_{n=1}^\infty a_n\beta_n-b_n\alpha_n\right).$$
+  另一方面有
+  $$\frac{1}{\pi}\int_0^{2\pi}[\varphi'^2(s)+\phi'^2(s)]ds=2=\sum_{n=1}^\infty n^2(a_n^2+b_n^2+\alpha_n^2+\beta_n^2).$$
+  从而有：
+  $$n^2(a_n^2+b_n^2+\alpha_n^2+\beta_n^2)-2n(a_n\beta_n-b_n\alpha_n)=(na_n-\beta_n)^2+(nb_n+\alpha_n)^2+
+  (n^2-1)(\alpha_n^2+\beta_n^2)\ge 0.$$
+  对上式求和就有
+  $$n\pi\left(\sum_{n=1}^\infty a_n\beta_n-b_n\alpha_n\right)\le
+  \frac{\pi}{2}\sum_{n=1}^\infty n^2(a_n^2+b_n^2+\alpha_n^2+\beta_n^2)=\pi.$$
+  等号成立当且仅当
+  $$a_n=b_n=\alpha_n=\beta_n=0,\forall n\ge2; \alpha_1=-b_1,\beta_1=a_1.$$
+  \clearpage
+  \section{课堂笔记(29):复数形式的傅里叶级数}
+  我们知道Euler公式：
+  $$e^{ix}=\cos x+i\sin x.$$
+  故
+  $$\cos nx=\frac{e^{inx}+e^{-inx}}{2},\sin nx=\frac{e^{inx}-e^{-inx}}{2i}.$$
+  现在设$f$为$2\pi$周期的可积函数，它的傅里叶级数为
+  $$\frac{a_0}{2}+\sum_{n=1}^\infty\left(a_n\frac{e^{inx}+e^{-inx}}{2}+b_n\frac{e^{inx}-e^{-inx}}{2i}\right)=
+  \frac{a_0}{2}+\sum_{n=1}^\infty\left(\frac{a_n-ib_n}{2}e^{inx}+\frac{a_n+ib_n}{2}e^{-inx}\right).$$
+  令$c_n=\dfrac{a_n-ib_n}{2}$,则上式等于$\sum\limits_{n=-\infty}^{+\infty} c_ne^{inx}.$
+  而且我们还有
+  \begin{align*}
+    c_n&=\dfrac{a_n-ib_n}{2}=\frac{1}{2\pi}\left(\int_0^{2\pi}f(x)\cos nx\dx
+    -i\int_0^{2\pi}f(x)\sin nx\dx\right)\\
+    &=\frac{1}{2\pi}\int_0^{2\pi}f(x)e^{-inx}\dx\\
+  \end{align*}
+  则$f(x)$的的Fourier级数的复数形式为
+  $$f(x)=\sum c_ne^{inx}.$$
+\end{document}
