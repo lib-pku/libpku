@@ -1,0 +1,1009 @@
+\documentclass[UTF8]{article}
+\usepackage{ctex}
+\usepackage{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{hyperref}
+\usepackage{color}
+\title{\textbf{高等代数(上)应当掌握或了解的定理、结论总结}}
+\author{Sulley}
+\date{}
+\geometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm}
+\newtheorem{thrm}{定理}[subsection]
+\newtheorem{lemma}{引理}[subsection]
+\newtheorem{defn}{定义}[subsection]
+\newtheorem{ccl}{结论}[subsection]
+\begin{document}
+\maketitle
+\tableofcontents
+\clearpage
+\section{线性方程组}
+\subsection{Guass-Jordan算法}
+\begin{thrm}
+  增广矩阵$\xrightarrow{\text{初等行变换}}$阶梯形矩阵$\xrightarrow{\text{初等行变换}}$简化行阶梯形矩阵$\xrightarrow{\text{判断是否有唯一解}}$
+  唯一解(一般解).
+\end{thrm}
+
+\subsection{线性方程组解的情况及其判别准则}
+\begin{thrm}
+  $n$元线性方程组的解的情况有且只有三种：无解、有唯一解、有无穷多解。把$n$元线性方程组的增广矩阵经过初等行变换化成阶梯形矩阵，如果相应的阶梯形方程组出现``$0=d$''
+  (其中$d$为非零数)这样的方程，则原方程组无解；否则有解。当有解时，如果阶梯形矩阵的非零行数目$r$等于未知量数目$n$，则原方程有唯一解，否则有无穷多解.
+\end{thrm}
+\begin{ccl}
+  $n$元齐次线性方程组有非零解的充要条件是：系数矩阵经过初等行变换化成阶梯形矩阵中，非零行数目r<n.
+\end{ccl}
+\begin{ccl}
+  如果n元齐次线性方程方程数目s<n，那么它一定有非零解，从而有无穷多解.
+\end{ccl}
+
+\subsection{数域}
+\begin{ccl}
+  任一数域都包含有理数域.
+\end{ccl}
+注：我们的讨论都建立在某一个数域$\mathbb{K}$上.
+
+\section{行列式}
+\subsection{$n$元排列}
+\begin{thrm}
+  对换改变n元排列的奇偶性.
+\end{thrm}
+\begin{thrm}
+  任一n元排列与排列$123\ldots n$可以经过一系列对换\textbf{互变}，并且所做对换的次数与这个n元排列有相同的奇偶性.
+\end{thrm}
+
+\subsection{$n$阶行列式的定义}
+\begin{defn}
+  \begin{gather*}
+  \begin{vmatrix}
+    a_{11} & a_{12} & \ldots & a_{1n} \\
+    a_{21} & a_{22} & \ldots & a_{2n} \\
+    \vdots & \vdots &    & \vdots     \\
+    a_{n1} & a_{n2} & \ldots & a_{nn}
+  \end{vmatrix}
+  \equiv \sum\limits_{j_1j_2\ldots j_n}(-1)^{\tau(j_1j_2\ldots j_n)}a_{1j_1}a_{2j_2}\ldots a_{nj_n},\text{这叫做n阶行列式的\textbf{完全展开式}}.
+  \end{gather*}
+\end{defn}
+\begin{ccl}
+  当$n\ge 2$时，如果n级矩阵$A$的元素为$1$或$-1$，则$|A|$必为偶数.
+\end{ccl}
+
+\subsection{行列式的性质}
+\begin{thrm}
+  行列互换\text{转置}，行列式的值不变.
+\end{thrm}
+\begin{thrm}
+  行列式一行的公因子可以提出去.
+\end{thrm}
+\begin{thrm}
+  行列式中若有某一行是两组数的和，则此行列式等于两个行列式的和.
+\end{thrm}
+\begin{thrm}
+  两行互换，行列式反号.
+\end{thrm}
+\begin{thrm}
+  两行相同，行列式的值为$0$.
+\end{thrm}
+\begin{thrm}
+  两行成比例，行列式的值为$0$.
+\end{thrm}
+\begin{thrm}
+  把一行的倍数加到另一行上，行列式的值不变.
+\end{thrm}
+\begin{ccl}
+  $A^\mathrm{T}(i;j)=A(j;i)$.
+\end{ccl}
+\begin{ccl}
+  如果$A\xrightarrow{\text{初等行变换}}B$，那么$|B|=l|A|$，其中$l$是某个非零数.也就是初等行列变换\textbf{不改变行列式的非零性}.
+\end{ccl}
+
+\subsection{行列式按一行(列)展开}
+\begin{thrm}\label{thrm:238}
+  $n$阶行列式$|A|$等于它的第$i$行(列)元素与自己的代数余子式的乘积之和，即
+  $$|A|=a_{i1}A_{i1}+a_{i2}A_{i2}+\cdots a_{in}A_{in}=\sum\limits_{j=1}^na_{ij}A_{ij}$$.
+\end{thrm}
+\begin{thrm}
+  $n$阶行列式$|A|$的第$i$行(列)元素与第$k$行(列)相应元素的代数余子式的乘积之和等于零，和定理\ref{thrm:238}一起可以写成：
+  \[
+  \sum_{j=1}^na_{ij}A_{kj}=
+  \begin{cases}
+    |A| &,k=i \\
+    0 &,k\ne i
+  \end{cases}
+  \]
+  \[
+  \sum_{i=1}^na_{ij}A_{il}=
+  \begin{cases}
+    |A| &,j=l \\
+    0 &,j\ne l
+  \end{cases}
+  \]
+\end{thrm}
+
+\subsection{Cramer法则}
+\begin{thrm}
+  $n$个方程的$n$元\textbf{线性方程组}，如果它的系数行列式$|A|\ne 0$，则它有唯一解(这也是充要条件)；如果$|A|=0$，则它无解或无穷多解.
+\end{thrm}
+\begin{ccl}
+  $n$个方程的$n$元\textbf{齐次线性方程组}只有零解的充要条件是它的系数行列式不等于零，有非零解的充要条件是系数行列式等于$0$.
+\end{ccl}
+\begin{thrm}
+  $n$个方程的$n$元线性方程组的系数行列式$|A|\ne 0$时，它的唯一解是:
+  \[
+  \left( \frac{|B_1|}{|A|},\frac{|B_2|}{|A|},\ldots,\frac{|B_n|}{|A|} \right)^\mathrm{T}
+  \]
+\end{thrm}
+
+\subsection{行列式按$k$行(列)展开}
+\begin{thrm}
+  在$n$阶行列式$|A|$中，取定$k$行(列)：第$i_1,i_2,\ldots,i_k$行(列)($i_1<i_2<\ldots<i_k,1\le k<n$)，则这$k$行(列)元素形成的
+  所有$k$阶子式与它们自己的代数余子式的乘积之和等于$|A|$.即
+  \[
+  |A|=\sum_{1\le j_1<j_2<\ldots<j_k\le n}A \begin{pmatrix} i_1,& \ldots ,& i_k \\ j_1,& \ldots ,&j_k \end{pmatrix} (-1)^{(i_1+\ldots+i_k)+
+  (j_1+\ldots+j_k)} A \begin{pmatrix} i^{'}_1,& \ldots ,& i^{'}_{n-k} \\ j^{'}_1,& \ldots ,&j^{'}_{n-k} \end{pmatrix}
+  \]
+\end{thrm}
+
+\subsection{本章补充}
+\begin{ccl}
+  设$n\ge 2$，元素为$1$或$-1$的$n$阶行列式的值可以被$2^{n-1}$整除.
+\end{ccl}
+\begin{ccl}
+  \[
+  D_n=
+  \begin{pmatrix}
+    a & b & 0 & 0 & \ldots & 0 & 0 & 0 \\
+    c & a & b & 0 & \ldots & 0 & 0 & 0 \\
+    \vdots & & & & & & & \vdots \\
+    0 & 0 & 0 & 0 & \ldots & c & a & b \\
+    0 & 0 & 0 & 0 & \ldots & 0 & c & a \\
+  \end{pmatrix} =
+  \begin{cases}
+    \dfrac{\alpha_1^{n+1}-\beta_1^{n+1}}{\alpha_1-\beta_1},&a^2 \ne 4bc\\
+    (n+1)\dfrac{a^n}{2^n},&a^2 = 4bc
+  \end{cases}
+  \]
+
+  其中$\alpha_1=c\alpha,\beta_1=c\beta,\quad \alpha,\beta$ 是方程$x^2-\frac{a}{c}x+\frac{b}{c}=0$ 的两个根.
+\end{ccl}
+
+\section{$n$维向量空间}
+\subsection{$n$维向量空间及其子空间}
+\begin{defn}
+  $K^n$的一个非空子集$U$如果满足：
+  \begin{enumerate}
+    \item $\alpha,\gamma \in U \Longrightarrow \alpha+\gamma \in U$;
+    \item $\alpha \in U,k \in K \Longrightarrow k\alpha \in U$,
+  \end{enumerate}
+  则称$U$是$k^n$的一个线性子空间，简称为子空间。
+\end{defn}
+\begin{ccl}
+    数域$k$上$n$元线性方程组$x_1\alpha_1+x_2\alpha_2+\ldots+x_n\alpha_n=\beta$有解\\
+    $\Longleftrightarrow$ $\beta$可以由$\alpha_1,\alpha_2,\ldots,\alpha_n$线性表出\\
+    $\Longleftrightarrow$ $\beta \in <\alpha_1,\alpha_2,\ldots,\alpha_n>$
+\end{ccl}
+
+\subsection{线性相关与线性无关的向量组}
+\begin{defn}
+  $K^n$中向量组$\alpha_1,\ldots,\alpha_s$称为线性相关的，如果有$K$中不全为零的数$k_1,\ldots,k_s$，使得
+  $$k_1\alpha_1+\ldots+k_s\alpha_s=0$$.
+\end{defn}
+\begin{defn}
+  $K^n$中向量组$\alpha_1,\ldots,\alpha_s$称为线性无关的，如果能从
+  $$k_1\alpha_1+\ldots+k_s\alpha_s=0$$
+  推出所有系数全为$0$.
+\end{defn}
+\begin{ccl}
+  如果向量组的一个部分组线性相关，那么整个向量组也线性相关；如果向量组线性无关，那么它的任何一个部分组也线性无关.
+\end{ccl}
+\begin{ccl}
+  如果向量组线性无关，那么它的延伸组也线性无关；如果向量组线性相关，那么它的缩短组也线性相关.
+\end{ccl}
+\begin{thrm}
+  设向量组$\alpha_1,\ldots,\alpha_s$线性无关，则向量$\beta$可以由$\alpha_1,\ldots,\alpha_s$线性表出的充要条件是
+  $\alpha_1,\ldots,\alpha_s,\beta$线性相关.
+\end{thrm}
+\begin{ccl}
+  设向量组$\alpha_1,\ldots,\alpha_s$线性无关，则向量$\beta$不可以由$\alpha_1,\ldots,\alpha_s$线性表出的充要条件是
+  $\alpha_1,\ldots,\alpha_s,\beta$线性无关.
+\end{ccl}
+\begin{ccl}
+  $K^n$中任意$n+1$个向量都线性相关.
+\end{ccl}
+\begin{thrm}
+  \textbf{Steinitz替换定理 }设$\alpha_1,\ldots,\alpha_s$线性无关，并且可由向量$\beta_1,\ldots,\beta_t$线性表出，则$s\le t$，并且可以用
+  向量$\alpha_1,\ldots,\alpha_s$替换向量$\beta_1,\ldots,\beta_t$中某$s$个向量，替换后得到的向量组与原向量组$\beta_1,\ldots,\beta_t$等价.
+\end{thrm}
+
+\subsection{极大线性无关组，向量组的秩}
+\begin{thrm}
+  向量组与它的极大线性无关组等价.
+\end{thrm}
+\begin{thrm}
+  向量组的任意两个极大线性无关组等价.
+\end{thrm}
+\begin{thrm}
+  设向量组$\beta_1,\ldots,\beta_r$可以由向量组$\alpha_1,\ldots,\alpha_s$线性表出，如果$r>s$，那么向量组$\beta_1,\ldots,\beta_r$线性相关;
+  如果$\beta_1,\ldots,\beta_r$线性无关，则$r\le s$.
+\end{thrm}
+\begin{thrm}
+  等价的线性无关的向量组所含向量的数目相等.
+\end{thrm}
+\begin{thrm}
+  向量组的任意两个极大线性无关组所含向量的数目相等.
+\end{thrm}
+\begin{thrm}
+  向量组$\alpha_1,\ldots,\alpha_s$线性无关的充要条件是它的秩等于$s$.
+\end{thrm}
+\begin{thrm}
+  如果向量组1可以由向量组2线性表出，则1的秩$\le$ 2的秩.
+\end{thrm}
+\begin{thrm}
+  等价的向量组有相同的秩.
+\end{thrm}
+\begin{ccl}
+  rank$\{\alpha_1,\ldots,\alpha_s,\beta_1,\ldots,\beta_r\} \le $rank$\{\alpha_1,\ldots,\alpha_s\}+$rank$\{\beta_1,\ldots,\beta_r\}$.
+\end{ccl}
+\begin{ccl}
+  一个向量组的任何一个线性无关组都可以扩充成一个极大线性无关组.
+\end{ccl}
+
+\subsection{子空间的基和维数}
+\begin{thrm}
+  $K^n$的每一个非零子空间$U$都有一个基.从子空间$U$的一个非零向量出发，可以扩充成$U$的一个基.
+\end{thrm}
+\begin{thrm}
+  $K^n$的每一个非零子空间$U$的任意两个基所含向量的数目相等.
+\end{thrm}
+\begin{thrm}
+  设$U$是$K^n$的$r$维子空间，则$U$中任意$r$个线性无关的向量是$U$的一个基.
+\end{thrm}
+\begin{thrm}
+  设$U$和$W$是$K^n$的两个非零子空间，如果$U\subseteq W$，则$\dim U\le \dim W$.
+\end{thrm}
+\begin{thrm}
+  设$U$和$W$是$K^n$的两个非零子空间，且$U\subseteq W$，如果$\dim U= \dim W$，则$U=W$.
+\end{thrm}
+\begin{thrm}
+  $K^n$中，向量组$\alpha_1,\ldots,\alpha_s$的一个极大线性无关组是由这个向量组生成的子空间$U = <\alpha_1,\ldots,\alpha_s>$的一个基，从而
+  $$\dim<\alpha_1,\ldots,\alpha_s>=rank\{\alpha_1,\ldots,\alpha_s\}$$
+\end{thrm}
+
+\subsection{矩阵的秩}
+\begin{thrm}
+  矩阵的初等行、列变换不改变矩阵的秩.
+\end{thrm}
+\begin{thrm}
+  矩阵的秩等于行秩等于列秩，等于不为零的子式的最高阶数，从而行空间的维数等于列空间的维数.9
+\end{thrm}
+\begin{ccl}
+  一个$n$级矩阵$A$的秩等于$n$当且仅当$|A| \ne 0$.
+\end{ccl}
+\begin{ccl}
+  设$s\times n$矩阵$A$的秩为$r$，则$A$的不等于零的子式所在的列(行)构成$A$的列(行)向量组的一个极大线性无关组.
+\end{ccl}
+
+\subsection{线性方程有解的充要条件}
+\begin{thrm}
+  线性方程组$x_1\alpha_1+\ldots+x_n\alpha_n=\beta$有解\\
+  $\Longleftrightarrow \beta \in <\alpha_1,\ldots,\alpha_n>$\\
+  $\Longleftrightarrow <\alpha_1,\ldots,\alpha_n,\beta>=<\alpha_1,\ldots,\alpha_n>$\\
+  $\Longleftrightarrow \dim\{\alpha_1,\ldots,\alpha_n,\beta\}=\dim\{\alpha_1,\ldots,\alpha_n\}$ \\
+  $\Longleftrightarrow$它的系数矩阵的秩等于增广矩阵的秩.
+\end{thrm}
+\begin{thrm}
+  线性方程组有解时，如果它的系数矩阵$A$的秩等于未知量数目$n$，那么有唯一解，如果小于$n$，则有无穷多解.
+\end{thrm}
+
+\subsection{齐次线性方程组的解集的结构}
+\begin{thrm}
+  数域$K$上的$n$元齐次线性方程组的解空间$W$的维数为 $\dim W=n-rank(A)$,其中$A$是方程组的系数矩阵，$\dim W$也即是$A$中自由未知量的个数.
+\end{thrm}
+
+\subsection{非齐次线性方程的解集的结构}
+\begin{thrm}
+  如果数域$K$上$n$元非齐次线性方程组有解，则它的解集$U$为
+  $$U=\{\gamma_0+\eta\,|\,\eta \in W\},$$
+  其中$\gamma_0$是非齐次线性方程组的一个解，$W$是它的导出组的解空间.此时，我们把集合$\{\gamma_0+\eta\,|\,\eta \in W\}$记作$\gamma_0+W$,
+  称它是一个$W$型的线性流形(或子空间$W$的一个陪集)，把$\dim W$称为线性流形$\gamma_0+W$的维数.
+\end{thrm}
+\begin{ccl}
+  如果$n$元非齐次线性方程组有解，则它解唯一的充要条件是它的导出组只有零解.
+\end{ccl}
+
+\subsection{本章补充}
+\begin{ccl}
+  设$A=(a_{ij})$是实数域上的$n$级矩阵，如果
+  $$ a_{ii}>\sum_{\substack{j=1\\j\ne l}}^n|a_{ij}|,i=1,2,\ldots,n $$
+  那么$|A|>0$.
+\end{ccl}
+
+\section{矩阵的运算}
+\subsection{矩阵的运算}
+\begin{ccl}
+  设$A$、$B$都是$n$级矩阵，如果$A^2=B^2$，则不能推出$A=B$或者$A=-B$.
+\end{ccl}
+\begin{ccl}
+  若$n$级矩阵$A=\begin{pmatrix} 0 & 1 & 0 & \ldots & 0\\ 0 & 0 & 1 & \ldots & 0\\
+  \vdots & & & & \vdots \\0 & 0 & 0 & \ldots & 1\\ 0 & 0 & 0 & \ldots & 0 \end{pmatrix}$,则$rank(A^m)=\begin{cases} n-m,&m<n\\0,& m\ge n\end{cases}$
+\end{ccl}
+
+\subsection{特殊矩阵}
+\begin{ccl}
+  两个$n$级对角矩阵的乘积还是$n$级对角矩阵，并且是把相应的主对角元相乘.
+\end{ccl}
+\begin{thrm}
+  两个$n$级上三角矩阵$A,B$的乘积仍为上三角矩阵，并且$AB$的主对角元等于其相应的主对角元的乘积.
+\end{thrm}
+\begin{ccl}
+  用$E_{ij}$左(右)乘一个矩阵$A$,相当于把$A$的第$j$行搬到第$i$行的位置(把$A$的第$i$列搬到第$j$列的位置)，其余行(列)都为零.
+\end{ccl}
+\begin{thrm}
+  用初等矩阵去左(右)乘一个矩阵，就相当于对$A$作了一次相应的初等行(列)变换.
+\end{thrm}
+\begin{ccl}
+  与主对角元两两不同的对角矩阵可交换的矩阵也是对角矩阵.
+\end{ccl}
+\begin{ccl}
+  与所有$n$级矩阵可交换的矩阵一定是$n$级数量矩阵.
+\end{ccl}
+\begin{ccl}
+  数域$K$上任一$n$级矩阵都可以表示成一个对称矩阵和一个反对称矩阵的和，并且表法唯一，即$A=\dfrac{A+A'}{2}+\dfrac{A-A'}{2}$.
+\end{ccl}
+\begin{ccl}
+  矩阵的2型初等行变换(即两行交换)可以通过一些1型与3型初等行变换实现.
+\end{ccl}
+\begin{ccl}
+  设$A,B$都是$n$级对称矩阵，则$AB$为对称矩阵的充要条件是$A$与$B$可交换.
+\end{ccl}
+\begin{ccl}
+  设$A$是数域$K$上一个$s\times n$矩阵，如果$A$的秩为$r$，那么$A$的行向量组的一个极大线性无关组与$A$的列向量组的一个极大线性无关组交叉位置的
+  元素按照原来的排法组成的$r$阶子式不等于0.
+\end{ccl}
+\begin{ccl}
+  斜对称矩阵的秩是偶数.
+\end{ccl}
+\begin{thrm}
+  \textbf{(循环移位矩阵) }令 $C=\begin{pmatrix} 0&1&0&\ldots&0&0\\ 0&0&1&\ldots&0&0\\
+  \vdots& & & & &\vdots\\ 0&0&0&\ldots&0&1\\ 1&0&0&\ldots&0&0 \end{pmatrix}$,称$C$为循环移位矩阵，则有：
+  \begin{enumerate}
+    \item 用$C$左(右)乘一个矩阵，就相当于把这个矩阵的行(列)向上(右)移一行(列)，第一行换到最后一行(最后一列换到第一列).
+    \item $\sum\limits_{l=0}^{n-1}C^l=J$，其中$J$元素全为1.
+  \end{enumerate}
+\end{thrm}
+\begin{ccl}
+  $n$级矩阵$A=\begin{pmatrix} a_1 & a_2 & \ldots & a_n \\ a_n & a_1 & \ldots & a_{n-1} \\ \vdots & & & \vdots \\ a_2 & a_3 & \ldots &a1 \end{pmatrix}$
+  称为\textbf{循环矩阵}，则$A=a_1I+a_2C+a_3C^2+\ldots+a_nC^{n-1}$，其中$C$为循环移位矩阵.
+\end{ccl}
+\begin{ccl}
+  初等矩阵可以表示成形如$I+a_{ij}E_{ij}$这样的矩阵的乘积，对角矩阵$D=diag\{1,\ldots,1,0,\ldots,0\}$可以表成形如$I+a_{ij}E_{ij}$这样的矩阵的乘积.
+\end{ccl}
+
+\subsection{矩阵乘积的秩和行列式}
+\begin{thrm}
+  设$A=(a_{ij})_{s\times n},B=(b_{ij})_{n\times m}$，则$rank(AB)\le \min \{rank(A),rank(B)\}$.
+\end{thrm}
+\begin{thrm}
+  $rank(A^\mathrm{T}A)=rank(AA^\mathrm{T})=rank(A)=rank(A^\mathrm{T})$
+\end{thrm}
+\begin{thrm}
+  $rank(A+B)\le rank(A)+rank(B)$.
+\end{thrm}
+\begin{thrm}
+  若$A_{s\times n}B_{n\times m}=0$，则$rank(A)+rank(B)\le n$.
+\end{thrm}
+\begin{thrm}
+  \textbf{(Sylvester)}设$A,B$分别是$s\times n,n\times m$矩阵，则$rank(AB)+n\ge rank(A)+rank(B)$.
+\end{thrm}
+\begin{thrm}
+  $|AB|=|A||B|$.
+\end{thrm}
+\begin{thrm}
+  \textbf{(Cauchy-Binet) }设$A$是$s\times n$矩阵，$B$是$n\times s$矩阵，则：
+  \[
+  |AB|=
+  \begin{cases}
+    0,&s>n\\
+    \sum\limits_{1\le v_1<v_2<\ldots<v_s\le n}A\begin{pmatrix}1,2,\ldots,s\\v_1,v_2,\ldots,v_s \end{pmatrix}
+    B\begin{pmatrix}v_1,v_2,\ldots,v_s\\1,2,\ldots,s \end{pmatrix},&s\le n
+  \end{cases}
+  \]
+  也即$|AB|$等于$A$的所有$s$阶子式和$B$的对应$s$阶子式的乘积之和.
+\end{thrm}
+\begin{thrm}
+  设$A$是$s\times n$矩阵，$B$是$n\times s$矩阵，且有$r\le s$,则有：
+  \begin{enumerate}
+    \item 如果$r>n$，那么$AB$的所有$r$阶子式都等于0.
+    \item 如果$r\le n$，那么$AB$的任一$r$阶子式为$$ AB\begin{pmatrix} i_1,i_2,\ldots,i_r\\j_1,j_2,\ldots,j_r \end{pmatrix}=
+    \sum\limits_{1\le v_1<v_2<\ldots<v_r\le n}A\begin{pmatrix}i_1,i_2,\ldots,i_r\\v_1,v_2,\ldots,v_r \end{pmatrix}
+    B\begin{pmatrix}v_1,v_2,\ldots,v_r\\i_1,i_2,\ldots,i_r \end{pmatrix}$$
+  \end{enumerate}
+\end{thrm}
+\begin{thrm}
+  \textbf{(满秩分解定理) }如果$s\times n$的矩阵$A$的秩为$r$，那么存在$s\times r$的列满秩矩阵$B$和$r\times n$的行满秩矩阵$C$使得$A=BC$.
+\end{thrm}
+\begin{ccl}
+  若$A$是$\mathbb{C}$上的$n$级循环矩阵，第一行为$(a_1,a_2,\ldots,a_n)$，则$|A|=\prod\limits_{i=0}^{n-1}f(w^i)$，
+  其中$w=\mathrm{e}^{\frac{2\pi}{n}\mathrm{i}}$.
+\end{ccl}
+\begin{ccl}
+  设$A,B$都是$n$级矩阵，则$AB$和$BA$的$r$阶的所有主子式之和相等，其中$1\le r\le n$.
+\end{ccl}
+\begin{ccl}
+  设$A$是一个$n\times m$矩阵，$m\ge n-1$，并且$A$的每一列元素的和都为$0$，则$AA'$的所有元素的代数余子式都相等.
+\end{ccl}
+\begin{ccl}
+  实数域上的$n$级矩阵$A=(B,C)$，其中$B$为$n\times m$矩阵，则$|A|^2\le |B'B||C'C|$.
+\end{ccl}
+\begin{ccl}
+  设$A,B$分别是数域$K$上$s\times n,n\times m$矩阵，则$rank(AB)=rank(B)$当且仅当齐次线性方程组$(AB)X=0$的每一个解都是$BX=0$的解.
+\end{ccl}
+\begin{ccl}
+  设$A,B$分别是数域$K$上$s\times n,n\times m$矩阵，若$rank(AB)=rank(B)$，则对数域$K$上任意$m\times r$矩阵$C$，都有$rank(ABC)=rank(BC)$.
+\end{ccl}
+\begin{ccl}
+  设$A$是数域$K$上的$n$级矩阵，如果存在正整数$m$使得$rank(A^m)=rank(A^{m+1})$，则对一切$k\in \mathbb{Z_+},rank(A^m)=rank(A^{m+k})$.
+\end{ccl}
+\begin{ccl}
+  设$A$是数域$K$上的$n$级矩阵，则对任意$k\in \mathbb{Z_+},rank(A^n)=rank(A^{n+k})$.
+\end{ccl}
+\begin{ccl}
+  对于实数域上的任一$s\times n$矩阵$A$，都有$rank(AA'A)=rank(A)$.
+\end{ccl}
+
+\subsection{可逆矩阵}
+\begin{thrm}
+  $A^{*}A=
+  |A|I$.若$A^{-1}$存在，则$A^{-1}=\dfrac{1}{|A|}A^{*}$.
+\end{thrm}
+\begin{thrm}
+  $n$级矩阵$A$可逆\\ $\Longleftrightarrow$ $rank(A)=n$\\ $\Longleftrightarrow$ $|A|\ne 0$\\ $\Longleftrightarrow$ $A$的行(列)向量组线性无关\\
+  $\Longleftrightarrow$ $A$的行(列)向量组为$K^n$的一个基\\ $\Longleftrightarrow$ $A$的行(列)空间等于$K^n$.
+\end{thrm}
+\begin{ccl}
+  若$AB=I$，则$A,B$都可逆，且$A^{-1}=B,B^{-1}=A$.
+\end{ccl}
+\begin{ccl}
+  可逆矩阵$A$可以表示成一些初等矩阵的乘积.
+\end{ccl}
+\begin{ccl}
+  用可逆矩阵去左(右)乘矩阵$A$，不改变$A$的秩.
+\end{ccl}
+\begin{ccl}
+  可逆的对称(斜对称)矩阵的逆矩阵也是对称(斜对称)矩阵.
+\end{ccl}
+\begin{ccl}
+  可逆的上(下)三角矩阵也是上(下)三角矩阵.
+\end{ccl}
+\begin{ccl}
+  设$A,B$分别是数域$K$上$n\times m,m\times n$,如果$I_n-AB$可逆，那么$I_m-BA$也可逆，并且$(I_m-BA)^{-1}=I_m+B(I_n-AB)^{-1}A$.
+\end{ccl}
+\begin{thrm}
+  任何方阵都可以表示成一些下三角矩阵与上三角矩阵的乘积.
+\end{thrm}
+
+\subsection{矩阵的分块}
+\begin{ccl}
+  若$A$是对合矩阵，则$rank(I+A)+rank(I-A)=n$.
+\end{ccl}
+\begin{ccl}
+  若$A$为幂等矩阵，则$rank(A)+rank(I-A)=n$.
+\end{ccl}
+\begin{ccl}
+  设$A,B$分别是$s\times n,s\times m$矩阵，则矩阵方程$AX=B$有解的充要条件是$rank(A)=rank(A, B)$.
+\end{ccl}
+\begin{ccl}
+  设$A_{s\times n}\ne 0,B_{n\times m}$的列向量组是$\beta_1,\ldots,\beta_m$；$C_{s\times m}$的列向量组是
+  $\delta_1,\ldots,\delta_m$，则\[
+  AB=C\Longleftrightarrow \beta_j\text{是线性方程}AX=\delta_j \text{的一个解},j=1,2,\ldots,m
+  \]
+\end{ccl}
+\begin{ccl}
+  若分块对角矩阵$A=diag\{A_1,A_2,\ldots,A_s\}$的每个子矩阵都可逆，则$A$的逆为$diag\{A_1^{-1},A_2^{-1},\ldots,A_s^{-1}\}$.
+\end{ccl}
+\begin{ccl}
+  $A=\begin{pmatrix} A_{11} & A_{12}\\ 0 & A_{22}\end{pmatrix}$的逆矩阵$A^{-1}=\begin{pmatrix} A_{11}^{-1} & -A_{11}^{-1}A_{12}A_{22}^{-1}\\
+  0 & A_{22}^{-1}\end{pmatrix}$，其中$A_{11},A_{22}$都可逆.
+\end{ccl}
+\begin{ccl}
+  $B=\begin{pmatrix} 0&B_1\\B_2&0 \end{pmatrix}$的逆矩阵$B^{-1}=\begin{pmatrix} 0&B_2^{-1}\\ B_1^{-1}&0 \end{pmatrix}$，其中$B_1,B_2$都可逆.
+\end{ccl}
+\begin{ccl}
+  设$A,B$分别是$s\times n,n\times s$矩阵，则$\begin{vmatrix} I_n&B\\A&I_s\end{vmatrix}=|I_n-BA|=|I_s-AB|$.
+\end{ccl}
+\begin{ccl}
+  设$A,B,C,D$都是$n$级矩阵，且$AC=CA$，则有$\begin{vmatrix} A&B\\C&D \end{vmatrix}=|AD-CB|$，此处不要求$|A|\ne 0$.
+\end{ccl}
+\begin{ccl}
+  设$A,D$分别是$r,s$级矩阵，则$|D||A-BD^{-1}C|=|A||D-CA^{-1}B|$.
+\end{ccl}
+\begin{ccl}
+    设$A=diag\{a_1I_{n_1},a_2I_{n_2},\ldots,a_sI_{n_s}\}$，其中$a_1,a_2,\ldots,a_s$两两不同，那么与$A$可交换的矩阵一定是分块对角矩阵
+    $diag\{B_1,B_2,\ldots,B_s\}$，其中$B_i$是$n_i$级方阵.
+\end{ccl}
+\begin{ccl}
+  设$A,B$都是$n$级矩阵，则$(AB)^{*}=B^{*}A^{*}$.
+\end{ccl}
+\begin{ccl}
+  设$A$是数域$K$上的$n(n\ge 2)$级矩阵，如果$|A|=1$,那么$A$可以表示成1型初等矩阵的乘积.
+\end{ccl}
+\begin{ccl}
+  如果$n$级矩阵$A$的所有顺序主子式都不等于$0$，那么存在$n$级下三角矩阵$B$使得$BA$为上三角矩阵.
+\end{ccl}
+
+\subsection{正交矩阵，欧几里得空间$\mathbb{R}^n$}
+\begin{thrm}
+  设实数域上的$n$级矩阵$A$的行向量组为$\gamma_1,\ldots,\gamma_n$，列向量组为$\alpha_1,\ldots,\alpha_n$，则：$A$为正交矩阵当且仅当
+  \[
+  \begin{cases}
+    \gamma_i\gamma_j^{\mathrm{T}},&1\le i,j\le n;\\
+    \alpha_i^{\mathrm{T}}\alpha_j,&1\le i,j\le n;
+  \end{cases}
+  \]
+\end{thrm}
+\begin{thrm}
+  实数域上的$n$级矩阵$A$是正交矩阵的充要条件是：$A$的行(列)向量组是欧几里得空间$\mathbb{R}^n$的一个标准正交基.
+\end{thrm}
+\begin{ccl}
+  如果正交矩阵是上三角矩阵，则一定是对角矩阵，且主对角元是$1$或$-1$.
+\end{ccl}
+\begin{ccl}
+  设$A$是$n$级正交矩阵，则对欧几里得空间$\mathbb{R}^n$的任一列向量$\alpha$，都有$|A\alpha|=|\alpha|$.
+\end{ccl}
+\begin{thrm}
+  列满秩矩阵$A_{n\times m}$的$QR$分解.
+\end{thrm}
+\begin{ccl}
+  设$A$是实数域上的$n$级矩阵，如果$|A|=1$且$A$的每一个元素等于它自己的代数余子式，那么$A$为正交矩阵；如果$|A|=-1$且$A$的每一个元素等于自己的
+  代数余子式乘以$-1$，那么$A$是正交矩阵.
+\end{ccl}
+\begin{ccl}
+  位于正交矩阵的任意$k$行(列)的所有$k$级子式的平方和为$1$.
+\end{ccl}
+
+\subsection{$K^n$到$K^s$的线性映射}
+\begin{thrm}
+  映射$f:S\rightarrow S'$是可逆的当且仅当$f$是双射.
+\end{thrm}
+\begin{thrm}
+  $\dim(\ker A)+\dim(Im\,A)=\dim(K^n)$.
+\end{thrm}
+\begin{thrm}
+  设$A$是数域$K$上$s\times n$矩阵，是$K^n$到$K^s$的一个线性映射，则：\\
+  \begin{enumerate}
+    \item $A$是单射当且仅当$\ker(A)=0$.
+    \item $A$是满射当且仅当$A$的值域为$K^s$.
+    \item 当$n=s$时，$A$是单射当且仅当$A$是满射，从而是双射.
+  \end{enumerate}
+\end{thrm}
+\begin{thrm}
+  两个有限维向量空间\textbf{同构}当且仅当它们的维数相等.
+\end{thrm}
+
+\subsection{本章补充}
+\begin{ccl}
+  设$A$是实数域上的$n$级矩阵，若$A$的所有顺序主子式都大于$0$,且所有非主对角元都小于$0$，那么$A^{-1}$的每个元素都大于$0$.
+\end{ccl}
+\begin{ccl}
+  设$A$是数域$K$上的$n$级可逆矩阵，$\alpha,\beta$是$K$上$n$维列向量，且$1+\beta'A^{-1}\alpha \ne 0$，则
+  $(A+\alpha\beta')^{-1}=A^{-1}-\dfrac{1}{1+\beta'A^{-1}\alpha}A^{-1}\alpha\beta'A^{-1}$.
+\end{ccl}
+
+\section{矩阵的相抵与相似}
+\subsection{等价关系与集合的划分}
+\begin{defn}
+  集合$S$上的一个二元关系$\sim $如果具有下述性质：$\forall a,b,c\in S$，有
+  \begin{enumerate}
+    \item $a\sim a$ 反身性,
+    \item $a\sim b\Rightarrow b\sim a$ 对称性，
+    \item $a\sim b,b\sim c\Rightarrow a\sim c$ 传递性
+  \end{enumerate}
+  则称$\sim $为集合$S$上的一个等价关系.
+\end{defn}
+\subsection{矩阵的相抵}
+\begin{defn}
+  数域$K$上的矩阵$A$如果经过一系列初等行变换和初等列变换变成矩阵$B$，则称$A$和$B$是\textbf{相抵的}.
+\end{defn}
+\begin{thrm}
+  设数域$K$上$s\times n$矩阵$A$的秩$r>0$，则存在$K$上$s$级、$n$级\textbf{可逆}矩阵$P,Q$，
+  使得$A=P\begin{pmatrix} I_r&0\\0&0 \end{pmatrix}Q$.
+\end{thrm}
+\begin{thrm}
+  任何一个秩为$r$的矩阵都可以表示成$r$个秩为$1$的矩阵之和.
+\end{thrm}
+\begin{ccl}
+  设$A$是实数域上$n$级对称矩阵，且$A$的秩$r\ne 0$.则$A$至少有一个$r$阶主子式不为0，$A$的所有不等于$0$的$r$阶主子式都同号.
+\end{ccl}
+\begin{ccl}
+  设$A,B,C$分别是数域$K$上$s\times n,p\times m,s\times m$矩阵，则矩阵方程$AX-YB=C$有解的充要条件是
+  $rank\begin{pmatrix} A&0\\0&B \end{pmatrix}=rank\begin{pmatrix} A&C\\0&B \end{pmatrix}$.
+\end{ccl}
+\begin{ccl}
+  设$A,B$都是$n$级矩阵，则$rank(I-AB)\le rank(I-A)+rank(I-B)$.
+\end{ccl}
+\begin{ccl}
+  设$A,B$都是$n$级矩阵，如果$AB=BA=0,$且$rank(A^2)=rank(A)$，那么$rank(A+B)=rank(A)+rank(B)$.
+\end{ccl}
+\begin{ccl}
+  设$A,B$都是$n$级矩阵，如果$AB=BA=0,$那么存在正整数$m$使得$rank(A^m+B^m)=rank(A^m)+rank(B^m)$.
+\end{ccl}
+
+\subsection{广义逆矩阵}
+\subsection{矩阵的相似}
+\begin{defn}
+  设$A,B$都是数域$K$上$n$级矩阵，如果存在$K$上一个$n$级可逆矩阵$P$,使得$P^{-1}AP=B$，则称$A,B$相似.
+\end{defn}
+\begin{ccl}
+  相似的矩阵有如下性质：
+  \begin{enumerate}
+    \item 相似矩阵的和、乘积、幂也相似
+    \item 相似矩阵的行列式相等
+    \item 相似矩阵的秩相等
+    \item 相似矩阵的迹相等
+    \item 相似矩阵有相同的特征多项式，从而有相同的特征值(包括重数相同)
+    \item 相似的矩阵或者都可逆，或者都不可逆；当它们都可逆时，它们的逆矩阵也相似
+  \end{enumerate}
+\end{ccl}
+\begin{thrm}
+  数域$K$上的$n$级矩阵$A$可对角化的充要条件是，存在$K^n$中$n$个线性无关的列向量$\alpha_1,\alpha_2,\ldots,\alpha_n$以及$K$
+  中$n$个数$\lambda_1,\lambda_2,\ldots,\lambda_n$，
+  使得$A\alpha_1=\lambda_1\alpha_1,A\alpha_2=\lambda_2\alpha_2,\ldots,A\alpha_n=\lambda_n\alpha_n$,
+  此时令$P=(\alpha_1,\alpha_2,\ldots,\alpha_n)$,则$P^{-1}AP=diag\{\lambda_1,\lambda_2,\ldots,\lambda_n\}$.
+\end{thrm}
+\begin{ccl}
+  如果$A,B$可交换，则$P^{-1}AP,P^{-1}BP$也可交换.
+\end{ccl}
+\begin{ccl}
+  如果$A$可对角化，则$A\sim A^{\mathrm{T}}$.
+\end{ccl}
+\begin{ccl}
+  如果数域$K$上$n$级矩阵$A,B$满足$AB-BA=A$，则$A$不可逆.
+\end{ccl}
+\begin{ccl}
+  与幂等矩阵、对合矩阵、幂零矩阵相似的矩阵仍是该类矩阵.
+\end{ccl}
+\begin{ccl}
+  与数量矩阵$kI$相似的矩阵只有$kI$自己.
+\end{ccl}
+\begin{thrm}
+  设$f(x)=a_0+a_1x+\ldots+a_mx_m$是数域$K$上的一元多项式，$A$是数域$K$上的一个$n$级矩阵，如果$A\sim B$，则$f(A)\sim f(B)$.
+\end{thrm}
+\begin{ccl}
+  幂等矩阵一定可对角化，并且如果幂等矩阵$A$的秩为$r(r>0)$，则$A\sim \begin{pmatrix}I_r&0\\0&0 \end{pmatrix}$.
+\end{ccl}
+\begin{ccl}
+  数域$K$上的幂等矩阵的秩等于它的迹.
+\end{ccl}
+
+\subsection{矩阵的特征值和特征向量}
+\begin{defn}
+  设$A$是数域$K$上的$n$级矩阵，如果$K^n$中有非零列向量$\alpha$使得$A\alpha=\lambda_0\alpha,$且$\lambda_0\in K$，
+  则称$\lambda_0$是$A$的一个特征值，称$\alpha$是$A$的属于特征值$\lambda_0$的一个特征向量.
+\end{defn}
+\begin{thrm}
+  设$A$是数域$K$上的$n$级矩阵，则
+  \begin{enumerate}
+    \item $\lambda_0$是$A$的一个特征值当且仅当$\lambda_0$是$A$的特征多项式$|\lambda I-A|$在$K$中的一个根；
+    \item $\alpha$是$A$的属于特征值$\lambda_0$的一个特征向量当且仅当$\alpha$是齐次线性方程组$(\lambda_0I-A)X=0$的一个非零解.
+  \end{enumerate}
+\end{thrm}
+\begin{ccl}
+  若$\lambda_1,\lambda_2,\ldots,\lambda_n$是$n$级矩阵$A$在数域$K$内的$n$个特征值，
+  则$\lambda_1+\lambda_2+\ldots+\lambda_n=tr(A),\lambda_1\lambda_2\ldots\lambda_n=|A|$.
+\end{ccl}
+\begin{ccl}
+  数域$K$上的幂零矩阵的特征值都是$0$.
+\end{ccl}
+\begin{thrm}
+  $\lambda_1$是数域$K$上$n$级矩阵$A$的一个特征值，则$\lambda_1$的\textbf{几何重数}不超过它的\textbf{代数重数}.
+\end{thrm}
+\begin{ccl}
+  设$A$是数域$K$上的$n$级可逆矩阵，如果$A$有特征值，那么$A$的特征值不等于$0$.
+\end{ccl}
+\begin{ccl}
+  设$A$是一个$n$级正交矩阵，则
+  \begin{enumerate}
+    \item 如果$A$有特征值，那么它的特征值是$1$或$-1$
+    \item 如果$|A|=-1$，那么$-1$是$A$的一个特征值
+    \item 如果$|A|=1$且$n$为奇数，那么$1$是$A$的一个特征值
+  \end{enumerate}
+\end{ccl}
+\begin{thrm}
+  设$A,B$分别是数域$K$上$s\times n,n\times s$矩阵，则：
+  \begin{enumerate}
+    \item $AB$和$BA$有相同的\textbf{非零}特征值，并且重数相同
+    \item 如果$\alpha$是$AB$的属于非零特征值$\lambda_0$的一个特征向量，那么$B\alpha$是$BA$的属于特征值$\lambda_0$的一个特征向量.
+  \end{enumerate}
+\end{thrm}
+\begin{ccl}
+  用$J$表示元素全为$1$的$n$级矩阵，则数域$K$上$n$级矩阵$J$的全部特征值是$n$(一重),$0$；$J$的属于$n$的所有
+  特征向量的集合是$\{k\textbf{$1_n$}|k\in K,k\ne 0\}$，$J$的属于$0$的所有特征向量的集合是
+  $\{k_1\eta_1+k_2\eta_2+\ldots+k_{n-1}\eta_{n-1}|k_1,k_2,\ldots,k_{n-1}\in K\text{且不全为$0$}\}$,其中
+  $\eta_1=(1,-1,0,\ldots,0)^{\mathrm{T}},\eta_2=(1,0,-1,\ldots,0)^{\mathrm{T}},\ldots,\eta_{n-1}=(1,0,0,\ldots,-1)^{\mathrm{T}}$.
+\end{ccl}
+\begin{ccl}
+  复数域上$n$级循环移位矩阵$C=(\varepsilon_n,\varepsilon_1,\ldots,\varepsilon_{n-1})$的全部特征值是$1,\xi,\ldots,\xi^{n-1}$，
+  其中$\xi=\mathrm{e}^{\mathrm{i}\frac{2\pi}{n}}$；
+  属于特征值$\xi^m$的所有特征向量集合是$\{k(1,\xi^m,\xi^{2m},\ldots,\xi^{(n-1)m})'|k\in\mathbb{C},k\ne 0\}$.
+\end{ccl}
+\begin{ccl}
+  设$f(x)=a_0+a_1x+\ldots+a_mx_m$是数域$K$上的一元多项式，如果$\lambda_0$是$K$上$n$级矩阵$A$的一个特征值，且$\alpha$是$A$的属于
+  $\lambda_0$的一个特征向量，那么$f(\lambda_0)$是矩阵$f(A)$的一个特征值，且$\alpha$是$f(A)$的属于
+  $f(\lambda_0)$的一个特征向量.
+\end{ccl}
+\begin{ccl}
+  设$A$是实数域上的$n$级矩阵，如果$I-A$的特征多项式的所有复根的模都小于$1$，那么$0<|A|<2^n$.
+\end{ccl}
+
+\subsection{矩阵可对角化的条件}
+\begin{thrm}
+  矩阵的属于不同特征值的特征向量线性无关，也即矩阵的特征向量组线性无关，且在相似标准型中特征值$\lambda_j$
+  在主对角线上出现的次数等于属于$\lambda_j$的特征子空间的维数.
+\end{thrm}
+\begin{thrm}
+  数域$K$上的$n$级矩阵可对角化的三个充要条件：
+  \begin{enumerate}
+    \item 矩阵的属于不同特征值的特征子空间的维数之和等于$n$
+    \item 有$n$个不同的特征值
+    \item 矩阵的特征多项式的全部复根都属于$K$，且每个特征值的几何重数等于代数重数
+  \end{enumerate}
+\end{thrm}
+\begin{ccl}
+  设$A$是数域$K$上的$n$级矩阵，如果$K^n$中任意非零列向量都是$A$的特征向量，那么$A$一定是数量矩阵.
+\end{ccl}
+\begin{ccl}
+  设$A$是数域$K$上的$n$级矩阵，如果$A$可对角化，那么$A^{-1},A^{*}$也可对角化.
+\end{ccl}
+\begin{ccl}
+  设$A,B$是数域$K$上的$n,m$级矩阵，它们分别有$n,m$个不同的特征值，设$f(\lambda)$是$A$的特征值，且$f(B)$为可逆矩阵，
+  则对任意$n\times m$矩阵$C$都有矩阵$G=\begin{pmatrix} A&C\\0&B \end{pmatrix}$可对角化.
+\end{ccl}
+
+\subsection{实对称矩阵的对角化}
+\begin{thrm}
+  实对称矩阵的特征多项式在复数域的每一个根都是实数，从而每一个根都是它的特征值.
+\end{thrm}
+\begin{thrm}
+  实对称矩阵的属于不同特征值的特征向量是正交的，故一定正交相似于对角矩阵.
+\end{thrm}
+\begin{thrm}
+  两个实对称矩阵正交相似的充要条件是它们相似.因此对于所有$n$级实对称矩阵组成的集合来说，特征值(包括重数)是相似关系下的
+  \textbf{完全不变量}.
+\end{thrm}
+\begin{ccl}
+  若实对称矩阵$A,B$有相同的特征多项式，则$A,B$相似.
+\end{ccl}
+\begin{ccl}
+  若实对称矩阵$A$正交相似于对角矩阵，则$A$一定是对称矩阵.
+\end{ccl}
+\begin{ccl}
+  如果$n$级实矩阵$A$的特征多项式在复数域中的根都是实数，则$A$一定正交相似于上三角矩阵.
+\end{ccl}
+\begin{ccl}
+  任一$n$级复矩阵一定相似于一个上三角矩阵.
+\end{ccl}
+\begin{ccl}
+  设$A$是实数域上的$n$级斜对称矩阵，则$\begin{vmatrix} 2I_n&A\\A&2I_n \end{vmatrix}\ge 2^{2n}$，等号成立当且仅当$A=0$.
+\end{ccl}
+\begin{ccl}
+  正交矩阵的特征多项式在复数域中的根的模都等于$1$.
+\end{ccl}
+\begin{ccl}
+  正交矩阵如果有两个不同的特征值，那么它的属于不同特征值的特征向量是正交的.
+\end{ccl}
+
+\subsection{本章补充}
+\begin{ccl}
+  设$A$是复数域上的$n$级可逆矩阵，如果$A\sim A^k$，则$A$的特征值都是单位根.
+\end{ccl}
+\begin{thrm}
+  \textbf{(Gersgorn圆盘定理) }设$A$是$n$级复矩阵，令$D_i(A)=\{z\in\mathbb{C}\ |\ |z-a_{ii}|\le \sum\limits_{j\ne i}|a_{ij}|\}$,
+  称$D_i(A)$是$A$的$n$个Gersgorn圆盘.则$A$的每一个特征值都在$A$的某个Gersgorn圆盘中.
+\end{thrm}
+\begin{ccl}
+  设$A$是$n$级复矩阵，如果$|a_{ii}|>(n-1)|a_{ij}|,j\ne i$，那么$A$可逆.
+\end{ccl}
+\begin{ccl}
+  设$A,B$都是数域$K$上的$n$级矩阵，如果$A\sim B$，则$A^{*}\sim B^{*}$(伴随矩阵).
+\end{ccl}
+\begin{ccl}
+  设$B$是$2n$级实矩阵，满足$B^2=-I$，则存在$2n$级实可逆矩阵$P$使得$P^{-1}BP=\begin{pmatrix}0&I_n\\-I_n&0\end{pmatrix}$.
+\end{ccl}
+
+\section{二次型，矩阵的合同}
+\subsection{二次型和它的标准型}
+\begin{defn}
+  系数在数域$K$中的$n$个变量$x_1,x_2,\ldots,x_n$的一个二次齐次多项式，称为数域$K$上的一个\textbf{$n$元二次型}.
+\end{defn}
+\begin{defn}
+  数域$K$上两个$n$元二次型$X^{\mathrm{T}}AX，Y^{\mathrm{T}}BY$，如果存在一个非退化线性替换$X=CY$把$X^{\mathrm{T}}AX$变为
+  $Y^{\mathrm{T}}BY$，则称二次型$X^{\mathrm{T}}AX,Y^{\mathrm{T}}BY$等价.
+\end{defn}
+\begin{defn}
+  数域$K$上两个$n$级矩阵$A,B$,如果存在$K$上的一个可逆矩阵$C$使得$C^{\mathrm{T}}AC=B$，则称$A,B$合同.
+\end{defn}
+\begin{thrm}
+  数域$K$上两个$n$元二次型$X^{\mathrm{T}}AX,Y^{\mathrm{T}}BY$等价当且仅当$n$级对称矩阵$A,B$合同.
+\end{thrm}
+\begin{lemma}
+  设$A,B$都是数域$K$上的矩阵，则$A$合同于$B$当且仅当$A$经过$K$上的一系列成对初等行、列变换可以变成$B$，并且对$I$
+  只作其中的初等列变换得到的可逆矩阵$C$就使得$C^{\mathrm{T}}AC=B$.
+\end{lemma}
+\begin{thrm}
+  数域$K$上任一对称矩阵都合同于一个对角矩阵.
+\end{thrm}
+\begin{thrm}
+  数域$K$上任一二次型都等价于一个只含平方项的二次型.
+\end{thrm}
+\begin{ccl}
+  二次型$X^{\mathrm{T}}AX$的标准形中系数不为$0$的平方项个数$r$等于它的矩阵的秩.
+\end{ccl}
+\begin{ccl}
+  设$A$是数域$K$上的$n$级矩阵，则$A$是写对称矩阵当且仅当对于$K^n$中任一列向量$\alpha$,都有$\alpha^{\mathrm{T}}A\alpha=0$.
+\end{ccl}
+\begin{ccl}
+  设$A$是数域$K$上的$n$级对称矩阵，如果对于$K^n$中任一列向量$\alpha$,都有$\alpha^{\mathrm{T}}A\alpha=0$，则$A=0$.
+\end{ccl}
+\begin{ccl}
+  秩为$r$的对称矩阵可以表示为$r$个秩为$1$的对称矩阵之和.
+\end{ccl}
+\begin{ccl}
+  设$n$级实对称矩阵$A$的全部特征值按大小顺序排成$\lambda_1\ge \lambda_1 \ge \ldots \lambda_n$，
+  则对于$R^n$中任一列向量$\alpha \ne 0$，都有$\lambda_n \le \dfrac{\alpha^{\mathrm{T}}A\alpha}{|\alpha|^2}\le \lambda_1$.
+\end{ccl}
+\begin{ccl}
+  设$A$是$n$级实对称矩阵，则存在一个正实数$c$使得对于$R^n$中任一列向量$\alpha$都有
+  $|\alpha^{\mathrm{T}}A\alpha|\le c\alpha^{\mathrm{T}}\alpha$.
+\end{ccl}
+\begin{ccl}
+  设$B$是$n$级实矩阵，$B'B$的全部特征值排序成$\lambda_1\ge \lambda_1 \ge \ldots \lambda_n$,
+  如果$B$有特征值，那么$B$的任一特征值$\mu$满足$\sqrt{\lambda_n}\le \mu \le \sqrt{\lambda_1}$.
+\end{ccl}
+\begin{ccl}
+  设$A,B$都是$n$级实对称矩阵，并且$AB=BA$，则存在一个$n$级正交矩阵，使得
+  $T^{\mathrm{T}}AT,T^{\mathrm{T}}BT$都是对角矩阵.
+\end{ccl}
+\begin{ccl}
+  设$n$元实二次型$X^{\mathrm{T}}AX$的矩阵$A$的一个特征值是$\lambda_i$,则存在$R^n$中非零向量
+  $\alpha=(a_1,a_2,\ldots,a_n)^{\mathrm{T}}$，使得
+  $\alpha^{\mathrm{T}}A\alpha=\lambda_i(a_1^2+a_2^2+\ldots+a_n^2)$.
+\end{ccl}
+\begin{ccl}
+  设$A=\begin{pmatrix} A_1&A_2\\A_3&A_4 \end{pmatrix}$是一个$n$级对称矩阵，且$A_1$是$r$级可逆矩阵，则有
+  $A\simeq \begin{pmatrix} A_1&0\\0&B \end{pmatrix}$.
+\end{ccl}
+
+\subsection{实二次型的规范性}
+\begin{thrm}
+  $n$元实二次型$X^{\mathrm{T}}AX$的规范形是唯一的.
+\end{thrm}
+\begin{thrm}
+  两个$n$元实二次型等价\\
+  $\Longleftrightarrow$它们的规范形等价\\
+  $\Longleftrightarrow$它们的秩相等并且正惯性指数也相等.
+\end{thrm}
+\begin{thrm}
+  两个$n$级实对称矩阵合同$\Longleftrightarrow$它们的秩相等并且正惯性指数也相等.从而秩和正惯性指数是合同关系下的完全不变量.
+\end{thrm}
+\begin{thrm}
+  两个$n$级复对称矩阵合同当且仅当它们的秩相等.
+\end{thrm}
+\begin{ccl}
+  设$A$为一个$n$级实对称矩阵，如果$|A|<0$,则在$R^n$中有非零列向量$\alpha$使得$\alpha^{\mathrm{T}}A\alpha<0$.
+\end{ccl}
+\begin{ccl}
+  一个$n$元实二次型可以分解成两个实系数$1$次齐次多项式的乘积当且仅当它的秩等于$2$，并且符号差为$0$，或者它的秩为$1$.
+\end{ccl}
+\begin{ccl}
+  设实二次型$f(x_1,x_2,\ldots,x_n)=l_1^2+\ldots+l_s^2-l_{s+1}^2-\ldots-l_{s+u}^2$,其中$l_i$是$x_1,\ldots,x_n$的$1$
+  次齐次多项式，则$f(x_1,x_2,\ldots,x_n)$的正惯性指数$p\le s,$负惯性指数$q\le u$.
+\end{ccl}
+
+\subsection{正定二次型与正定矩阵}
+\begin{defn}
+  $n$元实二次型$X^{\mathrm{T}}AX$称为\textbf{正定的}，如果对$R^n$中任意非零列向量$\alpha$都有$\alpha^{\mathrm{T}}A\alpha>0$.
+\end{defn}
+\begin{thrm}
+  $n$元实二次型是正定的\\
+  $\Longleftrightarrow$它的正惯性指数等于$n$\\
+  $\Longleftrightarrow$它的规范形为$y_1^2+\ldots+y_n^2$\\
+  $\Longleftrightarrow$它的标准形中$n$个系数全大于$0$
+\end{thrm}
+\begin{defn}
+  实对称矩阵$A$称为正定的，如果实二次型$X^{\mathrm{T}}AX$是正定的.
+\end{defn}
+\begin{thrm}
+  $n$元实对称矩阵$A$是正定的\\
+  $\Longleftrightarrow$对$R^n$中任意非零列向量$\alpha$都有$\alpha^{\mathrm{T}}A\alpha>0$\\
+  $\Longleftrightarrow$$A$的正惯性指数为$n$\\
+  $\Longleftrightarrow$$A\simeq I$,即$A$的合同规范形为$I$\\
+  $\Longleftrightarrow$$A$的合同标准形中主对角元全大于0\\
+  $\Longleftrightarrow$$A$的特征值全大于$0$\\
+  $\Longleftrightarrow$$A$的所有顺序主子式大于$0$.
+\end{thrm}
+\begin{ccl}
+  与正定矩阵合同的实对称矩阵也是正定矩阵.\\
+  与正定二次型等价的实二次型也是正定的，从而非退化线性替换不改变实二次型的正定型.\\
+  正定矩阵的行列式大于$0$.\\
+  正定矩阵的迹大于$0$.
+\end{ccl}
+\begin{ccl}
+  对于任一实可逆矩阵$C$,都有$C^{\mathrm{T}}C$是正定矩阵.
+\end{ccl}
+\begin{ccl}
+  若$C$是正定的，则$A^{-1},A^{*},A^k$也是正定的.
+\end{ccl}
+\begin{ccl}
+  若$n$级实对称矩阵$A$是正定的且$P_{n\times m}$列满秩，则$P^{\mathrm{T}}AP$也是正定的.
+\end{ccl}
+\begin{ccl}
+  设$A$是$n$级实对称矩阵，它的$n$个特征值的绝对值中最大的记作$Sr(A)$，则当$t>Sr(A)$时，$tI+A$是正定矩阵.
+\end{ccl}
+\begin{ccl}
+  $n$级实对称矩阵$A$是正定的充要条件是，有可逆实对称矩阵$C$使得$A=C^2$.
+\end{ccl}
+\begin{ccl}
+  如果$A$是$n$级正定矩阵，那么存在唯一的正定矩阵$C$使得$A=C^2$.
+\end{ccl}
+\begin{ccl}
+  如果$A$是$n$级正定矩阵，$B$是$n$级实对称矩阵，则存在一个$n$级实可逆矩阵$C$，使得$C^{\mathrm{T}}AC$与$C^{\mathrm{T}}BC$
+  都是对角矩阵.
+\end{ccl}
+\begin{ccl}
+  如果$A,B$都是$n$级正定矩阵，且$AB=BA$，则$AB$也是正定矩阵.
+\end{ccl}
+\begin{ccl}
+  实对称矩阵$A$是正定的充要条件是$A$的所有主子式大于0.
+\end{ccl}
+\begin{ccl}
+  $n$元实二次型为正定的必要条件是，它的$n$个平方项的系数全是正的.
+\end{ccl}
+\begin{ccl}
+  如果$A$是$n$级正定矩阵，$B$是$n$级半正定矩阵且$B\ne 0$，那么$|A+B|>\max\{|A|,|B|\}$.
+\end{ccl}
+\begin{ccl}
+  设$M=\begin{pmatrix}A&B\\B'&D \end{pmatrix}$是$n$级正定矩阵，其中$A$是$r$级矩阵，则$A,D,D-B'A^{-1}B$都是正定矩阵.
+\end{ccl}
+\begin{ccl}
+  设$M=\begin{pmatrix}A&B\\B'&D \end{pmatrix}$是$n$级正定矩阵，其中$A$是$r$级矩阵，则$|M|\le|A||D|$,
+  等号成立当且仅当$B=0$.
+\end{ccl}
+\begin{ccl}
+  如果$A$是$n$级正定矩阵，那么$|A|<a_{11}\ldots a_{nn}$.
+\end{ccl}
+\begin{ccl}
+  如果$C$是$n$级实可逆矩阵，那么$|C|^2 \le \prod\limits_{j=1}^n(c_{1j}^2+\ldots+c_{nj}^2)$.
+\end{ccl}
+
+\subsection{本章补充}
+\begin{ccl}
+  \textbf{(极分解定理) }对于任一实可逆矩阵$A$，一定存在一个正交矩阵$T$和两个正定矩阵$S_1,S_2$使得$A=TS_1=S_2T$，
+  且这两种分解都是唯一的.
+\end{ccl}
+\begin{ccl}\label{ccl1}
+  如果数域$K$上$n$级对称矩阵$A$的顺序主子式全不为零，那么存在$K$上主对角元全为$1$的上三角矩阵$B$与主对角元全不为零的
+  对角矩阵$D$使得$A=B'DB$，并且这种分解是唯一的.
+\end{ccl}
+\begin{ccl}
+  设$A$是数域$K$上的$n$级对称矩阵，如果$B$是$K$上主对角元全为$1$的$n$级上三角矩阵，那么$B'AB$与$A$的$k$阶顺序主子式相等，
+  $k=1,2,\ldots,n$.
+\end{ccl}
+\begin{ccl}
+  设$A$是数域$K$上$n$级对称矩阵，且顺序主子式全不为零.则在结论\ref{ccl1}中的对角矩阵$D$的主对角元为\\
+  $$d_1=|A_1|,d_k=\dfrac{|A_k|}{|A_{k-1}|},k=2,3,\ldots,n$$,其中$|A_k|$是$A$的$k$阶顺序主子式.
+\end{ccl}
+\begin{ccl}
+  设$A$是$n$级实对称矩阵，如果$A$的顺序主子式全不为$0$，则$A$的正惯性指数等于数列\\
+  $$1,|A_1|,\ldots,|A_{n-1}|,|A|$$的保号数，而$A$的负惯性指数等于这个数列的变号数.这告诉我们，对于$n$级实对称矩阵，
+  如果它的顺序主子式全不为零，那么计算它的顺序主子式就可以求出它的正、负惯性指数.
+\end{ccl}
+\begin{ccl}
+  如果$A$是$n$级正定矩阵，那么对于$R^n$中任一非零列向量$\alpha$有$\begin{vmatrix}A&\alpha \\ \alpha'&0 \end{vmatrix}<0$.
+\end{ccl}
+\begin{ccl}
+  如果$n$级矩阵$A=(a_{ij}),B=(b_{ij})$都是正定的，那么矩阵$C=(a_{ij}b_{ij})$也是正定的.
+\end{ccl}
+\begin{ccl}
+  设$A$是$n$级可逆实对称矩阵，则$A$是正定矩阵当且仅当对于一切$n$级正定矩阵$B$，有$tr(AB)>0$.
+\end{ccl}
+\end{document}
