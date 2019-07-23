@@ -79,5 +79,6 @@ Issue、PR、纠错、资料、选课/考试攻略，完全欢迎！
 - [上海交通大学课程资料分享](https://github.com/CoolPhilChen/SJTU-Courses/)
 - [中山大学课程资料分享](https://github.com/sysuexam/SYSU-Exam)
 - [南京大学课程复习资料](https://github.com/idealclover/NJU-Review-Materials)
+- [郑州大学课程复习资料](https://github.com/CooperNiu/ZZU-Courses-Resource)
 
 (more to be added....)
