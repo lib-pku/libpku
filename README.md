@@ -81,5 +81,6 @@ Issue、PR、纠错、资料、选课/考试攻略，完全欢迎！
 - [南京大学课程复习资料](https://github.com/idealclover/NJU-Review-Materials)
 - [郑州大学课程复习资料](https://github.com/CooperNiu/ZZU-Courses-Resource)
 - [广东工业大学计算机学院课程攻略](https://github.com/brenner8023/gdut-course)
+- [华南师范大学计算机学院 - 0xFFFF CS Wiki](https://www.yuque.com/0xffff.one/cs-learning)
 
 (more to be added....)
